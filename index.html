@@ -376,14 +376,36 @@ body{
   width:14px;height:14px;border-radius:50%;
   background:radial-gradient(circle,#fff,transparent 65%);
 }
-.picker__tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.tag{
-  padding:9px 16px;border-radius:999px;
-  background:rgba(255,255,255,.7);border:1px solid var(--line);
-  font-size:13px;color:var(--ink-soft);
-  transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+.picker__cta{margin-top:8px;display:flex;justify-content:center}
+.picker__btn{
+  padding:18px 30px;font-size:16px;border-radius:16px;
+  position:relative;
 }
-.tag:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.picker__btn-spark{
+  display:inline-block;color:#F4C46A;font-size:14px;
+  transform:rotate(-10deg);
+}
+.picker__tags-wrap{
+  margin-top:28px;padding-top:24px;
+  border-top:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+}
+.picker__tags-label{
+  font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:500;
+}
+.picker__tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tag{
+  padding:10px 18px;border-radius:999px;
+  background:rgba(255,255,255,.85);border:1px solid var(--line-strong);
+  font-size:14px;color:var(--ink);font-weight:500;
+  transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease);
+}
+.tag:hover{background:var(--brand);color:#fff;border-color:var(--brand);transform:translateY(-1px)}
+.tag--other{
+  background:transparent;border-style:dashed;color:var(--ink-soft);
+}
+.tag--other:hover{background:var(--ink);border-color:var(--ink);border-style:solid;color:#fff}
 .picker__foot{
   margin-top:26px;padding-top:22px;border-top:1px solid var(--line);
   display:flex;align-items:center;gap:14px;justify-content:center;text-align:center;
@@ -489,7 +511,15 @@ body{
 }
 .field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.42)}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--brand);background:rgba(31,102,255,.10)}
-.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,rgba(255,255,255,.5) 50%),linear-gradient(135deg,rgba(255,255,255,.5) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,rgba(255,255,255,.5) 50%),linear-gradient(135deg,rgba(255,255,255,.5) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:36px}
+.field select option,
+.field select optgroup{
+  background-color:#1A2235;
+  color:#FFFFFF;
+  padding:10px;
+}
+.field select:invalid{color:rgba(255,255,255,.5)}
+.field select option[value=""][disabled]{color:rgba(255,255,255,.5)}
 .cta__form .btn--primary{grid-column:1/-1;margin-top:4px}
 .cta__legal{grid-column:1/-1;font-size:12px;color:rgba(255,255,255,.55);margin:0;line-height:1.5}
 .cta__legal a{color:rgba(255,255,255,.85);text-decoration:underline;text-underline-offset:2px}
@@ -738,7 +768,7 @@ body{
     </span>
     <div>
       <strong>Доступно</strong>
-      <span>первая консультация — 0&nbsp;₽</span>
+      <span>консультация — бесплатно</span>
     </div>
   </div>
 </section>
@@ -762,31 +792,26 @@ body{
       </p>
     </header>
 
-    <form class="picker__search" onsubmit="event.preventDefault(); document.getElementById('form')?.scrollIntoView({behavior:'smooth'});">
-      <span class="picker__search-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      </span>
-      <input type="text" class="picker__input" placeholder="Введите профессию или направление…" aria-label="Поиск программы" />
-      <button type="button" class="picker__chip" aria-label="Голосовой ввод">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+    <div class="picker__cta">
+      <button type="button" class="btn btn--primary btn--lg picker__btn" data-pick="">
+        <span class="picker__btn-spark" aria-hidden="true">✦</span>
+        Подобрать программу
+        <span aria-hidden="true">→</span>
       </button>
-      <button type="button" class="picker__chip" aria-label="Поиск по фото аттестата">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg>
-      </button>
-      <button type="submit" class="picker__go">
-        <span class="picker__go-spark" aria-hidden="true"></span>
-        Режим&nbsp;ИИ
-      </button>
-    </form>
+    </div>
 
-    <div class="picker__tags" role="list" aria-label="Популярные направления">
-      <button class="tag" type="button">IT и&nbsp;разработка</button>
-      <button class="tag" type="button">Дизайн</button>
-      <button class="tag" type="button">Медицина</button>
-      <button class="tag" type="button">Юриспруденция</button>
-      <button class="tag" type="button">Экономика</button>
-      <button class="tag" type="button">Инженерия</button>
-      <button class="tag" type="button">Маркетинг</button>
+    <div class="picker__tags-wrap">
+      <div class="picker__tags-label">Популярные направления:</div>
+      <div class="picker__tags" role="list" aria-label="Популярные направления">
+        <button class="tag" type="button" data-pick="IT и разработка">IT и&nbsp;разработка</button>
+        <button class="tag" type="button" data-pick="Дизайн">Дизайн</button>
+        <button class="tag" type="button" data-pick="Медицина">Медицина</button>
+        <button class="tag" type="button" data-pick="Юриспруденция">Юриспруденция</button>
+        <button class="tag" type="button" data-pick="Экономика">Экономика</button>
+        <button class="tag" type="button" data-pick="Инженерия">Инженерия</button>
+        <button class="tag" type="button" data-pick="Маркетинг">Маркетинг</button>
+        <button class="tag tag--other" type="button" data-pick="__other__">Другое</button>
+      </div>
     </div>
 
     <div class="picker__foot">
@@ -934,6 +959,10 @@ body{
         </select>
       </div>
       <div class="field field--full">
+        <label for="f-direction">Направление</label>
+        <input id="f-direction" type="text" placeholder="Например: IT и разработка, медицина, дизайн…" />
+      </div>
+      <div class="field field--full">
         <label for="f-goal">Что важно разобрать (необязательно)</label>
         <textarea id="f-goal" rows="3" placeholder="Например: не знаю, куда идти с обществом и информатикой"></textarea>
       </div>
@@ -1018,10 +1047,27 @@ body{
     phone.addEventListener('focus', () => { if (!phone.value) phone.value = '+7 ('; });
   }
 
-  // Tags fill input
-  const input = document.querySelector('.picker__input');
-  document.querySelectorAll('.picker__tags .tag').forEach(tag => {
-    tag.addEventListener('click', () => { if (input) { input.value = tag.textContent.trim(); input.focus(); } });
+  // Picker → form: tags & button fill direction field and scroll to form
+  const directionField = document.getElementById('f-direction');
+  const formSection = document.getElementById('form');
+  const goToForm = (value, focusDirection) => {
+    if (directionField) directionField.value = value || '';
+    formSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (focusDirection && directionField) {
+      setTimeout(() => directionField.focus({ preventScroll: true }), 700);
+    }
+  };
+  document.querySelectorAll('[data-pick]').forEach(el => {
+    el.addEventListener('click', () => {
+      const pick = el.dataset.pick;
+      if (pick === '__other__') {
+        goToForm('', true);
+      } else if (pick) {
+        goToForm(pick, false);
+      } else {
+        goToForm('', true);
+      }
+    });
   });
 
   // Smooth scroll
