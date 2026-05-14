@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Путь к профессии — поступление в Москве и МО, 2026</title>
+<meta name="description" content="Консультации для абитуриентов Москвы и Московской области. Разбираем правила приёма 2026, подбираем направление и вуз, считаем приоритеты." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet" />
+
+<style>
+/* ===== reset ===== */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none}
+ul,ol{margin:0;padding:0;list-style:none}
+
+/* ===== tokens ===== */
+:root{
+  --bg:#FAF6EC;
+  --bg-2:#F4EDD8;
+  --paper:#FFFFFF;
+  --ink:#0F1729;
+  --ink-soft:#3F485A;
+  --ink-mute:#737A88;
+  --line:rgba(15,23,41,.08);
+  --line-strong:rgba(15,23,41,.14);
+  --brand:#1F66FF;
+  --brand-deep:#1A52CC;
+
+  --t-blue:#E4ECFF;
+  --t-blue-ink:#1F66FF;
+  --t-green:#DFF1E2;
+  --t-green-ink:#1F9D55;
+  --t-purple:#ECE5FB;
+  --t-purple-ink:#6B4FE1;
+  --t-amber:#FBE6CC;
+  --t-amber-ink:#C0700E;
+
+  --shadow-1:0 1px 0 rgba(15,23,41,.04),0 2px 6px rgba(15,23,41,.04);
+  --shadow-2:0 10px 30px -12px rgba(15,23,41,.18),0 2px 6px rgba(15,23,41,.04);
+  --shadow-3:0 40px 80px -30px rgba(15,23,41,.28);
+
+  --ease:cubic-bezier(.16,1,.3,1);
+  --maxw:1280px;
+  --pad-x:clamp(20px,4vw,56px);
+
+  --font:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Newsreader",Georgia,serif;
+}
+
+html,body{
+  font-family:var(--font);
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  font-feature-settings:"ss01" on,"cv11" on;
+}
+body{
+  min-height:100dvh;
+  overflow-x:hidden;
+  background:
+    radial-gradient(60% 50% at 8% 6%,rgba(31,102,255,.10),transparent 55%),
+    radial-gradient(55% 60% at 92% 0%,rgba(244,200,140,.28),transparent 60%),
+    linear-gradient(180deg,#FAF6EC 0%,#F7F1E0 60%,#FAF6EC 100%);
+}
+
+/* ===== type ===== */
+.display{
+  font-weight:700;
+  letter-spacing:-.028em;
+  font-size:clamp(40px,5.4vw,72px);
+  line-height:1;
+  margin:0;
+}
+.display .word{color:var(--brand);position:relative;display:inline-block}
+.display .word::after{
+  content:"✦";
+  position:absolute;
+  font-size:.35em;
+  color:#F4C46A;
+  right:-.45em; top:0;
+  transform:rotate(-10deg);
+}
+.display--md{font-size:clamp(28px,3.8vw,52px);line-height:1.05;font-weight:700}
+.lede{
+  font-size:clamp(15px,1.05vw,17px);
+  line-height:1.55;
+  color:var(--ink-soft);
+  max-width:54ch;
+  margin:0;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:500;
+}
+.eyebrow span{display:inline-block;width:22px;height:1px;background:currentColor}
+.eyebrow--on-dark{color:rgba(255,255,255,.6)}
+
+/* ===== buttons ===== */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 22px;border-radius:14px;
+  font-weight:500;font-size:15px;
+  border:1px solid transparent;
+  transition:transform .2s var(--ease),background-color .2s var(--ease),color .2s var(--ease),box-shadow .2s var(--ease);
+  white-space:nowrap;
+}
+.btn--lg{padding:17px 26px;font-size:16px;border-radius:16px}
+.btn--sm{padding:9px 14px;font-size:13px;border-radius:10px}
+.btn--full{width:100%;justify-content:center}
+.btn--primary{
+  background:var(--brand);color:#fff;
+  box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 10px 24px -10px rgba(31,102,255,.55);
+}
+.btn--primary:hover{background:var(--brand-deep);transform:translateY(-1px)}
+.btn--white{
+  background:#fff;color:var(--ink);
+  border-color:var(--line);
+  box-shadow:var(--shadow-1);
+}
+.btn--white:hover{transform:translateY(-1px)}
+.btn--text{color:var(--ink);padding:14px 4px;background:transparent;font-weight:500}
+.btn--text:hover{color:var(--brand)}
+.btn .play{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--brand);color:#fff;
+  display:inline-grid;place-items:center;
+}
+.btn .play svg{width:14px;height:14px}
+
+/* ===== nav ===== */
+.nav{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;gap:24px;
+  padding:18px var(--pad-x);
+  background:linear-gradient(to bottom,rgba(250,246,236,.92),rgba(250,246,236,.7));
+  backdrop-filter:blur(14px);
+}
+.brand{display:inline-flex;align-items:center;gap:12px}
+.brand__mark{
+  width:42px;height:42px;
+  border:1.5px solid var(--brand);
+  border-radius:50%;
+  color:var(--brand);
+  display:inline-grid;place-items:center;
+}
+.brand__mark svg{width:22px;height:22px}
+.brand__text{display:flex;flex-direction:column;line-height:1.2}
+.brand__text strong{font-weight:600;font-size:15px;letter-spacing:-.01em;color:var(--ink)}
+.brand__text em{font-style:normal;font-size:11.5px;letter-spacing:.02em;color:var(--ink-mute)}
+.nav__menu{display:flex;gap:30px;margin-left:18px;font-size:14.5px;color:var(--ink-soft)}
+.nav__menu a{transition:color .2s var(--ease)}
+.nav__menu a:hover{color:var(--ink)}
+.nav__cta{margin-left:auto;display:flex;gap:10px;align-items:center}
+.nav__cta .btn{padding:11px 20px;font-size:14px;border-radius:12px}
+
+/* ===== hero ===== */
+.hero{
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  gap:clamp(24px,4vw,56px);
+  align-items:center;
+  padding:clamp(36px,5vw,72px) var(--pad-x) clamp(24px,4vw,56px);
+  max-width:var(--maxw);
+  margin:0 auto;
+}
+.hero__copy{display:flex;flex-direction:column;gap:24px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 14px 7px 10px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(8px);
+  border-radius:999px;
+  font-size:13px;color:var(--ink-soft);font-weight:500;
+  width:fit-content;
+}
+.pill__dot{width:7px;height:7px;border-radius:50%;background:#22A06B;box-shadow:0 0 0 3px rgba(34,160,107,.18)}
+.hero__actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:4px}
+
+.mini-features{
+  margin-top:16px;
+  padding:18px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  background:rgba(255,255,255,.78);
+  border:1px solid var(--line);
+  border-radius:24px;
+  box-shadow:var(--shadow-1);
+  backdrop-filter:blur(8px);
+}
+.mini-features li{display:flex;flex-direction:column;gap:10px;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+.mini-features__icon{
+  width:44px;height:44px;border-radius:14px;
+  display:grid;place-items:center;
+}
+.mini-features__icon svg{width:20px;height:20px}
+.mini-features__icon--blue  {background:var(--t-blue);  color:var(--t-blue-ink)}
+.mini-features__icon--green {background:var(--t-green); color:var(--t-green-ink)}
+.mini-features__icon--purple{background:var(--t-purple);color:var(--t-purple-ink)}
+.mini-features__icon--amber {background:var(--t-amber); color:var(--t-amber-ink)}
+
+/* hero visual */
+.hero__visual{
+  position:relative;
+  aspect-ratio:1/1.05;
+  width:100%;
+  max-width:620px;
+  justify-self:end;
+}
+.hero__visual::before{
+  content:"";
+  position:absolute;
+  inset:8% 2% 6% 6%;
+  border:1.5px dashed rgba(107,79,225,.35);
+  border-radius:50%;
+  z-index:1;
+  pointer-events:none;
+}
+.hero__photo{
+  position:absolute;
+  inset:5% 4% 4% 12%;
+  border-radius:24px;
+  overflow:hidden;
+  background:linear-gradient(180deg,#EFE4CC,#D9CBA9);
+  box-shadow:var(--shadow-3);
+  z-index:0;
+}
+.hero__photo img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.01)}
+.hero__photo-fallback{
+  width:100%;height:100%;
+  background:
+    radial-gradient(circle at 28% 26%,#FBEAC6,transparent 50%),
+    radial-gradient(circle at 72% 70%,#CFDCFF,transparent 55%),
+    linear-gradient(180deg,#F0E6D0 0%,#DDCFB1 100%);
+  display:grid;place-items:center;
+  color:rgba(15,23,41,.4);font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+}
+.hero__sparkle{position:absolute;width:24px;height:24px;z-index:2;animation:float 5s ease-in-out infinite;color:#F4C46A}
+.hero__sparkle::before{content:"✦";font-size:22px}
+.hero__sparkle--a{top:8%;left:46%}
+.hero__sparkle--b{bottom:6%;right:30%;animation-delay:-2s}
+
+.float-card{
+  position:absolute;z-index:3;
+  display:flex;gap:12px;align-items:flex-start;
+  padding:14px 16px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow-2);
+  max-width:240px;
+  animation:float 7s ease-in-out infinite;
+}
+.float-card h4{margin:0 0 4px;font-size:14px;font-weight:600;letter-spacing:-.005em;color:var(--ink);line-height:1.2}
+.float-card p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+.float-card__icon{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}
+.float-card__icon svg{width:18px;height:18px}
+.float-card__icon[data-tone="blue"]  {background:var(--t-blue);  color:var(--t-blue-ink)}
+.float-card__icon[data-tone="green"] {background:var(--t-green); color:var(--t-green-ink)}
+.float-card__icon[data-tone="purple"]{background:var(--t-purple);color:var(--t-purple-ink)}
+.float-card__icon[data-tone="amber"] {background:var(--t-amber); color:var(--t-amber-ink)}
+
+.float-card--tl{top:12%;left:-6%;animation-delay:-1s}
+.float-card--tr{top:6%;right:-4%;animation-delay:-3s}
+.float-card--ml{top:46%;right:-6%;animation-delay:-4s}
+.float-card--br{bottom:14%;right:0;animation-delay:-5s}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* ===== stats strip ===== */
+.stats{
+  margin:0 auto clamp(40px,6vw,80px);
+  max-width:var(--maxw);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:24px clamp(20px,3vw,40px);
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  box-shadow:var(--shadow-1);
+  margin-inline:var(--pad-x);
+}
+.stats__item{display:flex;align-items:center;gap:14px}
+.stats__icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex-shrink:0}
+.stats__icon svg{width:22px;height:22px}
+.stats__icon[data-tone="blue"]  {background:var(--t-blue);  color:var(--t-blue-ink)}
+.stats__icon[data-tone="green"] {background:var(--t-green); color:var(--t-green-ink)}
+.stats__icon[data-tone="purple"]{background:var(--t-purple);color:var(--t-purple-ink)}
+.stats__icon[data-tone="amber"] {background:var(--t-amber); color:var(--t-amber-ink)}
+.stats__item strong{display:block;font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.1;color:var(--ink)}
+.stats__item span{font-size:13px;color:var(--ink-soft);line-height:1.4}
+
+/* ===== picker (popup-style) ===== */
+.picker{
+  position:relative;
+  padding:clamp(36px,6vw,84px) var(--pad-x);
+  display:grid;place-items:center;
+}
+.picker__shroud{
+  position:absolute;inset:4% 6%;z-index:0;
+  background:
+    radial-gradient(70% 70% at 50% 0%,rgba(31,102,255,.12),transparent 70%),
+    linear-gradient(180deg,#F0E8CF 0%,#FAF6EC 100%);
+  border-radius:40px;
+}
+.picker__card{
+  position:relative;z-index:1;
+  width:min(900px,100%);
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);
+  border:1px solid var(--line-strong);
+  border-radius:30px;
+  padding:clamp(28px,4vw,52px);
+  box-shadow:var(--shadow-3);
+}
+.picker__head{text-align:center;margin-bottom:24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.picker__eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--brand);background:rgba(31,102,255,.08);
+  padding:7px 14px;border-radius:999px;font-weight:600;
+}
+.picker__pin{width:6px;height:6px;background:var(--brand);border-radius:50%;box-shadow:0 0 0 3px rgba(31,102,255,.18)}
+.picker__title{
+  font-weight:700;letter-spacing:-.028em;
+  font-size:clamp(28px,4vw,46px);line-height:1.05;margin:0;
+}
+.picker__title em{color:var(--brand);font-style:normal;position:relative}
+.picker__title em::after{
+  content:"✦";position:absolute;font-size:.4em;color:#F4C46A;
+  right:-.4em;top:-.05em;transform:rotate(-12deg);
+}
+.picker__sub{font-size:15.5px;color:var(--ink-soft);max-width:54ch;margin:0;line-height:1.55}
+
+.picker__search{
+  margin-top:8px;
+  display:flex;align-items:center;gap:6px;
+  padding:6px 6px 6px 20px;
+  background:#fff;
+  border:1px solid var(--line-strong);
+  border-radius:999px;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,var(--shadow-2);
+  transition:border-color .2s var(--ease),box-shadow .2s var(--ease);
+}
+.picker__search:focus-within{border-color:var(--brand);box-shadow:0 0 0 5px rgba(31,102,255,.15),var(--shadow-2)}
+.picker__search-icon{color:var(--ink-mute);display:grid;place-items:center}
+.picker__search-icon svg{width:20px;height:20px}
+.picker__input{
+  flex:1;border:0;background:transparent;outline:none;
+  padding:16px 6px;font:inherit;font-size:15.5px;color:var(--ink);min-width:0;
+}
+.picker__input::placeholder{color:var(--ink-mute)}
+.picker__chip{
+  width:40px;height:40px;border-radius:50%;
+  color:var(--ink-soft);display:grid;place-items:center;
+  transition:background .2s var(--ease),color .2s var(--ease);
+}
+.picker__chip:hover{background:var(--bg);color:var(--ink)}
+.picker__chip svg{width:18px;height:18px}
+.picker__go{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 20px;border-radius:999px;
+  background:var(--ink);color:#fff;
+  font-size:14px;font-weight:500;
+  transition:background .2s var(--ease),transform .2s var(--ease);
+}
+.picker__go:hover{background:var(--brand);transform:translateY(-1px)}
+.picker__go-spark{
+  width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle,#fff,transparent 65%);
+}
+.picker__tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tag{
+  padding:9px 16px;border-radius:999px;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  font-size:13px;color:var(--ink-soft);
+  transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+}
+.tag:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.picker__foot{
+  margin-top:26px;padding-top:22px;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:14px;justify-content:center;text-align:center;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.picker__foot strong{color:var(--ink);font-weight:600}
+.picker__avatars{display:inline-flex}
+.picker__avatars span{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid #fff;margin-left:-8px;
+}
+.picker__avatars span:first-child{margin-left:0}
+.picker__avatars span:nth-child(1){background:linear-gradient(135deg,#C9DAFF,#A8C0FF)}
+.picker__avatars span:nth-child(2){background:linear-gradient(135deg,#D6F0DB,#A8DFB3)}
+.picker__avatars span:nth-child(3){background:linear-gradient(135deg,#FBE6CC,#F2C68A)}
+.picker__avatars span:nth-child(4){background:linear-gradient(135deg,#E1D6F8,#BFA8EE)}
+
+/* ===== facts ===== */
+.facts{padding:clamp(60px,8vw,120px) var(--pad-x) clamp(40px,5vw,80px);max-width:var(--maxw);margin:0 auto}
+.facts__head{max-width:760px;margin-bottom:40px;display:flex;flex-direction:column;gap:16px}
+.facts__head .display em{color:var(--brand);font-style:normal;font-family:inherit;font-weight:700}
+.facts__grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.fact{
+  grid-column:span 2;
+  background:#fff;border:1px solid var(--line);border-radius:24px;
+  padding:28px;display:flex;flex-direction:column;gap:12px;
+  position:relative;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.fact:hover{transform:translateY(-2px);box-shadow:var(--shadow-2)}
+.fact--lg{grid-column:span 3}
+.fact--accent{
+  grid-column:span 3;background:var(--ink);color:#fff;border-color:transparent;
+  background-image:radial-gradient(70% 80% at 100% 0%,rgba(31,102,255,.35),transparent 60%);
+}
+.fact--accent h3{color:#fff}
+.fact--accent p{color:rgba(255,255,255,.78)}
+.fact--accent .fact__num{color:rgba(255,255,255,.35)}
+.fact--accent .hl{background:linear-gradient(transparent 60%,rgba(31,102,255,.5) 60%);color:#fff}
+.fact__num{
+  font-family:var(--serif);font-style:italic;
+  font-size:13px;color:var(--ink-mute);letter-spacing:.04em;
+}
+.fact h3{margin:0;font-size:clamp(18px,1.4vw,22px);font-weight:600;letter-spacing:-.018em;line-height:1.25}
+.fact p{margin:0;color:var(--ink-soft);font-size:14.5px;line-height:1.55}
+.fact footer{margin-top:auto;padding-top:10px;font-size:11.5px;color:var(--ink-mute);letter-spacing:.04em;text-transform:uppercase;font-weight:500}
+.hl{background:linear-gradient(transparent 62%,rgba(31,102,255,.22) 62%);padding:0 2px;font-weight:600}
+
+/* ===== how ===== */
+.how{padding:clamp(40px,5vw,80px) var(--pad-x) clamp(20px,3vw,40px);max-width:var(--maxw);margin:0 auto}
+.how__head{max-width:720px;margin-bottom:36px;display:flex;flex-direction:column;gap:14px}
+.how__head .display em{color:var(--brand);font-style:normal;font-family:inherit;font-weight:700}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.step{padding:30px 26px 30px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.step:last-child{border-right:0;padding-right:0}
+.step:not(:first-child){padding-left:26px}
+.step__no{
+  font-family:var(--serif);font-style:italic;font-size:14px;color:var(--brand);
+}
+.step h3{margin:0;font-size:19px;font-weight:600;letter-spacing:-.015em}
+.step p{margin:0;font-size:14px;line-height:1.55;color:var(--ink-soft)}
+
+/* ===== cta / form ===== */
+.cta{padding:0 var(--pad-x) clamp(48px,7vw,100px);max-width:var(--maxw);margin:0 auto}
+.cta__card{
+  background:var(--ink);color:#fff;
+  border-radius:36px;
+  padding:clamp(28px,4vw,56px);
+  display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,4vw,56px);
+  align-items:start;
+  position:relative;overflow:hidden;
+  box-shadow:0 40px 80px -30px rgba(15,23,41,.45);
+}
+.cta__card::before{
+  content:"";position:absolute;inset:-40% -10% auto auto;
+  width:60%;aspect-ratio:1;
+  background:radial-gradient(circle,rgba(31,102,255,.4),transparent 60%);
+  pointer-events:none;
+}
+.cta__copy{display:flex;flex-direction:column;gap:18px;position:relative;z-index:1}
+.cta__title{color:#fff}
+.cta__title em{color:#9AB7FF;font-style:normal;font-family:inherit;font-weight:700}
+.cta__lede{color:rgba(255,255,255,.78);font-size:16px;line-height:1.55;max-width:52ch;margin:0}
+.cta__bullets{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;color:rgba(255,255,255,.85);font-size:14.5px}
+.cta__bullets li{position:relative;padding-left:26px}
+.cta__bullets li::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--brand);box-shadow:inset 0 0 0 4px var(--ink)}
+
+.cta__form{
+  position:relative;z-index:1;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+  border-radius:24px;padding:clamp(20px,2.5vw,32px);
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  backdrop-filter:blur(10px);
+}
+.field{display:flex;flex-direction:column;gap:6px}
+.field--full{grid-column:1/-1}
+.field label{font-size:12px;letter-spacing:.04em;color:rgba(255,255,255,.7);text-transform:uppercase}
+.field input,.field select,.field textarea{
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);
+  color:#fff;border-radius:12px;padding:13px 14px;font:inherit;font-size:15px;outline:none;
+  transition:border-color .2s var(--ease),background .2s var(--ease);
+  font-family:var(--font);
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.42)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--brand);background:rgba(31,102,255,.10)}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,rgba(255,255,255,.5) 50%),linear-gradient(135deg,rgba(255,255,255,.5) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.cta__form .btn--primary{grid-column:1/-1;margin-top:4px}
+.cta__legal{grid-column:1/-1;font-size:12px;color:rgba(255,255,255,.55);margin:0;line-height:1.5}
+.cta__legal a{color:rgba(255,255,255,.85);text-decoration:underline;text-underline-offset:2px}
+.cta__success{
+  grid-column:1/-1;padding:14px 18px;border-radius:12px;
+  background:rgba(34,160,107,.18);border:1px solid rgba(34,160,107,.4);
+  color:#C8F0D6;font-size:14px;display:none;
+}
+.cta__success strong{color:#fff}
+.cta__form.is-sent .cta__success{display:block}
+.cta__form.is-sent .field,.cta__form.is-sent>.btn,.cta__form.is-sent .cta__legal{opacity:.45;pointer-events:none}
+
+/* ===== footer ===== */
+.footer{
+  border-top:1px solid var(--line);
+  padding:48px var(--pad-x) 28px;
+  max-width:var(--maxw);margin:0 auto;
+  display:grid;grid-template-columns:1.2fr 2fr;gap:32px;
+}
+.footer__cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.footer__cols h5{margin:0 0 12px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);font-weight:600}
+.footer__cols a,.footer__cols span{display:block;font-size:14px;color:var(--ink-soft);margin-bottom:8px;transition:color .2s var(--ease)}
+.footer__cols a:hover{color:var(--ink)}
+.footer__legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:20px;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-mute);flex-wrap:wrap}
+
+/* ===== reveal ===== */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== responsive ===== */
+@media (max-width:1024px){
+  .nav__menu{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero__visual{max-width:520px;margin:0 auto;aspect-ratio:1/1}
+  .float-card--tl{left:0}
+  .float-card--tr{right:0}
+  .float-card--ml{right:0}
+  .float-card--br{right:0}
+  .facts__grid{grid-template-columns:repeat(2,1fr)}
+  .fact,.fact--lg,.fact--accent{grid-column:span 1}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .step:nth-child(2){border-right:0}
+  .step:nth-child(3),.step:nth-child(4){border-top:1px solid var(--line);padding-top:26px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cta__card{grid-template-columns:1fr}
+  .footer{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  :root{--pad-x:18px}
+  .nav__cta .btn--white{display:none}
+  .mini-features{grid-template-columns:repeat(2,1fr);padding:16px;gap:14px}
+  .hero__visual{aspect-ratio:1/1.1}
+  .float-card{padding:10px 12px;max-width:200px}
+  .float-card h4{font-size:12.5px}
+  .float-card p{font-size:11px}
+  .picker__card{padding:24px 18px}
+  .picker__search{padding-left:14px}
+  .picker__chip{display:none}
+  .picker__go{padding:10px 14px;font-size:13px}
+  .facts__grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:0;border-top:1px solid var(--line);padding:22px 0}
+  .step:first-child{border-top:0}
+  .stats{grid-template-columns:1fr}
+  .cta__form{grid-template-columns:1fr;padding:20px}
+  .footer__cols{grid-template-columns:1fr;gap:16px}
+  .footer__legal{flex-direction:column;gap:6px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <a href="#" class="brand" aria-label="Путь к профессии">
+    <span class="brand__mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="m15.6 8.4-2.6 4.6-4.6 2.6 2.6-4.6 4.6-2.6z"/>
+      </svg>
+    </span>
+    <span class="brand__text">
+      <strong>Путь к&nbsp;профессии</strong>
+      <em>Москва и&nbsp;область · приём&nbsp;2026</em>
+    </span>
+  </a>
+  <nav class="nav__menu" aria-label="Главное меню">
+    <a href="#picker">Подбор программы</a>
+    <a href="#facts">Что изменилось</a>
+    <a href="#how">Как мы помогаем</a>
+    <a href="#form">Заявка</a>
+  </nav>
+  <div class="nav__cta">
+    <a href="#" class="btn btn--white">Войти</a>
+    <a href="#form" class="btn btn--primary">Бесплатная&nbsp;консультация</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__copy">
+    <div class="pill">
+      <span class="pill__dot" aria-hidden="true"></span>
+      Только для жителей Москвы и&nbsp;Московской области
+    </div>
+
+    <h1 class="display">
+      Поступай в&nbsp;2026 году<br/>
+      и&nbsp;<span class="word">уверенно</span> строй<br/>
+      своё будущее
+    </h1>
+
+    <p class="lede">
+      Правила приёма меняются каждый год. Одна ошибка в&nbsp;приоритетах —
+      и&nbsp;бюджетное место уходит другому. Помогаем разобраться в&nbsp;себе,
+      подобрать направление и&nbsp;точно спланировать подачу документов
+      в&nbsp;вузы Москвы и&nbsp;области.
+    </p>
+
+    <ul class="mini-features">
+      <li>
+        <span class="mini-features__icon mini-features__icon--blue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15 9-4 2-2 4 4-2 2-4z"/></svg>
+        </span>
+        Поймёте свои интересы и&nbsp;сильные стороны
+      </li>
+      <li>
+        <span class="mini-features__icon mini-features__icon--green" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9m6 9V4m6 14v-6m6 6V11"/></svg>
+        </span>
+        Узнаете, какие профессии вам подходят
+      </li>
+      <li>
+        <span class="mini-features__icon mini-features__icon--purple" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h14a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2V4z"/><path d="M4 4v14a2 2 0 0 0 2 2"/></svg>
+        </span>
+        Получите план подачи документов
+      </li>
+      <li>
+        <span class="mini-features__icon mini-features__icon--amber" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
+        </span>
+        Соберёте сильное портфолио и&nbsp;цели
+      </li>
+    </ul>
+
+    <div class="hero__actions">
+      <a href="#picker" class="btn btn--primary btn--lg">Пройти подбор и&nbsp;получить план</a>
+      <a href="#how" class="btn btn--text">
+        <span class="play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        Как это работает?
+      </a>
+    </div>
+  </div>
+
+  <div class="hero__visual" aria-hidden="true">
+    <div class="hero__photo">
+      <img
+        src="https://images.pexels.com/photos/4144144/pexels-photo-4144144.jpeg?auto=compress&cs=tinysrgb&w=900"
+        alt=""
+        onerror="this.outerHTML='&lt;div class=&quot;hero__photo-fallback&quot;&gt;замените изображение&lt;/div&gt;'"
+      />
+    </div>
+    <span class="hero__sparkle hero__sparkle--a"></span>
+    <span class="hero__sparkle hero__sparkle--b"></span>
+
+    <article class="float-card float-card--tl">
+      <span class="float-card__icon" data-tone="blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.6 5.5 21 7 14 2 9.3 9 8.5 12 2"/></svg>
+      </span>
+      <div>
+        <h4>Подходящие профессии</h4>
+        <p>На&nbsp;основе ваших интересов, навыков и&nbsp;целей</p>
+      </div>
+    </article>
+
+    <article class="float-card float-card--tr">
+      <span class="float-card__icon" data-tone="green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
+      </span>
+      <div>
+        <h4>Понятный путь</h4>
+        <p>Пошаговый план от&nbsp;выбора до&nbsp;первых результатов</p>
+      </div>
+    </article>
+
+    <article class="float-card float-card--ml">
+      <span class="float-card__icon" data-tone="purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 4 2 10l10 6 10-6z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
+      </span>
+      <div>
+        <h4>Актуальные направления</h4>
+        <p>МГУ, ВШЭ, МФТИ, РАНХиГС, МИСИС, МПГУ и&nbsp;ещё 26&nbsp;вузов</p>
+      </div>
+    </article>
+
+    <article class="float-card float-card--br">
+      <span class="float-card__icon" data-tone="amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </span>
+      <div>
+        <h4>Поддержка экспертов</h4>
+        <p>Менторы и&nbsp;сообщество на&nbsp;каждом этапе</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section class="stats" aria-label="Статистика">
+  <div class="stats__item">
+    <span class="stats__icon" data-tone="blue">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 0 0 0-8"/></svg>
+    </span>
+    <div>
+      <strong>2 184+</strong>
+      <span>выпускника МО&nbsp;нашли своё направление</span>
+    </div>
+  </div>
+  <div class="stats__item">
+    <span class="stats__icon" data-tone="green">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+    </span>
+    <div>
+      <strong>Актуально</strong>
+      <span>информация под&nbsp;приказы&nbsp;2026</span>
+    </div>
+  </div>
+  <div class="stats__item">
+    <span class="stats__icon" data-tone="purple">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5 5 0 0 0-7-.2L12 6l-1.8-1.6a5 5 0 0 0-7 7L12 21l8.8-9.6a5 5 0 0 0 0-6.8z"/></svg>
+    </span>
+    <div>
+      <strong>Практично</strong>
+      <span>работаем точечно по&nbsp;вашим баллам</span>
+    </div>
+  </div>
+  <div class="stats__item">
+    <span class="stats__icon" data-tone="amber">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 17 12 3l7.5 14"/><path d="M7 13h10"/></svg>
+    </span>
+    <div>
+      <strong>Доступно</strong>
+      <span>первая консультация — 0&nbsp;₽</span>
+    </div>
+  </div>
+</section>
+
+<!-- PICKER -->
+<section class="picker" id="picker">
+  <div class="picker__shroud" aria-hidden="true"></div>
+
+  <div class="picker__card" role="region" aria-labelledby="picker-title">
+    <header class="picker__head">
+      <div class="picker__eyebrow">
+        <span class="picker__pin" aria-hidden="true"></span>
+        шаг 1 из&nbsp;3 · бесплатно
+      </div>
+      <h2 id="picker-title" class="picker__title">
+        Подбери себе <em>программу</em>
+      </h2>
+      <p class="picker__sub">
+        Введите профессию, направление или предмет ЕГЭ —
+        подберём подходящие программы вузов Москвы и&nbsp;Московской&nbsp;области.
+      </p>
+    </header>
+
+    <form class="picker__search" onsubmit="event.preventDefault(); document.getElementById('form')?.scrollIntoView({behavior:'smooth'});">
+      <span class="picker__search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </span>
+      <input type="text" class="picker__input" placeholder="Введите профессию или направление…" aria-label="Поиск программы" />
+      <button type="button" class="picker__chip" aria-label="Голосовой ввод">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      </button>
+      <button type="button" class="picker__chip" aria-label="Поиск по фото аттестата">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg>
+      </button>
+      <button type="submit" class="picker__go">
+        <span class="picker__go-spark" aria-hidden="true"></span>
+        Режим&nbsp;ИИ
+      </button>
+    </form>
+
+    <div class="picker__tags" role="list" aria-label="Популярные направления">
+      <button class="tag" type="button">IT и&nbsp;разработка</button>
+      <button class="tag" type="button">Дизайн</button>
+      <button class="tag" type="button">Медицина</button>
+      <button class="tag" type="button">Юриспруденция</button>
+      <button class="tag" type="button">Экономика</button>
+      <button class="tag" type="button">Инженерия</button>
+      <button class="tag" type="button">Маркетинг</button>
+    </div>
+
+    <div class="picker__foot">
+      <div class="picker__avatars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <p>Уже <strong>2 184&nbsp;выпускника</strong> МО&nbsp;нашли направление через подбор в&nbsp;этом сезоне.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FACTS -->
+<section class="facts" id="facts">
+  <header class="facts__head">
+    <div class="eyebrow"><span></span>что важно знать до&nbsp;подачи</div>
+    <h2 class="display display--md">
+      Правила поступления в&nbsp;2026 году —<br/>
+      <em>тише, но&nbsp;жёстче</em>
+    </h2>
+    <p class="lede">
+      Это уже не&nbsp;тот приём, к&nbsp;которому готовили старшие.
+      Вот&nbsp;что реально работает по&nbsp;законам РФ и&nbsp;приказам
+      Минобрнауки на&nbsp;сезон&nbsp;2026.
+    </p>
+  </header>
+
+  <div class="facts__grid">
+    <article class="fact fact--lg">
+      <span class="fact__num">01</span>
+      <h3>Только <span class="hl">одна волна</span> зачисления на&nbsp;бюджет</h3>
+      <p>Вторая волна отменена с&nbsp;2021&nbsp;года. Если приоритеты расставлены неправильно — поезд ушёл, дальше только платное или год пересдачи.</p>
+      <footer>основание: приказ Минобрнауки №&nbsp;1076</footer>
+    </article>
+
+    <article class="fact">
+      <span class="fact__num">02</span>
+      <h3>Максимум <span class="hl">5&nbsp;вузов</span></h3>
+      <p>И до&nbsp;5&nbsp;направлений в&nbsp;каждом. Любая ошибка в&nbsp;выборе режет шансы вдвое.</p>
+    </article>
+
+    <article class="fact">
+      <span class="fact__num">03</span>
+      <h3>Приоритеты <span class="hl">обязательны</span></h3>
+      <p>Алгоритм ставит вас туда, где совпадают баллы и&nbsp;ваш приоритет. После подачи поменять — нельзя.</p>
+    </article>
+
+    <article class="fact">
+      <span class="fact__num">04</span>
+      <h3><span class="hl">Целевой набор</span> по&nbsp;договору</h3>
+      <p>С&nbsp;2024&nbsp;договор подписывается ДО&nbsp;зачисления через «Работа России». Отказ&nbsp;= штраф до&nbsp;трёхкратной стоимости обучения.</p>
+      <footer>ФЗ&nbsp;№&nbsp;273, ст.&nbsp;71.1</footer>
+    </article>
+
+    <article class="fact fact--accent">
+      <span class="fact__num">05</span>
+      <h3>В&nbsp;МО — <span class="hl">меньше бюджета</span></h3>
+      <p>Часть мест перераспределяют в&nbsp;регионы. Конкурс в&nbsp;московских вузах на&nbsp;ИТ, медицину и&nbsp;экономику — от&nbsp;15&nbsp;человек на&nbsp;место.</p>
+      <a class="btn btn--white btn--sm" href="#form" style="margin-top:auto">Узнать свои шансы →</a>
+    </article>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how" id="how">
+  <header class="how__head">
+    <div class="eyebrow"><span></span>как мы помогаем</div>
+    <h2 class="display display--md">
+      Не&nbsp;курс. Не&nbsp;тест из&nbsp;интернета.<br/>
+      <em>Личная консультация.</em>
+    </h2>
+  </header>
+  <ol class="steps">
+    <li class="step">
+      <span class="step__no">01</span>
+      <h3>Разбираем вас</h3>
+      <p>Профориентационная диагностика, разговор о&nbsp;баллах, предметах, страхах и&nbsp;амбициях. 60&nbsp;минут с&nbsp;экспертом, не&nbsp;робот.</p>
+    </li>
+    <li class="step">
+      <span class="step__no">02</span>
+      <h3>Строим маршрут</h3>
+      <p>3–5 реальных направлений в&nbsp;вузах Москвы и&nbsp;МО под&nbsp;ваши баллы, с&nbsp;запасными вариантами и&nbsp;объяснением, почему именно так.</p>
+    </li>
+    <li class="step">
+      <span class="step__no">03</span>
+      <h3>Считаем приоритеты</h3>
+      <p>Помогаем расставить заявления так, чтобы вы&nbsp;попали в&nbsp;лучший из&nbsp;доступных вариантов. Без&nbsp;«авось».</p>
+    </li>
+    <li class="step">
+      <span class="step__no">04</span>
+      <h3>Сопровождаем приёмку</h3>
+      <p>Подача через Госуслуги, оригиналы, согласие на&nbsp;зачисление — на&nbsp;связи до&nbsp;приказа о&nbsp;поступлении.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- CTA / FORM -->
+<section class="cta" id="form">
+  <div class="cta__card">
+    <div class="cta__copy">
+      <div class="eyebrow eyebrow--on-dark"><span></span>оставьте заявку</div>
+      <h2 class="display display--md cta__title">
+        Один разговор —<br/>
+        <em>и&nbsp;план поступления готов</em>
+      </h2>
+      <p class="cta__lede">
+        Эксперт перезвонит в&nbsp;течение рабочего дня, разберёт ваши баллы и&nbsp;предметы и&nbsp;скажет, какие реальные шансы у&nbsp;вас есть в&nbsp;вузах Москвы и&nbsp;области в&nbsp;2026 году.
+      </p>
+      <ul class="cta__bullets">
+        <li>Бесплатно, без&nbsp;продаж курсов</li>
+        <li>Под&nbsp;законы и&nbsp;приказы сезона&nbsp;2026</li>
+        <li>Только для жителей Москвы и&nbsp;МО</li>
+      </ul>
+    </div>
+
+    <form class="cta__form" onsubmit="event.preventDefault(); this.classList.add('is-sent');">
+      <div class="field">
+        <label for="f-name">Как вас зовут</label>
+        <input id="f-name" type="text" required placeholder="Имя выпускника или родителя" />
+      </div>
+      <div class="field">
+        <label for="f-phone">Телефон</label>
+        <input id="f-phone" type="tel" required placeholder="+7 (___) ___-__-__" />
+      </div>
+      <div class="field">
+        <label for="f-class">Класс / статус</label>
+        <select id="f-class" required>
+          <option value="">Выберите</option>
+          <option>11 класс</option>
+          <option>10 класс</option>
+          <option>9 класс / СПО</option>
+          <option>выпускник прошлых лет</option>
+          <option>родитель</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-city">Город</label>
+        <select id="f-city" required>
+          <option value="">Выберите</option>
+          <option>Москва</option>
+          <option>Подольск</option>
+          <option>Химки</option>
+          <option>Балашиха</option>
+          <option>Мытищи</option>
+          <option>другой город МО</option>
+        </select>
+      </div>
+      <div class="field field--full">
+        <label for="f-goal">Что важно разобрать (необязательно)</label>
+        <textarea id="f-goal" rows="3" placeholder="Например: не знаю, куда идти с обществом и информатикой"></textarea>
+      </div>
+      <button type="submit" class="btn btn--primary btn--lg btn--full">Получить разбор бесплатно →</button>
+      <p class="cta__legal">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<a href="#">политикой обработки данных</a>. Звоним только по&nbsp;делу — Москва, МО.</p>
+      <div class="cta__success" aria-live="polite">
+        <strong>Заявка отправлена.</strong> Эксперт перезвонит в&nbsp;течение рабочего дня.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <a href="#" class="brand">
+    <span class="brand__mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="m15.6 8.4-2.6 4.6-4.6 2.6 2.6-4.6 4.6-2.6z"/>
+      </svg>
+    </span>
+    <span class="brand__text">
+      <strong>Путь к&nbsp;профессии</strong>
+      <em>Консультации для абитуриентов Москвы и&nbsp;МО</em>
+    </span>
+  </a>
+  <div class="footer__cols">
+    <div>
+      <h5>Сервисы</h5>
+      <a href="#picker">Подбор программы</a>
+      <a href="#how">Как мы работаем</a>
+      <a href="#form">Бесплатная консультация</a>
+    </div>
+    <div>
+      <h5>Поступление 2026</h5>
+      <a href="#facts">Что изменилось</a>
+      <a href="#facts">Сроки и&nbsp;приоритеты</a>
+      <a href="#facts">Целевой набор</a>
+    </div>
+    <div>
+      <h5>Контакты</h5>
+      <a href="tel:+74950000000">+7 (495) 000-00-00</a>
+      <a href="mailto:hi@put-k-professii.ru">hi@put-k-professii.ru</a>
+      <span>Москва, БЦ «Академик», офис&nbsp;312</span>
+    </div>
+  </div>
+  <div class="footer__legal">
+    <span>© 2026 Путь к&nbsp;профессии</span>
+    <span>ИП Иванова А.С. · ИНН 7700000000</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // Reveal on scroll
+  const revealTargets = document.querySelectorAll('.hero__copy, .hero__visual, .picker__card, .fact, .step, .stats, .cta__card');
+  revealTargets.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealTargets.forEach(el => io.observe(el));
+
+  // Phone mask
+  const phone = document.getElementById('f-phone');
+  if (phone) {
+    const format = (digits) => {
+      let d = digits.replace(/\D/g, '').slice(0, 11);
+      if (!d) return '';
+      if (d[0] === '8') d = '7' + d.slice(1);
+      if (d[0] !== '7') d = '7' + d;
+      const p = d.slice(1);
+      const a = p.slice(0, 3), b = p.slice(3, 6), c = p.slice(6, 8), e = p.slice(8, 10);
+      let out = '+7';
+      if (a) out += ' (' + a;
+      if (a.length === 3) out += ')';
+      if (b) out += ' ' + b;
+      if (c) out += '-' + c;
+      if (e) out += '-' + e;
+      return out;
+    };
+    phone.addEventListener('input', (ev) => { ev.target.value = format(ev.target.value); });
+    phone.addEventListener('focus', () => { if (!phone.value) phone.value = '+7 ('; });
+  }
+
+  // Tags fill input
+  const input = document.querySelector('.picker__input');
+  document.querySelectorAll('.picker__tags .tag').forEach(tag => {
+    tag.addEventListener('click', () => { if (input) { input.value = tag.textContent.trim(); input.focus(); } });
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (ev) => {
+      const id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      const t = document.querySelector(id);
+      if (!t) return;
+      ev.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
