@@ -523,6 +523,37 @@ body{
 .cta__form .btn--primary{grid-column:1/-1;margin-top:4px}
 .cta__legal{grid-column:1/-1;font-size:12px;color:rgba(255,255,255,.55);margin:0;line-height:1.5}
 .cta__legal a{color:rgba(255,255,255,.85);text-decoration:underline;text-underline-offset:2px}
+.check{
+  grid-column:1/-1;
+  display:flex;align-items:flex-start;gap:12px;
+  cursor:pointer;user-select:none;
+  font-size:13px;line-height:1.5;color:rgba(255,255,255,.78);
+  padding:4px 0;
+}
+.check input{position:absolute;opacity:0;pointer-events:none}
+.check__box{
+  flex-shrink:0;
+  width:20px;height:20px;
+  border:1.5px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.04);
+  border-radius:6px;
+  display:grid;place-items:center;
+  transition:background .2s var(--ease),border-color .2s var(--ease);
+  margin-top:1px;
+}
+.check__box::after{
+  content:"";
+  width:10px;height:6px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;
+  transform:rotate(-45deg) translate(1px,-1px) scale(.4);
+  opacity:0;
+  transition:opacity .2s var(--ease),transform .2s var(--ease);
+}
+.check input:checked + .check__box{background:var(--brand);border-color:var(--brand)}
+.check input:checked + .check__box::after{opacity:1;transform:rotate(-45deg) translate(1px,-1px) scale(1)}
+.check input:focus-visible + .check__box{box-shadow:0 0 0 4px rgba(31,102,255,.25)}
+.check__text a{color:#fff;text-decoration:underline;text-underline-offset:2px}
+.check__text a:hover{color:#9AB7FF}
 .cta__success{
   grid-column:1/-1;padding:14px 18px;border-radius:12px;
   background:rgba(34,160,107,.18);border:1px solid rgba(34,160,107,.4);
@@ -879,7 +910,6 @@ body{
   <header class="how__head">
     <div class="eyebrow"><span></span>как мы помогаем</div>
     <h2 class="display display--md">
-      Не&nbsp;курс. Не&nbsp;тест из&nbsp;интернета.<br/>
       <em>Личная консультация.</em>
     </h2>
   </header>
@@ -920,7 +950,6 @@ body{
         Эксперт перезвонит в&nbsp;течение рабочего дня, разберёт ваши баллы и&nbsp;предметы и&nbsp;скажет, какие реальные шансы у&nbsp;вас есть в&nbsp;вузах Москвы и&nbsp;области в&nbsp;2026 году.
       </p>
       <ul class="cta__bullets">
-        <li>Бесплатно, без&nbsp;продаж курсов</li>
         <li>Под&nbsp;законы и&nbsp;приказы сезона&nbsp;2026</li>
         <li>Только для жителей Москвы и&nbsp;МО</li>
       </ul>
@@ -966,8 +995,15 @@ body{
         <label for="f-goal">Что важно разобрать (необязательно)</label>
         <textarea id="f-goal" rows="3" placeholder="Например: не знаю, куда идти с обществом и информатикой"></textarea>
       </div>
+      <label class="check field--full" for="f-consent">
+        <input type="checkbox" id="f-consent" required />
+        <span class="check__box" aria-hidden="true"></span>
+        <span class="check__text">
+          Я&nbsp;соглашаюсь на&nbsp;обработку моих <a href="#">персональных данных</a>
+        </span>
+      </label>
       <button type="submit" class="btn btn--primary btn--lg btn--full">Получить разбор бесплатно →</button>
-      <p class="cta__legal">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<a href="#">политикой обработки данных</a>. Звоним только по&nbsp;делу — Москва, МО.</p>
+      <p class="cta__legal">Звоним только по&nbsp;делу — Москва, МО. Без&nbsp;спама и&nbsp;продаж курсов.</p>
       <div class="cta__success" aria-live="polite">
         <strong>Заявка отправлена.</strong> Эксперт перезвонит в&nbsp;течение рабочего дня.
       </div>
