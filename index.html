@@ -917,12 +917,12 @@ body{
     <li class="step">
       <span class="step__no">01</span>
       <h3>Разбираем вас</h3>
-      <p>Профориентационная диагностика, разговор о&nbsp;баллах, предметах, страхах и&nbsp;амбициях. 60&nbsp;минут с&nbsp;экспертом, не&nbsp;робот.</p>
+      <p>Короткая профориентационная диагностика и&nbsp;разговор о&nbsp;баллах, предметах и&nbsp;интересах. 5&nbsp;минут с&nbsp;экспертом, не&nbsp;робот.</p>
     </li>
     <li class="step">
       <span class="step__no">02</span>
-      <h3>Строим маршрут</h3>
-      <p>3–5 реальных направлений в&nbsp;вузах Москвы и&nbsp;МО под&nbsp;ваши баллы, с&nbsp;запасными вариантами и&nbsp;объяснением, почему именно так.</p>
+      <h3>Подбираем программу</h3>
+      <p>Находим <b>1 наиболее подходящую программу</b> в&nbsp;вузе Москвы или МО под&nbsp;ваши баллы. Если нужно больше&nbsp;— даём расширенный список вариантов.</p>
     </li>
     <li class="step">
       <span class="step__no">03</span>
@@ -931,8 +931,8 @@ body{
     </li>
     <li class="step">
       <span class="step__no">04</span>
-      <h3>Сопровождаем приёмку</h3>
-      <p>Подача через Госуслуги, оригиналы, согласие на&nbsp;зачисление — на&nbsp;связи до&nbsp;приказа о&nbsp;поступлении.</p>
+      <h3>День открытых дверей</h3>
+      <p>Помогаем посетить учебное заведение: записываем на&nbsp;Дни открытых дверей, готовим список вопросов к&nbsp;приёмной комиссии и&nbsp;сопровождаем вас на&nbsp;экскурсии по&nbsp;кампусу.</p>
     </li>
   </ol>
 </section>
@@ -955,7 +955,7 @@ body{
       </ul>
     </div>
 
-    <form class="cta__form" onsubmit="event.preventDefault(); this.classList.add('is-sent');">
+    <form class="cta__form" id="cta-form">
       <div class="field">
         <label for="f-name">Как вас зовут</label>
         <input id="f-name" type="text" required placeholder="Имя выпускника или родителя" />
@@ -1061,11 +1061,12 @@ body{
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealTargets.forEach(el => io.observe(el));
 
-  // Phone mask
+  // Phone mask + custom validity
   const phone = document.getElementById('f-phone');
   if (phone) {
-    const format = (digits) => {
-      let d = digits.replace(/\D/g, '').slice(0, 11);
+    const digitsOf = (v) => v.replace(/\D/g, '');
+    const format = (raw) => {
+      let d = digitsOf(raw).slice(0, 11);
       if (!d) return '';
       if (d[0] === '8') d = '7' + d.slice(1);
       if (d[0] !== '7') d = '7' + d;
@@ -1079,8 +1080,52 @@ body{
       if (e) out += '-' + e;
       return out;
     };
-    phone.addEventListener('input', (ev) => { ev.target.value = format(ev.target.value); });
+    const validatePhone = () => {
+      const d = digitsOf(phone.value);
+      if (phone.value === '+7 (' || d.length <= 1) {
+        phone.setCustomValidity('');
+      } else if (d.length < 11) {
+        phone.setCustomValidity('Введите полный номер телефона: +7 (XXX) XXX-XX-XX');
+      } else {
+        phone.setCustomValidity('');
+      }
+    };
+    phone.addEventListener('input', (ev) => { ev.target.value = format(ev.target.value); validatePhone(); });
     phone.addEventListener('focus', () => { if (!phone.value) phone.value = '+7 ('; });
+    phone.addEventListener('blur', () => {
+      if (phone.value === '+7 (' || digitsOf(phone.value).length <= 1) {
+        phone.value = '';
+        phone.setCustomValidity('');
+      }
+    });
+  }
+
+  // Form submit: validate all required + consent before "sending"
+  const ctaForm = document.getElementById('cta-form');
+  if (ctaForm) {
+    ctaForm.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      if (phone) {
+        const d = phone.value.replace(/\D/g, '');
+        if (d.length > 0 && d.length < 11) {
+          phone.setCustomValidity('Введите полный номер телефона: +7 (XXX) XXX-XX-XX');
+        } else if (d.length === 0 || phone.value === '+7 (') {
+          phone.value = '';
+          phone.setCustomValidity('');
+        } else {
+          phone.setCustomValidity('');
+        }
+      }
+      if (!ctaForm.checkValidity()) {
+        ctaForm.reportValidity();
+        const firstInvalid = ctaForm.querySelector(':invalid');
+        if (firstInvalid && typeof firstInvalid.focus === 'function') {
+          firstInvalid.focus({ preventScroll: false });
+        }
+        return;
+      }
+      ctaForm.classList.add('is-sent');
+    });
   }
 
   // Picker → form: tags & button fill direction field and scroll to form
