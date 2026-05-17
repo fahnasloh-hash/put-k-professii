@@ -581,14 +581,27 @@ body{
 .reveal.in{opacity:1;transform:none}
 
 /* ===== responsive ===== */
+
+/* --- tablet 1024 --- */
 @media (max-width:1024px){
   .nav__menu{display:none}
   .hero{grid-template-columns:1fr}
-  .hero__visual{max-width:520px;margin:0 auto;aspect-ratio:1/1}
-  .float-card--tl{left:0}
-  .float-card--tr{right:0}
-  .float-card--ml{right:0}
-  .float-card--br{right:0}
+
+  /* hero visual: compact square, overflow clipped so cards stay inside */
+  .hero__visual{
+    max-width:480px;margin:0 auto;
+    aspect-ratio:1/1;
+    overflow:visible; /* cards allowed outside */
+  }
+  /* re-anchor cards inside the 480-px box */
+  .float-card{max-width:210px;padding:12px 14px}
+  .float-card h4{font-size:13px}
+  .float-card p{font-size:11.5px}
+  .float-card--tl{top:8%; left:2%;  animation-delay:-1s}
+  .float-card--tr{top:4%; right:2%; animation-delay:-3s}
+  .float-card--ml{top:46%;right:2%; animation-delay:-4s}
+  .float-card--br{bottom:10%;right:4%;animation-delay:-5s}
+
   .facts__grid{grid-template-columns:repeat(2,1fr)}
   .fact,.fact--lg,.fact--accent{grid-column:span 1}
   .steps{grid-template-columns:repeat(2,1fr)}
@@ -598,25 +611,71 @@ body{
   .cta__card{grid-template-columns:1fr}
   .footer{grid-template-columns:1fr}
 }
+
+/* --- mobile 768 – hide all float cards, clean photo --- */
+@media (max-width:768px){
+  /* turn hero__photo back to normal flow so the container wraps it */
+  .hero__visual{
+    aspect-ratio:auto;
+    max-width:100%;
+  }
+  .hero__visual::before{display:none}   /* dashed ring */
+  .hero__sparkle{display:none}
+
+  .hero__photo{
+    position:relative;
+    inset:auto;
+    width:100%;
+    height:clamp(260px,60vw,380px);
+    border-radius:20px;
+  }
+
+  /* hide floating cards on mobile — info already in mini-features below */
+  .float-card{display:none}
+}
+
+/* --- small mobile 640 --- */
 @media (max-width:640px){
-  :root{--pad-x:18px}
+  :root{--pad-x:16px}
   .nav__cta .btn--white{display:none}
-  .mini-features{grid-template-columns:repeat(2,1fr);padding:16px;gap:14px}
-  .hero__visual{aspect-ratio:1/1.1}
-  .float-card{padding:10px 12px;max-width:200px}
-  .float-card h4{font-size:12.5px}
-  .float-card p{font-size:11px}
-  .picker__card{padding:24px 18px}
+  .nav__cta .btn--primary{padding:10px 16px;font-size:13px;border-radius:10px}
+
+  /* hero */
+  .hero{padding-top:28px;gap:16px}
+  .hero__photo{height:clamp(240px,72vw,340px)}
+  .mini-features{grid-template-columns:repeat(2,1fr);padding:14px;gap:12px}
+  .mini-features__icon{width:36px;height:36px;border-radius:10px}
+
+  /* picker */
+  .picker__card{padding:22px 16px}
   .picker__search{padding-left:14px}
   .picker__chip{display:none}
   .picker__go{padding:10px 14px;font-size:13px}
+
+  /* facts */
   .facts__grid{grid-template-columns:1fr}
+
+  /* steps */
   .steps{grid-template-columns:1fr}
-  .step{border-right:0;border-top:1px solid var(--line);padding:22px 0}
+  .step{border-right:0;border-top:1px solid var(--line);padding:20px 0}
   .step:first-child{border-top:0}
-  .stats{grid-template-columns:1fr}
-  .cta__form{grid-template-columns:1fr;padding:20px}
-  .footer__cols{grid-template-columns:1fr;gap:16px}
+
+  /* stats */
+  .stats{
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    padding:20px 18px;
+    margin-inline:var(--pad-x);
+    border-radius:18px;
+  }
+
+  /* cta form */
+  .cta__card{border-radius:22px;padding:24px 18px}
+  .cta__form{grid-template-columns:1fr;padding:18px;gap:12px}
+  .cta__title{font-size:clamp(26px,7vw,38px)}
+
+  /* footer */
+  .footer__cols{grid-template-columns:1fr;gap:14px}
   .footer__legal{flex-direction:column;gap:6px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -714,9 +773,9 @@ body{
   <div class="hero__visual" aria-hidden="true">
     <div class="hero__photo">
       <img
-        src="https://images.pexels.com/photos/4144144/pexels-photo-4144144.jpeg?auto=compress&cs=tinysrgb&w=900"
+        src="hero.jpg"
         alt=""
-        onerror="this.outerHTML='&lt;div class=&quot;hero__photo-fallback&quot;&gt;замените изображение&lt;/div&gt;'"
+        onerror="this.onerror=null;this.src='https://images.pexels.com/photos/4144144/pexels-photo-4144144.jpeg?auto=compress&cs=tinysrgb&w=900'"
       />
     </div>
     <span class="hero__sparkle hero__sparkle--a"></span>
