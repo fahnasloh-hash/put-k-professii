@@ -5,7 +5,7 @@ const https = require('https');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const BOT_TOKEN = process.env.BOT_TOKEN || '8814710536:AAFewXSFvDKcaP2YtVK8K64cy8zPYnAdCYc';
-let CHAT_ID = process.env.CHAT_ID || null;
+let CHAT_ID = process.env.CHAT_ID || '5041739228';
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
