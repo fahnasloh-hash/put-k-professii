@@ -1,7 +1,7 @@
 meta:
-  environment: static
+  environment: static web
   toolchain:
-    name: static
+    name: html
     version: latest
 build:
   skip: true
