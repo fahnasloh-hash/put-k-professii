@@ -1,9 +1,9 @@
 meta:
-  environment: static web
+  environment: docker
   toolchain:
-    name: html
+    name: docker
     version: latest
 build:
-  skip: true
+  dockerfile: Dockerfile
 run:
   containerPort: 80
