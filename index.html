@@ -660,14 +660,16 @@ body{
   .step{border-right:0;border-top:1px solid var(--line);padding:20px 0}
   .step:first-child{border-top:0}
 
-  /* stats */
+  /* stats — одна колонка, полная ширина каждого пункта */
   .stats{
-    grid-template-columns:1fr 1fr;
-    gap:16px;
+    grid-template-columns:1fr;
+    gap:14px;
     padding:20px 18px;
     margin-inline:var(--pad-x);
     border-radius:18px;
   }
+  .stats__item{border-bottom:1px solid var(--line);padding-bottom:14px}
+  .stats__item:last-child{border-bottom:0;padding-bottom:0}
 
   /* cta form */
   .cta__card{border-radius:22px;padding:24px 18px}
@@ -775,7 +777,7 @@ body{
       <img
         src="hero.jpg"
         alt=""
-        onerror="this.onerror=null;this.src='https://images.pexels.com/photos/4144144/pexels-photo-4144144.jpeg?auto=compress&cs=tinysrgb&w=900'"
+        onerror="this.onerror=null;this.src='https://images.pexels.com/photos/5212705/pexels-photo-5212705.jpeg?auto=compress&cs=tinysrgb&w=900'"
       />
     </div>
     <span class="hero__sparkle hero__sparkle--a"></span>
