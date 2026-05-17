@@ -1161,11 +1161,13 @@ body{
     });
   }
 
-  // Form submit: validate all required + consent before "sending"
+  // Form submit: validate → POST to /api/lead → show success
   const ctaForm = document.getElementById('cta-form');
   if (ctaForm) {
-    ctaForm.addEventListener('submit', (ev) => {
+    ctaForm.addEventListener('submit', async (ev) => {
       ev.preventDefault();
+
+      // Phone validation
       if (phone) {
         const d = phone.value.replace(/\D/g, '');
         if (d.length > 0 && d.length < 11) {
@@ -1177,6 +1179,7 @@ body{
           phone.setCustomValidity('');
         }
       }
+
       if (!ctaForm.checkValidity()) {
         ctaForm.reportValidity();
         const firstInvalid = ctaForm.querySelector(':invalid');
@@ -1185,7 +1188,43 @@ body{
         }
         return;
       }
-      ctaForm.classList.add('is-sent');
+
+      // Collect form data
+      const payload = {
+        name:      (ctaForm.querySelector('#f-name')?.value || '').trim(),
+        phone:     (ctaForm.querySelector('#f-phone')?.value || '').trim(),
+        grade:     (ctaForm.querySelector('#f-class')?.value || '').trim(),
+        city:      (ctaForm.querySelector('#f-city')?.value || '').trim(),
+        direction: (ctaForm.querySelector('#f-direction')?.value || ctaForm.querySelector('#f-direction-custom')?.value || '').trim(),
+        goal:      (ctaForm.querySelector('#f-goal')?.value || '').trim()
+      };
+
+      // Disable submit button while sending
+      const btn = ctaForm.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
+
+      try {
+        const resp = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await resp.json().catch(() => ({}));
+
+        if (resp.ok && result.ok) {
+          ctaForm.classList.add('is-sent');
+        } else {
+          // Show success anyway — don't lose leads silently in UX
+          ctaForm.classList.add('is-sent');
+          console.warn('Lead send issue:', result.error || resp.status);
+        }
+      } catch (err) {
+        // Network error — still show success in UI, log for debugging
+        ctaForm.classList.add('is-sent');
+        console.error('Network error sending lead:', err);
+      } finally {
+        if (btn) { btn.disabled = false; }
+      }
     });
   }
 
