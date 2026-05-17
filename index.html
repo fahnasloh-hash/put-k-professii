@@ -1203,27 +1203,39 @@ body{
       const btn = ctaForm.querySelector('button[type="submit"]');
       if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
 
+      // Send directly to Telegram Bot API
+      const TG_TOKEN = '8814710536:AAFewXSFvDKcaP2YtVK8K64cy8zPYnAdCYc';
+      const TG_CHAT  = '5041739228';
+      const lines = [
+        '🎓 *Новая заявка с сайта*',
+        '',
+        '👤 *Имя:* ' + (payload.name || '—'),
+        '📞 *Телефон:* ' + (payload.phone || '—'),
+        '🏫 *Класс:* ' + (payload.grade || '—'),
+        '📍 *Город:* ' + (payload.city || '—'),
+        '📚 *Направление:* ' + (payload.direction || '—')
+      ];
+      if (payload.goal) lines.push('💬 *Цель:* ' + payload.goal);
+      lines.push('');
+      lines.push('🕐 ' + new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' }) + ' (МСК)');
+
       try {
-        const resp = await fetch('/api/lead', {
+        const resp = await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            chat_id: TG_CHAT,
+            text: lines.join('\n'),
+            parse_mode: 'Markdown'
+          })
         });
         const result = await resp.json().catch(() => ({}));
-
-        if (resp.ok && result.ok) {
-          ctaForm.classList.add('is-sent');
-        } else {
-          // Show success anyway — don't lose leads silently in UX
-          ctaForm.classList.add('is-sent');
-          console.warn('Lead send issue:', result.error || resp.status);
-        }
+        if (!result.ok) console.warn('Telegram error:', result);
       } catch (err) {
-        // Network error — still show success in UI, log for debugging
-        ctaForm.classList.add('is-sent');
         console.error('Network error sending lead:', err);
       } finally {
         if (btn) { btn.disabled = false; }
+        ctaForm.classList.add('is-sent');
       }
     });
   }
