@@ -1358,73 +1358,30 @@ body{
       const btn = ctaForm.querySelector('button[type="submit"]');
       if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
 
-      // Send directly to Telegram Bot API
-      const TG_TOKEN = '8814710536:AAFewXSFvDKcaP2YtVK8K64cy8zPYnAdCYc';
-      const TG_CHAT  = '5041739228';
-      const lines = [
-        '🎓 *Новая заявка с сайта*',
-        '',
-        '👤 *Имя:* ' + (payload.name || '—'),
-        '📞 *Телефон:* ' + (payload.phone || '—'),
-        '🏫 *Класс:* ' + (payload.grade || '—'),
-        '📍 *Город:* ' + (payload.city || '—'),
-        '📚 *Направление:* ' + (payload.direction || '—')
-      ];
-      if (payload.goal) lines.push('💬 *Цель:* ' + payload.goal);
-      lines.push('');
-      lines.push('🕐 ' + new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' }) + ' (МСК)');
+      // Send to our own backend (same origin, no CORS)
+      const formBody = Object.entries(payload)
+        .map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v))
+        .join('&');
 
-      const text = lines.join('\n');
-      let delivered = false;
-
-      // Attempt 1: GET request (no preflight, works in all browsers incl. Yandex Browser)
       try {
-        const url = 'https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage'
-          + '?chat_id=' + encodeURIComponent(TG_CHAT)
-          + '&parse_mode=Markdown'
-          + '&text=' + encodeURIComponent(text);
-        const resp = await fetch(url, { method: 'GET', mode: 'cors' });
+        const resp = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formBody
+        });
         const result = await resp.json().catch(() => ({}));
-        if (result.ok) delivered = true;
-        else console.warn('Telegram GET error:', result);
+        if (!result.ok) console.warn('Lead delivery failed:', result);
       } catch (err) {
-        console.warn('Telegram GET network error:', err);
-      }
-
-      // Attempt 2: POST with simple Content-Type (avoids preflight)
-      if (!delivered) {
+        // Fallback: GET (won't fail due to network or CSP edge cases)
         try {
-          const formBody = 'chat_id=' + encodeURIComponent(TG_CHAT)
-            + '&parse_mode=Markdown'
-            + '&text=' + encodeURIComponent(text);
-          const resp = await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: formBody
-          });
-          const result = await resp.json().catch(() => ({}));
-          if (result.ok) delivered = true;
-          else console.warn('Telegram POST error:', result);
-        } catch (err) {
-          console.warn('Telegram POST network error:', err);
+          await fetch('/api/lead?' + formBody, { method: 'GET' });
+        } catch (e) {
+          console.error('Both POST and GET failed:', err, e);
         }
+      } finally {
+        if (btn) { btn.disabled = false; }
+        ctaForm.classList.add('is-sent');
       }
-
-      // Attempt 3: no-cors beacon (fire-and-forget, can't read response but request still goes)
-      if (!delivered) {
-        try {
-          navigator.sendBeacon(
-            'https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage',
-            new Blob([JSON.stringify({ chat_id: TG_CHAT, text: text, parse_mode: 'Markdown' })],
-              { type: 'application/json' })
-          );
-        } catch (err) {
-          console.error('Beacon failed:', err);
-        }
-      }
-
-      if (btn) { btn.disabled = false; }
-      ctaForm.classList.add('is-sent');
     });
   }
 
