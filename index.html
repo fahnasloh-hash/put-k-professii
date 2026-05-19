@@ -9,6 +9,71 @@
 <meta name="yandex-verification" content="bc97f22d31dde5d5" />
 <link rel="icon" type="image/png" href="/favicon.png" />
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Какой средний балл нужен для поступления в 2026 году?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Средний балл для поступления зависит от вуза и направления. В московских вузах на бюджет в 2026 году чаще всего нужен суммарный балл ЕГЭ от 240 до 290 (по трём предметам). На платное — от 180. Точный проходной балл для вашего направления мы рассчитаем на бесплатной консультации, исходя из ваших оценок и приоритетов."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как подобрать программу обучения после школы?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Подобрать программу можно тремя способами: пройти тест на профориентацию, посмотреть открытые двери вузов, обратиться к консультанту. Мы помогаем подобрать программу в 2 шага: разбираем ваши сильные предметы и интересы, затем подбираем 3–5 направлений в вузах Москвы и МО, где вы реально проходите по баллам."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "В какой колледж поступить после 9 класса?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "При выборе колледжа после 9 класса учитывайте: средний балл аттестата, востребованность специальности, возможность продолжить обучение в вузе. В Москве и МО более 130 колледжей. Мы поможем определить, в какой колледж поступить именно вам — на основе ваших оценок, района проживания и планов на дальнейшее обучение."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Какой ВУЗ лучше выбрать в Москве и МО?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Какой вуз лучше выбрать — зависит от направления, бюджета семьи и ваших баллов. Топовые вузы Москвы: МГУ, МФТИ, ВШЭ, МГИМО, Бауманка. В МО сильные вузы: МФТИ (Долгопрудный), Дубна, ГСГУ (Коломна). Мы подберём 3–5 вузов в Москве и Подмосковье, куда вы реально проходите по баллам, с учётом одной волны зачисления в 2026 году."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Сколько вузов можно указать при подаче документов в 2026 году?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "В 2026 году можно подать документы максимум в 5 вузов. В каждом вузе — до 5 направлений. Важно: приоритеты обязательны, их нужно правильно расставить. Мы помогаем рассчитать приоритеты так, чтобы максимизировать шансы на бюджет."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Что такое целевой набор и кому он подходит?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Целевой набор — это поступление в вуз по договору с работодателем (предприятием, ведомством, регионом). Работодатель оплачивает обучение, а выпускник обязан отработать у него 3–5 лет. Конкурс на целевые места обычно ниже, чем на общий бюджет. Подходит тем, кто заранее определился с профессией и регионом работы."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как считать приоритеты при поступлении в 2026 году?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Приоритеты — это порядок направлений, в которые вы хотите поступить. В 2026 году одна волна зачисления, поэтому приоритеты критически важны: вуз зачисляет на самое высокое направление по приоритету, на которое прошли по баллам. На консультации мы рассчитаем оптимальные приоритеты для ваших баллов."
+      }
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet" />
@@ -470,6 +535,44 @@ body{
 }
 .step h3{margin:0;font-size:19px;font-weight:600;letter-spacing:-.015em}
 .step p{margin:0;font-size:14px;line-height:1.55;color:var(--ink-soft)}
+
+/* ===== faq ===== */
+.faq{padding:clamp(48px,7vw,96px) var(--pad-x);max-width:var(--maxw);margin:0 auto}
+.faq__head{display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(28px,3.5vw,40px);max-width:760px}
+.faq__list{display:flex;flex-direction:column;gap:10px}
+.faq__item{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow-1);
+  transition:border-color .2s var(--ease),box-shadow .2s var(--ease);
+  overflow:hidden;
+}
+.faq__item[open]{border-color:var(--line-strong);box-shadow:var(--shadow-2)}
+.faq__q{
+  list-style:none;cursor:pointer;
+  padding:20px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  font-size:clamp(16px,1.2vw,18px);font-weight:600;letter-spacing:-.012em;
+  color:var(--ink);
+}
+.faq__q::-webkit-details-marker{display:none}
+.faq__q::after{
+  content:"";
+  flex:0 0 22px;width:22px;height:22px;
+  background:no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F1729' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  transition:transform .25s var(--ease);
+}
+.faq__item[open] .faq__q::after{transform:rotate(180deg)}
+.faq__a{
+  padding:0 24px 22px;
+  font-size:15px;line-height:1.6;color:var(--ink-soft);
+  max-width:80ch;
+}
+@media (max-width:680px){
+  .faq__q{padding:18px 18px;font-size:15.5px}
+  .faq__a{padding:0 18px 18px;font-size:14.5px}
+}
 
 /* ===== cta / form ===== */
 .cta{padding:0 var(--pad-x) clamp(48px,7vw,100px);max-width:var(--maxw);margin:0 auto}
@@ -999,6 +1102,59 @@ body{
       <p>Помогаем посетить учебное заведение: записываем на&nbsp;Дни открытых дверей, готовим список вопросов к&nbsp;приёмной комиссии и&nbsp;сопровождаем вас на&nbsp;экскурсии по&nbsp;кампусу.</p>
     </li>
   </ol>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq__head">
+    <div class="eyebrow"><span></span>частые вопросы</div>
+    <h2 class="display display--md">Вопросы абитуриентов о&nbsp;поступлении в&nbsp;2026 году</h2>
+    <p class="lede">Коротко о&nbsp;главном: проходные баллы, подбор программы, колледжи и&nbsp;вузы Москвы и&nbsp;области.</p>
+  </div>
+  <div class="faq__list">
+    <details class="faq__item">
+      <summary class="faq__q">Какой средний балл нужен для поступления в&nbsp;2026 году?</summary>
+      <div class="faq__a">
+        Средний балл для поступления зависит от&nbsp;вуза и&nbsp;направления. В&nbsp;московских вузах на&nbsp;бюджет в&nbsp;2026 году чаще всего нужен суммарный балл ЕГЭ от&nbsp;240 до&nbsp;290 (по&nbsp;трём предметам). На&nbsp;платное&nbsp;— от&nbsp;180. Точный проходной балл для вашего направления мы&nbsp;рассчитаем на&nbsp;бесплатной консультации.
+      </div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q">Как подобрать программу обучения после школы?</summary>
+      <div class="faq__a">
+        Подобрать программу можно тремя способами: пройти тест на&nbsp;профориентацию, посмотреть открытые двери вузов или обратиться к&nbsp;консультанту. Мы&nbsp;помогаем подобрать программу за&nbsp;2&nbsp;шага: разбираем ваши сильные предметы и&nbsp;интересы, затем подбираем 3–5 направлений в&nbsp;вузах Москвы и&nbsp;МО, где вы&nbsp;реально проходите по&nbsp;баллам.
+      </div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q">В&nbsp;какой колледж поступить после 9&nbsp;класса?</summary>
+      <div class="faq__a">
+        При выборе колледжа после 9&nbsp;класса учитывайте: средний балл аттестата, востребованность специальности и&nbsp;возможность продолжить обучение в&nbsp;вузе. В&nbsp;Москве и&nbsp;МО более 130&nbsp;колледжей. Мы&nbsp;поможем определить, в&nbsp;какой колледж поступить именно вам&nbsp;— на&nbsp;основе оценок, района проживания и&nbsp;планов на&nbsp;дальнейшее обучение.
+      </div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q">Какой ВУЗ лучше выбрать в&nbsp;Москве и&nbsp;МО?</summary>
+      <div class="faq__a">
+        Какой вуз лучше выбрать&nbsp;— зависит от&nbsp;направления, бюджета семьи и&nbsp;ваших баллов. Топовые вузы Москвы: МГУ, МФТИ, ВШЭ, МГИМО, Бауманка. В&nbsp;МО сильные вузы: МФТИ (Долгопрудный), Дубна, ГСГУ (Коломна). Мы&nbsp;подберём 3–5 вузов в&nbsp;Москве и&nbsp;Подмосковье, куда вы&nbsp;реально проходите по&nbsp;баллам.
+      </div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q">Сколько вузов можно указать при подаче документов?</summary>
+      <div class="faq__a">
+        В&nbsp;2026 году можно подать документы максимум в&nbsp;5&nbsp;вузов. В&nbsp;каждом вузе&nbsp;— до&nbsp;5&nbsp;направлений. Приоритеты обязательны и&nbsp;их&nbsp;нужно правильно расставить. Мы&nbsp;помогаем рассчитать приоритеты так, чтобы максимизировать шансы на&nbsp;бюджет.
+      </div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q">Что такое целевой набор и&nbsp;кому он&nbsp;подходит?</summary>
+      <div class="faq__a">
+        Целевой набор&nbsp;— это поступление в&nbsp;вуз по&nbsp;договору с&nbsp;работодателем (предприятием, ведомством, регионом). Работодатель оплачивает обучение, а&nbsp;выпускник обязан отработать у&nbsp;него 3–5&nbsp;лет. Конкурс на&nbsp;целевые места обычно ниже, чем на&nbsp;общий бюджет.
+      </div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q">Как считать приоритеты при поступлении в&nbsp;2026 году?</summary>
+      <div class="faq__a">
+        Приоритеты&nbsp;— это порядок направлений, в&nbsp;которые вы&nbsp;хотите поступить. В&nbsp;2026 году одна волна зачисления, поэтому приоритеты критически важны: вуз зачисляет на&nbsp;самое высокое направление по&nbsp;приоритету, на&nbsp;которое прошли по&nbsp;баллам. На&nbsp;консультации мы&nbsp;рассчитаем оптимальные приоритеты.
+      </div>
+    </details>
+  </div>
 </section>
 
 <!-- CTA / FORM -->
