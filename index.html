@@ -1320,10 +1320,10 @@ body{
     });
   }
 
-  // Form submit: validate all required + consent before "sending"
+  // Form submit: validate → send to Telegram → show success
   const ctaForm = document.getElementById('cta-form');
   if (ctaForm) {
-    ctaForm.addEventListener('submit', (ev) => {
+    ctaForm.addEventListener('submit', async (ev) => {
       ev.preventDefault();
       if (phone) {
         const d = phone.value.replace(/\D/g, '');
@@ -1344,7 +1344,54 @@ body{
         }
         return;
       }
-      ctaForm.classList.add('is-sent');
+
+      // Collect form data
+      const payload = {
+        name:      (ctaForm.querySelector('#f-name')?.value || '').trim(),
+        phone:     (ctaForm.querySelector('#f-phone')?.value || '').trim(),
+        grade:     (ctaForm.querySelector('#f-class')?.value || '').trim(),
+        city:      (ctaForm.querySelector('#f-city')?.value || '').trim(),
+        direction: (ctaForm.querySelector('#f-direction')?.value || '').trim(),
+        goal:      (ctaForm.querySelector('#f-goal')?.value || '').trim()
+      };
+
+      const btn = ctaForm.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
+
+      // Send directly to Telegram Bot API
+      const TG_TOKEN = '8814710536:AAFewXSFvDKcaP2YtVK8K64cy8zPYnAdCYc';
+      const TG_CHAT  = '5041739228';
+      const lines = [
+        '🎓 *Новая заявка с сайта*',
+        '',
+        '👤 *Имя:* ' + (payload.name || '—'),
+        '📞 *Телефон:* ' + (payload.phone || '—'),
+        '🏫 *Класс:* ' + (payload.grade || '—'),
+        '📍 *Город:* ' + (payload.city || '—'),
+        '📚 *Направление:* ' + (payload.direction || '—')
+      ];
+      if (payload.goal) lines.push('💬 *Цель:* ' + payload.goal);
+      lines.push('');
+      lines.push('🕐 ' + new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' }) + ' (МСК)');
+
+      try {
+        const resp = await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TG_CHAT,
+            text: lines.join('\n'),
+            parse_mode: 'Markdown'
+          })
+        });
+        const result = await resp.json().catch(() => ({}));
+        if (!result.ok) console.warn('Telegram error:', result);
+      } catch (err) {
+        console.error('Network error sending lead:', err);
+      } finally {
+        if (btn) { btn.disabled = false; }
+        ctaForm.classList.add('is-sent');
+      }
     });
   }
 
