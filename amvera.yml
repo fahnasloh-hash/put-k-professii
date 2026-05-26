@@ -1,0 +1,11 @@
+meta:
+  environment: static
+  toolchain:
+    name: static
+    version: latest
+build:
+  skip: false
+  artifacts:
+    "./*": /
+run:
+  containerPort: 80
