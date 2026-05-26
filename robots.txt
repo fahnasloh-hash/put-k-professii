@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://putkprofessii.ru/sitemap.xml
+
+# Disallow admin/service paths (none currently, but good practice)
+Disallow: /.claude/
+Disallow: /node_modules/
