@@ -1,0 +1,8 @@
+.git
+.dockerignore
+node_modules
+*.jsonl
+site-snapshot.html
+test.html
+ChatGPT Image*.png
+Снимок экрана*.png
