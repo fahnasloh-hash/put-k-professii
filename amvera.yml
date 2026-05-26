@@ -4,6 +4,6 @@ meta:
     name: static
     version: latest
 build:
-  skip: false
+  skip: true
 run:
   containerPort: 80
