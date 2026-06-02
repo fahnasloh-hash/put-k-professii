@@ -10,8 +10,9 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'data'))
 import institutions as D
+import faculties as F
 
-CSS_VER = '20260602b'
+CSS_VER = '20260603'
 SITE = 'https://putkprofessii.ru'
 
 COLOR_CYCLE = ['blue', 'green', 'purple', 'amber']
@@ -54,9 +55,9 @@ NAV = '''<nav class="nav" role="navigation" aria-label="Главное меню"
   <nav class="nav__menu" aria-label="Разделы сайта">
     <a href="/vuzy-moskvy/">Вузы</a>
     <a href="/kolledzhi-moskvy/">Колледжи</a>
+    <a href="/fakultety/">Факультеты</a>
     <a href="/kuda-postupit-posle-9-klassa/">После 9 класса</a>
     <a href="/postuplenie-2026/">Поступление 2026</a>
-    <a href="/pomoshch-s-postupleniem/">Помощь</a>
     <a href="/blog/">Блог</a>
   </nav>
   <div class="nav__cta"><a href="#" data-apply="" class="btn btn--primary">Получить консультацию →</a></div>
@@ -65,6 +66,7 @@ NAV = '''<nav class="nav" role="navigation" aria-label="Главное меню"
 <nav class="nav__mobile" id="mobileMenu" aria-label="Мобильное меню">
   <a href="/vuzy-moskvy/">🎓 Вузы Москвы и МО</a>
   <a href="/kolledzhi-moskvy/">🏫 Колледжи</a>
+  <a href="/fakultety/">🧭 Факультеты</a>
   <a href="/kuda-postupit-posle-9-klassa/">📚 После 9 класса</a>
   <a href="/postuplenie-2026/">📅 Поступление 2026</a>
   <a href="/pomoshch-s-postupleniem/">🤝 Помощь</a>
@@ -95,9 +97,9 @@ def esc(s):
 
 def card(inst, base_url):
     """Compact hub card linking to detail page + apply button."""
-    color = inst['color']
+    color = inst.get('color') or 'blue'
     badge_cls = 'inst-card__badge--top' if inst['type'] == 'Государственный' else 'inst-card__badge--choice'
-    detail = f"{base_url}{inst['slug']}/"
+    detail = f"{inst.get('_base', base_url)}{inst['slug']}/"
     budget = 'Бюджет есть' if inst.get('budget') else 'Платно'
     loc = inst.get('city', 'Москва')
     name = esc(inst['name'])
@@ -242,6 +244,106 @@ def related_for(items, idx, n=4):
     return out
 
 
+def build_index():
+    """slug -> inst dict, with _base (detail URL prefix) attached."""
+    idx = {}
+    for items, base in [
+        (D.VUZY_MSK, '/vuzy-moskvy/'),
+        (D.VUZY_MO, '/vuzy-moskovskoy-oblasti/'),
+        (D.KOLLEDZHI_MSK, '/kolledzhi-moskvy/'),
+        (D.KOLLEDZHI_PRI_VUZE, '/kolledzhi-pri-vuze/'),
+    ]:
+        for it in items:
+            it['_base'] = base
+            idx[it['slug']] = it
+    return idx
+
+
+def fac_hub(faculties, idx):
+    title = 'Факультеты и направления вузов и колледжей Москвы — куда поступить'
+    desc = 'Все факультеты и направления подготовки: IT, медицина, экономика, юриспруденция, дизайн и другие. Выберите направление — покажем вузы и колледжи Москвы и области, где этому учат.'
+    cards = []
+    for f in faculties:
+        cnt = sum(1 for s in f['members'] if s in idx)
+        cards.append(
+            f'''    <a class="fac-card" href="/fakultety/{f['slug']}/">
+      <span class="fac-card__icon" aria-hidden="true">{f['icon']}</span>
+      <span class="fac-card__name">{esc(f['name'])}</span>
+      <span class="fac-card__count">{cnt} заведений</span>
+    </a>''')
+    html = head(title, desc, '/fakultety/') + NAV
+    html += f'''
+<section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
+  <nav class="breadcrumbs" aria-label="Навигационная цепочка">
+    <a href="/">Главная</a><span class="sep">›</span><span aria-current="page">Факультеты</span>
+  </nav>
+  <div class="pill" style="margin-bottom:20px"><span class="pill__dot" aria-hidden="true"></span>Направления подготовки · 2026</div>
+  <h1 class="display" id="page-h1" style="max-width:20ch">Факультеты и направления</h1>
+  <p class="lede" style="margin-top:20px;max-width:64ch">Выберите направление подготовки — покажем вузы и колледжи Москвы и Московской области, где на него учат, с бюджетными местами. Поможем поступить бесплатно.</p>
+</section>
+
+<section class="section" style="padding-top:24px">
+  <div class="fac-grid">
+{chr(10).join(cards)}
+  </div>
+</section>
+
+<section class="section" id="form" style="padding-top:0">
+  <div class="cta-band">
+    <h2>Не знаете, какое направление выбрать?</h2>
+    <p>Поможем определиться с факультетом и подберём учебные заведения под ваши баллы — бесплатно за 15 минут.</p>
+    <a href="#" data-apply="" class="btn btn--white btn--lg" style="margin-top:18px">Получить консультацию →</a>
+  </div>
+</section>
+'''
+    html += FOOTER
+    return html
+
+
+def fac_detail(f, idx, faculties):
+    members = [idx[s] for s in f['members'] if s in idx]
+    title = f"{esc(f['name'])} — вузы и колледжи Москвы, куда поступить в 2026"
+    desc = f"{esc(f['desc'])}"
+    cards = '\n\n'.join(card(it, it['_base']) for it in members)
+    # other faculties for internal linking
+    others = [x for x in faculties if x['slug'] != f['slug']][:8]
+    other_links = ''.join(f'<a href="/fakultety/{o["slug"]}/">{o["icon"]} {esc(o["name"])}</a>' for o in others)
+    html = head(title, desc, f"/fakultety/{f['slug']}/") + NAV
+    html += f'''
+<section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
+  <nav class="breadcrumbs" aria-label="Навигационная цепочка">
+    <a href="/">Главная</a><span class="sep">›</span><a href="/fakultety/">Факультеты</a><span class="sep">›</span><span aria-current="page">{esc(f['name'])}</span>
+  </nav>
+  <div class="inst-detail-head">
+    <div class="inst-card__logo" style="width:84px;height:84px;font-size:38px;background:linear-gradient(135deg,#1F66FF,#5b8cff)"><span style="font-size:40px">{f['icon']}</span></div>
+    <div>
+      <h1 class="display--md" id="page-h1" style="max-width:24ch">{esc(f['name'])}</h1>
+      <div class="inst-card__loc" style="margin-top:8px;font-size:14px">{len(members)} учебных заведений Москвы и области</div>
+    </div>
+  </div>
+  <p class="lede" style="margin-top:18px;max-width:66ch">{esc(f['desc'])}</p>
+  <div style="margin-top:22px">
+    <button type="button" class="btn btn--primary btn--lg" data-apply="Направление: {esc(f['name'])}">Поступить на «{esc(f['name'])}» →</button>
+  </div>
+</section>
+
+<section class="section" id="catalog" style="padding-top:28px">
+  <h2 class="display--sm" style="margin-bottom:16px">Где учат: {esc(f['name'])}</h2>
+  <div class="inst-grid">
+{cards}
+  </div>
+</section>
+
+<section class="section" style="padding-top:0" aria-labelledby="other-h2">
+  <h2 class="display--sm" id="other-h2" style="margin-bottom:14px">Другие направления</h2>
+  <nav class="link-grid">{other_links}</nav>
+  <p style="margin-top:18px"><a href="/fakultety/" class="btn btn--white">← Все факультеты</a></p>
+</section>
+'''
+    html += FOOTER
+    return html
+
+
 def main():
     urls = []  # for sitemap (loc, priority)
 
@@ -335,6 +437,14 @@ def main():
                    'related': related_for(items, idx)}
             write(f"{base.strip('/')}/{inst['slug']}/index.html", detail_page(inst, ctx))
             urls.append((f"{base}{inst['slug']}/", '0.7'))
+
+    # ---------------- FACULTIES ----------------
+    idx = build_index()
+    write('fakultety/index.html', fac_hub(F.FACULTIES, idx))
+    urls.append(('/fakultety/', '0.9'))
+    for f in F.FACULTIES:
+        write(f"fakultety/{f['slug']}/index.html", fac_detail(f, idx, F.FACULTIES))
+        urls.append((f"/fakultety/{f['slug']}/", '0.7'))
 
     # ---------------- SITEMAP ----------------
     static_urls = [
