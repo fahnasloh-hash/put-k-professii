@@ -553,7 +553,8 @@ body{
   .inst-grid{grid-template-columns:1fr}
   .inst-card__specs{grid-template-columns:repeat(2,1fr);gap:14px 12px}
   .blog-grid{grid-template-columns:1fr}
-  .lead-form__row{grid-template-columns:1fr}
+  .lead-form__row{grid-template-columns:1fr 1fr}
+  .field--phone input{padding:10px 11px;font-size:14px}
   .testimonials{grid-template-columns:1fr}
   .link-grid{grid-template-columns:1fr}
   .nav__menu,.nav__cta{display:none}
