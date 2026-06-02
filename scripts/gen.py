@@ -95,6 +95,52 @@ def esc(s):
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 
+import json
+
+
+def jsonld(obj):
+    return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False) + '</script>\n'
+
+
+def breadcrumb(crumbs):
+    """crumbs: list of (name, url_or_None)."""
+    items = []
+    for i, (name, url) in enumerate(crumbs, 1):
+        it = {"@type": "ListItem", "position": i, "name": name}
+        if url:
+            it["item"] = SITE + url
+        items.append(it)
+    return jsonld({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items})
+
+
+def edu_org_ld(inst, url, kind):
+    t = "CollegeOrUniversity" if kind == 'vuz' else "EducationalOrganization"
+    return jsonld({
+        "@context": "https://schema.org", "@type": t,
+        "name": inst.get('full', inst['name']), "url": SITE + url,
+        "address": {"@type": "PostalAddress", "addressLocality": inst.get('city', 'Москва'),
+                    "addressRegion": "Москва и Московская область", "addressCountry": "RU"},
+    })
+
+
+CHEV = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>'
+
+
+def faq_block(qa):
+    """qa: list of (question, answer). Returns visible accordion + FAQPage JSON-LD."""
+    rows = []
+    for i, (q, a) in enumerate(qa):
+        op = ' open' if i == 0 else ''
+        exp = 'true' if i == 0 else 'false'
+        rows.append(f'<div class="faq-item{op}"><button class="faq-q" aria-expanded="{exp}">{esc(q)}{CHEV}</button><div class="faq-a">{esc(a)}</div></div>')
+    html = ('<section class="section" style="padding-top:0" aria-labelledby="faq-h2">'
+            '<header class="section-header section-header--center"><h2 class="display--sm" id="faq-h2">Частые вопросы</h2></header>'
+            '<div class="faq" style="max-width:760px;margin:0 auto">' + ''.join(rows) + '</div></section>\n')
+    ld = jsonld({"@context": "https://schema.org", "@type": "FAQPage",
+                 "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qa]})
+    return html + ld
+
+
 def card(inst, base_url):
     """Compact hub card linking to detail page + apply button."""
     color = inst.get('color') or 'blue'
@@ -155,6 +201,7 @@ def hub_page(cfg, items, alt_links):
   </div>
 </section>
 '''
+    html += breadcrumb([('Главная', '/'), (cfg['crumb'], cfg['url'])])
     html += FOOTER
     return html
 
@@ -218,6 +265,24 @@ def detail_page(inst, ctx):
   <p style="margin-top:18px"><a href="{ctx['hub_url']}" class="btn btn--white">← Все {ctx['hub_label_low']}</a></p>
 </section>
 '''
+    # FAQ + structured data
+    if ctx['kind'] == 'vuz':
+        admit = 'идёт по результатам ЕГЭ, а после колледжа — по внутренним испытаниям без ЕГЭ'
+    else:
+        admit = 'возможно после 9 или 11 класса по среднему баллу аттестата, без ЕГЭ'
+    budget_a = ('Да, есть бюджетные (бесплатные) места — конкурс зависит от направления и проходного балла.'
+                if inst.get('budget') else
+                'Обучение платное, бюджетных мест нет. Поможем подобрать выгодные условия и рассрочку.')
+    qa = [
+        (f"Как поступить в {name} в 2026 году?",
+         f"Поступление в {name} {admit}. Эксперты «Путь к профессии» бесплатно подберут направление, оценят шансы на бюджет и помогут с документами."),
+        (f"Есть ли бюджетные места в {name}?", budget_a),
+        (f"Какие направления есть в {name}?",
+         f"Основные направления подготовки: {inst['dirs']}. Полный список специальностей и проходные баллы уточним на бесплатной консультации."),
+    ]
+    html += faq_block(qa)
+    html += breadcrumb([('Главная', '/'), (ctx['hub_label'], ctx['hub_url']), (inst['abbr'], url)])
+    html += edu_org_ld(inst, url, ctx['kind'])
     html += FOOTER
     return html
 
@@ -296,6 +361,7 @@ def fac_hub(faculties, idx):
   </div>
 </section>
 '''
+    html += breadcrumb([('Главная', '/'), ('Факультеты', '/fakultety/')])
     html += FOOTER
     return html
 
@@ -340,6 +406,20 @@ def fac_detail(f, idx, faculties):
   <p style="margin-top:18px"><a href="/fakultety/" class="btn btn--white">← Все факультеты</a></p>
 </section>
 '''
+    examples = ', '.join(m['name'] for m in members[:5]) if members else ''
+    qa = [
+        (f"В каких вузах и колледжах Москвы есть направление «{f['name']}»?",
+         f"Направление «{f['name']}» представлено в {len(members)} учебных заведениях Москвы и области" + (f", среди них: {examples} и другие." if examples else ".")),
+        (f"Можно ли поступить на «{f['name']}» без ЕГЭ?",
+         "Да — через колледж по среднему баллу аттестата после 9 или 11 класса, а затем при желании перейти в вуз. Подберём вариант бесплатно."),
+        (f"Сколько баллов нужно для поступления на «{f['name']}»?",
+         "Проходной балл зависит от конкретного вуза и года. Рассчитаем ваши шансы и подберём заведения под ваши баллы — бесплатно за 15 минут."),
+    ]
+    html += faq_block(qa)
+    html += breadcrumb([('Главная', '/'), ('Факультеты', '/fakultety/'), (f['name'], f"/fakultety/{f['slug']}/")])
+    html += jsonld({"@context": "https://schema.org", "@type": "ItemList",
+                    "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": m.get('full', m['name']),
+                                         "url": SITE + m['_base'] + m['slug'] + '/'} for i, m in enumerate(members)]})
     html += FOOTER
     return html
 
