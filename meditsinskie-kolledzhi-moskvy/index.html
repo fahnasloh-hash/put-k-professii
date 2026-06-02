@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/styles.css?v=20260529"/>
+<link rel="stylesheet" href="/styles.css?v=20260530"/>
 </head>
 <body>
 
@@ -123,7 +123,8 @@
           <div class="field"><label for="pf-class">Класс</label><select id="pf-class" name="grade"><option value="">Выберите...</option><option>9 класс</option><option>10 класс</option><option>11 класс</option><option>Выпускник</option><option>Родитель</option></select></div>
           <div class="field"><label for="pf-spec">Специальность</label><select id="pf-spec" name="direction"><option value="">Любая медицина</option><option>Сестринское дело</option><option>Фармация</option><option>Стоматология</option><option>Лабораторная диагностика</option><option>Акушерское дело</option></select></div>
         </div>
-        <button type="submit" class="btn btn--primary btn--full btn--lg">Получить бесплатный подбор →</button>
+                  <label class="consent-row"><input type="checkbox" name="consent" required/><span>Я даю согласие на <a href="/privacy/" target="_blank" class="consent-link">обработку персональных данных</a></span></label>
+          <button type="submit" class="btn btn--primary btn--full btn--lg">Получить бесплатный подбор →</button>
         <p class="form-note">Отвечаем в течение 30 мин · Без спама · Бесплатно</p>
       </div>
       <div class="form-success" role="alert"><div class="form-success__icon">✓</div><h3>Заявка принята!</h3><p>Перезвоним и подберём медицинский колледж под ваш балл.</p></div>
@@ -183,7 +184,7 @@ burger?.addEventListener('click',()=>{const o=mobileMenu.classList.toggle('open'
 mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded','false')}));
 document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.closest('.faq-item'),isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-q').setAttribute('aria-expanded','false')});if(!isOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true')}}));
 async function sendToTelegram(p,s){const T='8814710536:AAFewXSFvDKcaP2YtVK8K64cy8zPYnAdCYc',C='5041739228',lines=['🎓 *Новая заявка с сайта*',`📌 *Страница:* ${s}`,'',`👤 *Имя:* ${p.name||'—'}`,`📞 *Телефон:* ${p.phone||'—'}`,p.grade?`🏫 *Класс:* ${p.grade}`:'',p.direction?`📚 *Специальность:* ${p.direction}`:'','',`🕐 ${new Date().toLocaleString('ru-RU',{timeZone:'Europe/Moscow'})} (МСК)`].filter(Boolean).join('\n');try{await fetch(`https://api.telegram.org/bot${T}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:C,text:lines,parse_mode:'Markdown'})})}catch(e){console.warn(e)}}
-document.querySelectorAll('.lead-form').forEach(form=>form.addEventListener('submit',async ev=>{ev.preventDefault();const ph=form.querySelector('[name="phone"]');const d=(ph?.value||'').replace(/\D/g,'');if(d.length<10){ph?.focus();ph?.setCustomValidity('Введите корректный номер');form.reportValidity();return}if(!form.checkValidity()){form.reportValidity();return}const btn=form.querySelector('[type="submit"]');if(btn){btn.disabled=true;btn.textContent='Отправляем…'}const p={name:form.querySelector('[name="name"]')?.value.trim(),phone:ph?.value.trim(),grade:form.querySelector('[name="grade"]')?.value,direction:form.querySelector('[name="direction"]')?.value||form.querySelector('[name="spec"]')?.value};await sendToTelegram(p,window.location.href);if(btn)btn.disabled=false;form.classList.add('is-sent')}));
+document.querySelectorAll('[name="phone"]').forEach(i=>i.addEventListener('input',function(){this.setCustomValidity('')}));document.querySelectorAll('.lead-form').forEach(form=>form.addEventListener('submit',async ev=>{ev.preventDefault();const ph=form.querySelector('[name="phone"]');const d=(ph?.value||'').replace(/\D/g,'');if(d.length<10){ph?.setCustomValidity('');ph?.focus();ph?.setCustomValidity('Введите корректный номер телефона');form.reportValidity();return}if(!form.checkValidity()){form.reportValidity();return}const btn=form.querySelector('[type="submit"]');if(btn){btn.disabled=true;btn.textContent='Отправляем…'}const p={name:form.querySelector('[name="name"]')?.value.trim(),phone:ph?.value.trim(),grade:form.querySelector('[name="grade"]')?.value,direction:form.querySelector('[name="direction"]')?.value||form.querySelector('[name="spec"]')?.value};await sendToTelegram(p,window.location.href);if(btn)btn.disabled=false;form.classList.add('is-sent')}));
 </script>
 </body>
 </html>
