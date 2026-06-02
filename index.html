@@ -621,5 +621,29 @@ document.querySelectorAll('.lead-form').forEach(form => {
   });
 });
 </script>
+<script>
+(function(){
+function phoneMask(inp){
+  inp.addEventListener('focus',function(){if(!this.value)this.value='+7 ('});
+  inp.addEventListener('blur',function(){if(this.value==='+7 ('||this.value==='+7')this.value=''});
+  inp.addEventListener('input',function(){
+    var d=this.value.replace(/\D/g,'');
+    if(d.slice(0,1)==='8')d='7'+d.slice(1);
+    if(d.slice(0,1)==='7')d=d.slice(1);
+    if(d.length>10)d=d.slice(0,10);
+    var r='+7';
+    if(d.length>0)r+=' ('+d.slice(0,3);
+    if(d.length>=3)r+=') '+d.slice(3,6);
+    if(d.length>=6)r+='-'+d.slice(6,8);
+    if(d.length>=8)r+='-'+d.slice(8,10);
+    this.value=r;
+  });
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Backspace'&&(this.value==='+7 ('||this.value==='+7 '))this.value='';
+  });
+}
+document.querySelectorAll('[name="phone"]').forEach(phoneMask);
+})();
+</script>
 </body>
 </html>

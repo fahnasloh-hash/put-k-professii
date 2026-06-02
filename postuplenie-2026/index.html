@@ -273,5 +273,29 @@ document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()
 async function sendToTelegram(p,s){const T='8814710536:AAFewXSFvDKcaP2YtVK8K64cy8zPYnAdCYc',C='5041739228',lines=['🎓 *Новая заявка с сайта*',`📌 *Страница:* ${s}`,'',`👤 *Имя:* ${p.name||'—'}`,`📞 *Телефон:* ${p.phone||'—'}`,p.grade?`🏫 *Класс:* ${p.grade}`:'',p.direction?`📚 *Направление:* ${p.direction}`:'',p.goal?`📊 *Баллы:* ${p.goal}`:'','',`🕐 ${new Date().toLocaleString('ru-RU',{timeZone:'Europe/Moscow'})} (МСК)`].filter(Boolean).join('\n');try{await fetch(`https://api.telegram.org/bot${T}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:C,text:lines,parse_mode:'Markdown'})})}catch(e){console.warn(e)}}
 document.querySelectorAll('[name="phone"]').forEach(i=>i.addEventListener('input',function(){this.setCustomValidity('')}));document.querySelectorAll('.lead-form').forEach(form=>form.addEventListener('submit',async ev=>{ev.preventDefault();const ph=form.querySelector('[name="phone"]');const d=(ph?.value||'').replace(/\D/g,'');if(d.length<10){ph?.setCustomValidity('');ph?.focus();ph?.setCustomValidity('Введите корректный номер телефона');form.reportValidity();return}if(!form.checkValidity()){form.reportValidity();return}const btn=form.querySelector('[type="submit"]');if(btn){btn.disabled=true;btn.textContent='Отправляем…'}const p={name:form.querySelector('[name="name"]')?.value.trim(),phone:ph?.value.trim(),grade:form.querySelector('[name="grade"]')?.value,direction:form.querySelector('[name="direction"]')?.value,goal:form.querySelector('[name="goal"]')?.value.trim()};await sendToTelegram(p,window.location.href);if(btn)btn.disabled=false;form.classList.add('is-sent')}));
 </script>
+<script>
+(function(){
+function phoneMask(inp){
+  inp.addEventListener('focus',function(){if(!this.value)this.value='+7 ('});
+  inp.addEventListener('blur',function(){if(this.value==='+7 ('||this.value==='+7')this.value=''});
+  inp.addEventListener('input',function(){
+    var d=this.value.replace(/\D/g,'');
+    if(d.slice(0,1)==='8')d='7'+d.slice(1);
+    if(d.slice(0,1)==='7')d=d.slice(1);
+    if(d.length>10)d=d.slice(0,10);
+    var r='+7';
+    if(d.length>0)r+=' ('+d.slice(0,3);
+    if(d.length>=3)r+=') '+d.slice(3,6);
+    if(d.length>=6)r+='-'+d.slice(6,8);
+    if(d.length>=8)r+='-'+d.slice(8,10);
+    this.value=r;
+  });
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Backspace'&&(this.value==='+7 ('||this.value==='+7 '))this.value='';
+  });
+}
+document.querySelectorAll('[name="phone"]').forEach(phoneMask);
+})();
+</script>
 </body>
 </html>
