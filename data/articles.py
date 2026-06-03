@@ -159,3 +159,10 @@ ARTICLES = {
         "budushchee": "Простые переводы автоматизируются нейросетями, но спрос на сложный перевод, локализацию и преподавание сохранится. Особенно ценятся лингвисты с IT-навыками.",
     },
 }
+
+# Batch 2 — remaining faculties
+try:
+    from articles_b2 import BATCH2
+    ARTICLES.update(BATCH2)
+except Exception:
+    pass
