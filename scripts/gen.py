@@ -12,6 +12,11 @@ sys.path.insert(0, os.path.join(ROOT, 'data'))
 import institutions as D
 import faculties as F
 import cities as C
+try:
+    import articles as A
+    ARTICLES = A.ARTICLES
+except Exception:
+    ARTICLES = {}
 
 CSS_VER = '20260603'
 SITE = 'https://putkprofessii.ru'
@@ -477,6 +482,52 @@ def fac_hub(faculties, idx):
     return html
 
 
+def article_block(f, art):
+    """Long-form SEO article for a faculty: intro + programs + ToC + 9 sections."""
+    name = f['name']
+    n1, npl, npg, nsg = art['n1'], art['npl'], art['npg'], art['nsg']
+    progs = ''.join(f'<li>{esc(p)}</li>' for p in art['programs'])
+    plusy = ''.join(f'<li>{esc(x)}</li>' for x in art['plusy'])
+    minusy = ''.join(f'<li>{esc(x)}</li>' for x in art['minusy'])
+    pm = ('<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px">'
+          f'<div style="background:#EAF7F0;border-radius:14px;padding:16px 18px"><b style="color:#0FAA66">Плюсы</b>'
+          f'<ul style="margin:8px 0 0;padding-left:18px">{plusy}</ul></div>'
+          f'<div style="background:#FdEeEe;border-radius:14px;padding:16px 18px"><b style="color:#d23b3b">Минусы</b>'
+          f'<ul style="margin:8px 0 0;padding-left:18px">{minusy}</ul></div></div>')
+    sections = [
+        ('chem', f'Чем занимаются {npl}', f"<p>{esc(art['chem'])}</p>"),
+        ('spec', f'Специализации {npg}', f"<p>{esc(art['spec'])}</p>"),
+        ('komu', f'Кому подойдёт профессия {nsg}', f"<p>{esc(art['komu'])}</p>"),
+        ('kariera', f'Карьера {nsg}', f"<p>{esc(art['kariera'])}</p>"),
+        ('vostreb', f'Востребованность {npg}', f"<p>{esc(art['vostreb'])}</p>"),
+        ('gde', f'Где работают {npl}', f"<p>{esc(art['gde'])}</p>"),
+        ('zarplata', f'Заработная плата {npg}', f"<p>{esc(art['zarplata'])}</p>"),
+        ('plusy-minusy', f'Плюсы и минусы работы {nsg}', pm),
+        ('budushchee', f'Будущее профессии {nsg}', f"<p>{esc(art['budushchee'])}</p>"),
+    ]
+    toc = ('<div style="background:#F5F7FA;border-radius:14px;padding:18px 22px;margin:24px 0">'
+           '<strong>В этой статье:</strong>'
+           '<ul style="margin:10px 0 0;padding-left:18px;line-height:1.95">'
+           + ''.join(f'<li><a href="#{sid}" style="color:var(--brand)">{esc(lbl)}</a></li>' for sid, lbl, _ in sections)
+           + '</ul></div>')
+    body = ''.join(
+        f'<h3 id="{sid}" style="font-size:20px;font-weight:700;color:var(--ink);margin:28px 0 8px;scroll-margin-top:84px">{esc(lbl)}</h3>{content}'
+        for sid, lbl, content in sections)
+    return f'''
+<section class="section" style="padding-top:0" aria-labelledby="art-h2">
+  <div style="max-width:780px;font-size:15.5px;line-height:1.75;color:var(--ink-soft)">
+    <h2 class="display--sm" id="art-h2" style="margin-bottom:12px">Кто такой {esc(n1)} и чем он занимается</h2>
+    <p>{esc(art['intro'])}</p>
+    <h3 style="font-size:20px;font-weight:700;color:var(--ink);margin:26px 0 8px">Направления факультета «{esc(name)}»</h3>
+    <ul style="margin:0;padding-left:18px;line-height:1.9">{progs}</ul>
+    {toc}
+    {body}
+    <div style="margin-top:26px"><button type="button" class="btn btn--primary btn--lg" data-apply="Направление: {esc(name)}">Поступить на «{esc(name)}» →</button></div>
+  </div>
+</section>
+'''
+
+
 def fac_detail(f, idx, faculties):
     members = [idx[s] for s in f['members'] if s in idx]
     title = f"{esc(f['name'])} — вузы и колледжи Москвы, куда поступить в 2026"
@@ -485,6 +536,7 @@ def fac_detail(f, idx, faculties):
     # other faculties for internal linking
     others = [x for x in faculties if x['slug'] != f['slug']][:8]
     other_links = ''.join(f'<a href="/fakultety/{o["slug"]}/">{o["icon"]} {esc(o["name"])}</a>' for o in others)
+    ARTICLE = article_block(f, ARTICLES[f['slug']]) if f['slug'] in ARTICLES else ''
     html = head(title, desc, f"/fakultety/{f['slug']}/") + NAV
     html += f'''
 <section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
@@ -510,7 +562,7 @@ def fac_detail(f, idx, faculties):
 {cards}
   </div>
 </section>
-
+{ARTICLE}
 <section class="section" style="padding-top:0" aria-labelledby="other-h2">
   <h2 class="display--sm" id="other-h2" style="margin-bottom:14px">Другие направления</h2>
   <nav class="link-grid">{other_links}</nav>
