@@ -11,6 +11,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'data'))
 import institutions as D
 import faculties as F
+import cities as C
 
 CSS_VER = '20260603'
 SITE = 'https://putkprofessii.ru'
@@ -184,6 +185,7 @@ def hub_page(cfg, items, alt_links):
   <h1 class="display" id="page-h1" style="max-width:20ch">{cfg['h1']}</h1>
   <p class="lede" style="margin-top:20px;max-width:64ch">{cfg['lede']}</p>
   <div class="toggle" role="tablist" style="margin-top:24px">{toggle}</div>
+  {cfg.get('extra', '')}
 </section>
 
 <section class="section" id="catalog" style="padding-top:24px">
@@ -324,6 +326,63 @@ def build_index():
     return idx
 
 
+def city_chips(active_slug=None):
+    """Row of MO-city pill links (reuses .btn--white, no new CSS)."""
+    links = ''.join(
+        f'<a href="/vuzy-moskovskoy-oblasti/gorod-{c["slug"]}/" class="btn btn--white" '
+        f'style="padding:8px 14px;font-size:13px{";font-weight:700" if c["slug"]==active_slug else ""}">{c["name"]}</a>'
+        for c in C.MO_CITIES)
+    return ('<div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">'
+            '<span style="font-size:13px;color:var(--ink-mute);margin-right:4px">Вузы Подмосковья по городам:</span>'
+            + links + '</div>')
+
+
+def city_page(city, idx):
+    insts = [idx[s] for s in city['vuz_slugs'] if s in idx]
+    slug, name, gen, loc = city['slug'], city['name'], city['gen'], city['loc']
+    url = f"/vuzy-moskovskoy-oblasti/gorod-{slug}/"
+    names = ', '.join(i['name'] for i in insts)
+    title = f"Вузы {gen} 2026 — куда поступить, список университетов, бюджет"
+    desc = f"Вузы {gen} 2026: {names}. Направления подготовки, бюджетные места, как поступить. Бесплатный подбор вуза в {loc}."
+    cards = '\n\n'.join(card(it, it['_base']) for it in insts)
+    html = head(title, desc, url) + NAV
+    html += f'''
+<section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
+  <nav class="breadcrumbs" aria-label="Навигационная цепочка">
+    <a href="/">Главная</a><span class="sep">›</span><a href="/vuzy-moskovskoy-oblasti/">Вузы Московской области</a><span class="sep">›</span><span aria-current="page">{esc(name)}</span>
+  </nav>
+  <div class="pill" style="margin-bottom:20px"><span class="pill__dot" aria-hidden="true"></span>Вузы Московской области · {esc(name)}</div>
+  <h1 class="display" id="page-h1" style="max-width:20ch">Вузы {esc(gen)} 2026</h1>
+  <p class="lede" style="margin-top:20px;max-width:66ch">{esc(city['intro'])}</p>
+  {city_chips(active_slug=slug)}
+</section>
+
+<section class="section" id="catalog" style="padding-top:24px">
+  <div class="inst-grid">
+{cards}
+  </div>
+  <p style="font-size:13px;color:var(--ink-mute);margin-top:20px">Не нашли подходящий вуз в {esc(loc)}? <a href="#" data-apply="" class="consent-link">Оставьте заявку</a> — подберём вариант в Подмосковье или Москве бесплатно.</p>
+</section>
+
+<section class="section" id="form" style="padding-top:0">
+  <div class="cta-band">
+    <h2>Поступление в вуз {esc(gen)} 2026</h2>
+    <p>Бесплатно подберём вуз и направление под ваши баллы, расскажем о бюджетных местах и поможем с документами.</p>
+    <a href="#" data-apply="" class="btn btn--white btn--lg" style="margin-top:18px">Получить подбор →</a>
+  </div>
+</section>
+'''
+    qa = [
+        (f"Какие вузы есть в {loc}?", f"В {loc} расположены: {names}. Доступны бюджетные и платные места — конкурс зависит от направления."),
+        (f"Как поступить в вуз в {loc} в 2026 году?", "Поступление идёт по результатам ЕГЭ. Эксперты «Путь к профессии» бесплатно подберут направление, оценят шансы на бюджет и помогут с документами."),
+        (f"Можно ли поступить в вуз {gen} без ЕГЭ?", "Да — через колледж по среднему баллу аттестата с последующим переводом в вуз. Подберём подходящий вариант бесплатно."),
+    ]
+    html += faq_block(qa)
+    html += breadcrumb([('Главная', '/'), ('Вузы Московской области', '/vuzy-moskovskoy-oblasti/'), (name, url)])
+    html += FOOTER
+    return html
+
+
 def fac_hub(faculties, idx):
     title = 'Факультеты и направления вузов и колледжей Москвы — куда поступить'
     desc = 'Все факультеты и направления подготовки: IT, медицина, экономика, юриспруденция, дизайн и другие. Выберите направление — покажем вузы и колледжи Москвы и области, где этому учат.'
@@ -446,6 +505,7 @@ def main():
         'lede': 'Список ведущих университетов Москвы: направления подготовки, бюджетные места, тип вуза. Выберите учебное заведение или оставьте заявку — подберём вуз под ваши баллы ЕГЭ бесплатно.',
         'base_url': '/vuzy-moskvy/',
         'cta_h': 'Узнайте, в какой вуз Москвы вы проходите по баллам',
+        'extra': city_chips(),
     }, D.VUZY_MSK, vuz_alt('msk')))
     urls.append(('/vuzy-moskvy/', '0.9'))
 
@@ -459,6 +519,7 @@ def main():
         'lede': 'Университеты Подмосковья: Дубна, Королёв, Коломна, Химки, Люберцы и другие города. Направления, бюджетные места и помощь с поступлением — бесплатно.',
         'base_url': '/vuzy-moskovskoy-oblasti/',
         'cta_h': 'Подберём вуз Московской области под ваши баллы',
+        'extra': city_chips(),
     }, D.VUZY_MO, vuz_alt('mo')))
     urls.append(('/vuzy-moskovskoy-oblasti/', '0.8'))
 
@@ -525,6 +586,11 @@ def main():
     for f in F.FACULTIES:
         write(f"fakultety/{f['slug']}/index.html", fac_detail(f, idx, F.FACULTIES))
         urls.append((f"/fakultety/{f['slug']}/", '0.7'))
+
+    # ---------------- MO CITIES ----------------
+    for c in C.MO_CITIES:
+        write(f"vuzy-moskovskoy-oblasti/gorod-{c['slug']}/index.html", city_page(c, idx))
+        urls.append((f"/vuzy-moskovskoy-oblasti/gorod-{c['slug']}/", '0.6'))
 
     # ---------------- SITEMAP ----------------
     static_urls = [
