@@ -56,6 +56,7 @@ NAV = '''<nav class="nav" role="navigation" aria-label="Главное меню"
   <nav class="nav__menu" aria-label="Разделы сайта">
     <a href="/vuzy-moskvy/">Вузы</a>
     <a href="/kolledzhi-moskvy/">Колледжи</a>
+    <a href="/goroda/">Города</a>
     <a href="/fakultety/">Факультеты</a>
     <a href="/kuda-postupit-posle-9-klassa/">После 9 класса</a>
     <a href="/postuplenie-2026/">Поступление 2026</a>
@@ -67,6 +68,7 @@ NAV = '''<nav class="nav" role="navigation" aria-label="Главное меню"
 <nav class="nav__mobile" id="mobileMenu" aria-label="Мобильное меню">
   <a href="/vuzy-moskvy/">🎓 Вузы Москвы и МО</a>
   <a href="/kolledzhi-moskvy/">🏫 Колледжи</a>
+  <a href="/goroda/">🏙 Города</a>
   <a href="/fakultety/">🧭 Факультеты</a>
   <a href="/kuda-postupit-posle-9-klassa/">📚 После 9 класса</a>
   <a href="/postuplenie-2026/">📅 Поступление 2026</a>
@@ -337,6 +339,56 @@ def city_chips(active_slug=None):
             + links + '</div>')
 
 
+def goroda_hub():
+    url = '/goroda/'
+    title = 'Вузы и колледжи по городам — Москва и Московская область 2026'
+    desc = 'Учебные заведения по городам: Москва, Дубна, Королёв, Коломна, Химки, Люберцы, Мытищи и другие города Подмосковья. Выберите город — подберём вуз или колледж бесплатно.'
+    msk_cards = (
+        '<a class="fac-card" href="/vuzy-moskvy/"><span class="fac-card__icon">🎓</span>'
+        '<span class="fac-card__name">Вузы Москвы</span><span class="fac-card__count">49 университетов</span></a>'
+        '<a class="fac-card" href="/kolledzhi-moskvy/"><span class="fac-card__icon">🏫</span>'
+        '<span class="fac-card__name">Колледжи Москвы</span><span class="fac-card__count">18 колледжей</span></a>')
+    city_cards = ''.join(
+        f'<a class="fac-card" href="/vuzy-moskovskoy-oblasti/gorod-{c["slug"]}/">'
+        f'<span class="fac-card__icon">📍</span><span class="fac-card__name">{esc(c["name"])}</span>'
+        f'<span class="fac-card__count">Вузы {esc(c["gen"])}</span></a>'
+        for c in C.MO_CITIES)
+    city_cards += ('<a class="fac-card" href="/vuzy-moskovskoy-oblasti/"><span class="fac-card__icon">🗺️</span>'
+                   '<span class="fac-card__name">Вся область</span><span class="fac-card__count">Все вузы МО</span></a>')
+    html = head(title, desc, url) + NAV
+    html += f'''
+<section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
+  <nav class="breadcrumbs" aria-label="Навигационная цепочка">
+    <a href="/">Главная</a><span class="sep">›</span><span aria-current="page">Города</span>
+  </nav>
+  <div class="pill" style="margin-bottom:20px"><span class="pill__dot" aria-hidden="true"></span>Поступление 2026 · по городам</div>
+  <h1 class="display" id="page-h1" style="max-width:22ch">Вузы и колледжи по городам</h1>
+  <p class="lede" style="margin-top:20px;max-width:64ch">Выберите город Москвы или Московской области — покажем вузы и колледжи, направления и бюджетные места. Бесплатно подберём учебное заведение под ваши баллы.</p>
+</section>
+
+<section class="section" style="padding-top:24px" aria-labelledby="msk-h2">
+  <header class="section-header"><h2 class="display--sm" id="msk-h2">Москва</h2></header>
+  <div class="fac-grid">{msk_cards}</div>
+</section>
+
+<section class="section" style="padding-top:0" aria-labelledby="mo-h2">
+  <header class="section-header"><h2 class="display--sm" id="mo-h2">Московская область — по городам</h2></header>
+  <div class="fac-grid">{city_cards}</div>
+</section>
+
+<section class="section" id="form" style="padding-top:0">
+  <div class="cta-band">
+    <h2>Не нашли свой город?</h2>
+    <p>Оставьте заявку — подберём вуз или колледж в любом городе Москвы и Подмосковья под ваши баллы. Бесплатно.</p>
+    <a href="#" data-apply="" class="btn btn--white btn--lg" style="margin-top:18px">Получить подбор →</a>
+  </div>
+</section>
+'''
+    html += breadcrumb([('Главная', '/'), ('Города', url)])
+    html += FOOTER
+    return html
+
+
 def city_page(city, idx):
     insts = [idx[s] for s in city['vuz_slugs'] if s in idx]
     slug, name, gen, loc = city['slug'], city['name'], city['gen'], city['loc']
@@ -588,6 +640,8 @@ def main():
         urls.append((f"/fakultety/{f['slug']}/", '0.7'))
 
     # ---------------- MO CITIES ----------------
+    write('goroda/index.html', goroda_hub())
+    urls.append(('/goroda/', '0.8'))
     for c in C.MO_CITIES:
         write(f"vuzy-moskovskoy-oblasti/gorod-{c['slug']}/index.html", city_page(c, idx))
         urls.append((f"/vuzy-moskovskoy-oblasti/gorod-{c['slug']}/", '0.6'))
