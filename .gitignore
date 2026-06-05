@@ -6,3 +6,6 @@ node_modules/
 
 __pycache__/
 *.pyc
+
+# Internal strategy docs — not for the public web root
+seo_semantic_core.md

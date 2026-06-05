@@ -182,6 +182,44 @@
         openModal(t.getAttribute('data-apply') || '');
       }
     });
+
+    // Catalog filter chips (Все / Государственные / С бюджетом / Частные)
+    document.querySelectorAll('[data-filter-group]').forEach(function (group) {
+      var grid = group.parentElement.querySelector('.ic-grid');
+      if (!grid) return;
+      group.addEventListener('click', function (e) {
+        var chip = e.target.closest('.chip');
+        if (!chip) return;
+        group.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('on'); });
+        chip.classList.add('on');
+        var f = chip.getAttribute('data-filter');
+        grid.querySelectorAll('.ic').forEach(function (card) {
+          var show = f === 'all'
+            || (f === 'gos' && card.getAttribute('data-type') === 'gos')
+            || (f === 'chastny' && card.getAttribute('data-type') === 'chastny')
+            || (f === 'budget' && card.getAttribute('data-budget') === '1');
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    // Favourites (heart) — visual + localStorage
+    var FAV_KEY = 'pkp_fav';
+    var favs = {};
+    try { favs = JSON.parse(localStorage.getItem(FAV_KEY) || '{}'); } catch (e) {}
+    document.querySelectorAll('[data-fav]').forEach(function (btn) {
+      var card = btn.closest('.ic');
+      var link = card && card.querySelector('h4 a');
+      var key = link ? link.getAttribute('href') : null;
+      if (key && favs[key]) { btn.classList.add('on'); btn.textContent = '♥'; }
+      btn.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var on = btn.classList.toggle('on');
+        btn.textContent = on ? '♥' : '♡';
+        if (key) { if (on) favs[key] = 1; else delete favs[key];
+          try { localStorage.setItem(FAV_KEY, JSON.stringify(favs)); } catch (e) {} }
+      });
+    });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

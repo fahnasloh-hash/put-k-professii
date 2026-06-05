@@ -18,7 +18,7 @@ try:
 except Exception:
     ARTICLES = {}
 
-CSS_VER = '20260603'
+CSS_VER = '20260604'
 SITE = 'https://putkprofessii.ru'
 
 COLOR_CYCLE = ['blue', 'green', 'purple', 'amber']
@@ -150,28 +150,54 @@ def faq_block(qa):
 
 
 def card(inst, base_url):
-    """Compact hub card linking to detail page + apply button."""
+    """Institution card v2: photo media + stats + favourite + actions."""
     color = inst.get('color') or 'blue'
-    badge_cls = 'inst-card__badge--top' if inst['type'] == 'Государственный' else 'inst-card__badge--choice'
     detail = f"{inst.get('_base', base_url)}{inst['slug']}/"
-    budget = 'Бюджет есть' if inst.get('budget') else 'Платно'
-    loc = inst.get('city', 'Москва')
     name = esc(inst['name'])
-    return f'''    <article class="inst-card inst-card--{color}">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">{esc(inst['abbr'])}</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge {badge_cls}">{inst['type']}</span>
-          <h4><a class="inst-card__namelink" href="{detail}">{name}</a></h4>
-          <div class="inst-card__loc">{loc} · {budget} · {esc(inst['dirs'])}</div>
+    typ = inst['type']
+    budget = 'Есть' if inst.get('budget') else 'Нет'
+    is_gos = typ == 'Государственный'
+    badge = ('<span class="ic__badge ic__badge--top">Гос</span>' if is_gos
+             else '<span class="ic__badge">Частный</span>')
+    photo = inst.get('photo')
+    img = f'<img src="{photo}" alt="{name}" loading="lazy" onerror="this.remove()"/>' if photo else ''
+    tagwords = [t.strip() for t in inst['dirs'].replace(' и ', ', ').split(',') if t.strip()][:2]
+    tags = ''.join(f'<span class="tag tag--blue">{esc(t)}</span>' for t in tagwords)
+    dt = 'gos' if is_gos else 'chastny'
+    db = '1' if inst.get('budget') else '0'
+    return f'''    <article class="ic ic--{color}" data-type="{dt}" data-budget="{db}">
+      <div class="ic__media">
+        {badge}
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">{esc(inst['abbr'])}</span>
+        {img}
+      </div>
+      <div class="ic__body">
+        <h4><a href="{detail}">{name}</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">{typ}</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">{budget}</span></div>
+        </div>
+        <div class="ic__tags">{tags}</div>
+        <div class="ic__actions">
+          <a href="{detail}" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="{name}">Поступить</button>
         </div>
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="{detail}" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="{name}">Поступить →</button>
-      </div>
     </article>'''
+
+
+def hub_stats(n, kind):
+    word = 'колледжей в каталоге' if kind == 'college' else 'учебных заведений'
+    cells = [('🎓', str(n), word), ('🧭', '31', 'направление подготовки'),
+             ('🏙', '8', 'городов Москвы и МО'), ('✅', 'Бесплатно', 'подбор и помощь')]
+    tones = [('#EAF1FF', '#1F66FF'), ('#E7F8F0', '#0FAA66'), ('#F0EAFE', '#7A3DF5'), ('#FFF1E0', '#E07D0A')]
+    out = ['<div class="hstats">']
+    for (ic, b, s), (bg, fg) in zip(cells, tones):
+        out.append(f'<div class="hstat"><span class="hstat__ic" style="background:{bg};color:{fg}">{ic}</span>'
+                   f'<div><b>{b}</b><span>{s}</span></div></div>')
+    out.append('</div>')
+    return ''.join(out)
 
 
 def hub_page(cfg, items, alt_links):
@@ -193,10 +219,17 @@ def hub_page(cfg, items, alt_links):
   <p class="lede" style="margin-top:20px;max-width:64ch">{cfg['lede']}</p>
   <div class="toggle" role="tablist" style="margin-top:24px">{toggle}</div>
   {cfg.get('extra', '')}
+  {hub_stats(len(items), cfg.get('kind', 'vuz'))}
 </section>
 
 <section class="section" id="catalog" style="padding-top:24px">
-  <div class="inst-grid">
+  <div class="chips" role="tablist" aria-label="Фильтр заведений" data-filter-group>
+    <button class="chip on" data-filter="all">Все</button>
+    <button class="chip" data-filter="gos">Государственные</button>
+    <button class="chip" data-filter="budget">С бюджетными местами</button>
+    <button class="chip" data-filter="chastny">Частные</button>
+  </div>
+  <div class="ic-grid">
 {cards}
   </div>
   <p style="font-size:13px;color:var(--ink-mute);margin-top:20px">Не нашли нужное заведение? <a href="#" data-apply="" class="consent-link">Оставьте заявку</a> — подберём вариант под ваши баллы бесплатно.</p>
@@ -415,7 +448,7 @@ def city_page(city, idx):
 </section>
 
 <section class="section" id="catalog" style="padding-top:24px">
-  <div class="inst-grid">
+  <div class="ic-grid">
 {cards}
   </div>
   <p style="font-size:13px;color:var(--ink-mute);margin-top:20px">Не нашли подходящий вуз в {esc(loc)}? <a href="#" data-apply="" class="consent-link">Оставьте заявку</a> — подберём вариант в Подмосковье или Москве бесплатно.</p>
@@ -558,7 +591,7 @@ def fac_detail(f, idx, faculties):
 
 <section class="section" id="catalog" style="padding-top:28px">
   <h2 class="display--sm" style="margin-bottom:16px">Где учат: {esc(f['name'])}</h2>
-  <div class="inst-grid">
+  <div class="ic-grid">
 {cards}
   </div>
 </section>

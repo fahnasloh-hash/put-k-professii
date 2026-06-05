@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/styles.css?v=20260603"/>
+<link rel="stylesheet" href="/styles.css?v=20260604"/>
 </head>
 <body>
 <nav class="nav" role="navigation" aria-label="Главное меню">
@@ -71,52 +71,67 @@
 
 <section class="section" id="catalog" style="padding-top:28px">
   <h2 class="display--sm" style="margin-bottom:16px">Где учат: Агрономия и ветеринария</h2>
-  <div class="inst-grid">
-    <article class="inst-card inst-card--green">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">РГАУ</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge inst-card__badge--top">Государственный</span>
-          <h4><a class="inst-card__namelink" href="/vuzy-moskvy/timiryazevka/">РГАУ-МСХА им. Тимирязева</a></h4>
-          <div class="inst-card__loc">Москва · Бюджет есть · Агрономия, ветеринария, экономика</div>
-        </div>
+  <div class="ic-grid">
+    <article class="ic ic--green" data-type="gos" data-budget="1">
+      <div class="ic__media">
+        <span class="ic__badge ic__badge--top">Гос</span>
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">РГАУ</span>
+        
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="/vuzy-moskvy/timiryazevka/" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="РГАУ-МСХА им. Тимирязева">Поступить →</button>
+      <div class="ic__body">
+        <h4><a href="/vuzy-moskvy/timiryazevka/">РГАУ-МСХА им. Тимирязева</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">Государственный</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">Есть</span></div>
+        </div>
+        <div class="ic__tags"><span class="tag tag--blue">Агрономия</span><span class="tag tag--blue">ветеринария</span></div>
+        <div class="ic__actions">
+          <a href="/vuzy-moskvy/timiryazevka/" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="РГАУ-МСХА им. Тимирязева">Поступить</button>
+        </div>
       </div>
     </article>
 
-    <article class="inst-card inst-card--purple">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">МГАВМиБ</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge inst-card__badge--top">Государственный</span>
-          <h4><a class="inst-card__namelink" href="/vuzy-moskvy/mgavm/">Академия им. Скрябина</a></h4>
-          <div class="inst-card__loc">Москва · Бюджет есть · Ветеринария, зоотехния</div>
-        </div>
+    <article class="ic ic--purple" data-type="gos" data-budget="1">
+      <div class="ic__media">
+        <span class="ic__badge ic__badge--top">Гос</span>
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">МГАВМиБ</span>
+        
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="/vuzy-moskvy/mgavm/" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="Академия им. Скрябина">Поступить →</button>
+      <div class="ic__body">
+        <h4><a href="/vuzy-moskvy/mgavm/">Академия им. Скрябина</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">Государственный</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">Есть</span></div>
+        </div>
+        <div class="ic__tags"><span class="tag tag--blue">Ветеринария</span><span class="tag tag--blue">зоотехния</span></div>
+        <div class="ic__actions">
+          <a href="/vuzy-moskvy/mgavm/" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="Академия им. Скрябина">Поступить</button>
+        </div>
       </div>
     </article>
 
-    <article class="inst-card inst-card--purple">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">РОСБИОТЕХ</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge inst-card__badge--top">Государственный</span>
-          <h4><a class="inst-card__namelink" href="/vuzy-moskvy/rosbiotech/">Росбиотех</a></h4>
-          <div class="inst-card__loc">Москва · Бюджет есть · Биотехнологии, пищевые производства</div>
-        </div>
+    <article class="ic ic--purple" data-type="gos" data-budget="1">
+      <div class="ic__media">
+        <span class="ic__badge ic__badge--top">Гос</span>
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">РОСБИОТЕХ</span>
+        
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="/vuzy-moskvy/rosbiotech/" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="Росбиотех">Поступить →</button>
+      <div class="ic__body">
+        <h4><a href="/vuzy-moskvy/rosbiotech/">Росбиотех</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">Государственный</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">Есть</span></div>
+        </div>
+        <div class="ic__tags"><span class="tag tag--blue">Биотехнологии</span><span class="tag tag--blue">пищевые производства</span></div>
+        <div class="ic__actions">
+          <a href="/vuzy-moskvy/rosbiotech/" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="Росбиотех">Поступить</button>
+        </div>
       </div>
     </article>
   </div>
@@ -153,6 +168,6 @@
   <div class="footer__bottom"><span>© 2026 Путь к профессии · <a href="/" style="color:inherit">putkprofessii.ru</a></span><span>Москва и МО</span></div>
 </footer>
 <div class="sticky-cta" aria-hidden="true"><a href="#" data-apply="" class="btn btn--primary btn--full">Получить бесплатную консультацию →</a></div>
-<script src="/app.js?v=20260603"></script>
+<script src="/app.js?v=20260604"></script>
 </body>
 </html>

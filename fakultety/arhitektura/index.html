@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/styles.css?v=20260603"/>
+<link rel="stylesheet" href="/styles.css?v=20260604"/>
 </head>
 <body>
 <nav class="nav" role="navigation" aria-label="Главное меню">
@@ -71,100 +71,130 @@
 
 <section class="section" id="catalog" style="padding-top:28px">
   <h2 class="display--sm" style="margin-bottom:16px">Где учат: Архитектура и строительство</h2>
-  <div class="inst-grid">
-    <article class="inst-card inst-card--blue">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">МАРХИ</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge inst-card__badge--top">Государственный</span>
-          <h4><a class="inst-card__namelink" href="/vuzy-moskvy/marhi/">Московский архитектурный институт</a></h4>
-          <div class="inst-card__loc">Москва · Бюджет есть · Архитектура, дизайн</div>
-        </div>
+  <div class="ic-grid">
+    <article class="ic ic--blue" data-type="gos" data-budget="1">
+      <div class="ic__media">
+        <span class="ic__badge ic__badge--top">Гос</span>
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">МАРХИ</span>
+        
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="/vuzy-moskvy/marhi/" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="Московский архитектурный институт">Поступить →</button>
+      <div class="ic__body">
+        <h4><a href="/vuzy-moskvy/marhi/">Московский архитектурный институт</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">Государственный</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">Есть</span></div>
+        </div>
+        <div class="ic__tags"><span class="tag tag--blue">Архитектура</span><span class="tag tag--blue">дизайн</span></div>
+        <div class="ic__actions">
+          <a href="/vuzy-moskvy/marhi/" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="Московский архитектурный институт">Поступить</button>
+        </div>
       </div>
     </article>
 
-    <article class="inst-card inst-card--green">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">МГСУ</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge inst-card__badge--top">Государственный</span>
-          <h4><a class="inst-card__namelink" href="/vuzy-moskvy/mgsu/">МГСУ</a></h4>
-          <div class="inst-card__loc">Москва · Бюджет есть · Строительство, инженерия</div>
-        </div>
+    <article class="ic ic--green" data-type="gos" data-budget="1">
+      <div class="ic__media">
+        <span class="ic__badge ic__badge--top">Гос</span>
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">МГСУ</span>
+        
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="/vuzy-moskvy/mgsu/" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="МГСУ">Поступить →</button>
+      <div class="ic__body">
+        <h4><a href="/vuzy-moskvy/mgsu/">МГСУ</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">Государственный</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">Есть</span></div>
+        </div>
+        <div class="ic__tags"><span class="tag tag--blue">Строительство</span><span class="tag tag--blue">инженерия</span></div>
+        <div class="ic__actions">
+          <a href="/vuzy-moskvy/mgsu/" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="МГСУ">Поступить</button>
+        </div>
       </div>
     </article>
 
-    <article class="inst-card inst-card--purple">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">МАДИ</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge inst-card__badge--top">Государственный</span>
-          <h4><a class="inst-card__namelink" href="/vuzy-moskvy/madi/">МАДИ</a></h4>
-          <div class="inst-card__loc">Москва · Бюджет есть · Транспорт, дороги, логистика</div>
-        </div>
+    <article class="ic ic--purple" data-type="gos" data-budget="1">
+      <div class="ic__media">
+        <span class="ic__badge ic__badge--top">Гос</span>
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">МАДИ</span>
+        
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="/vuzy-moskvy/madi/" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="МАДИ">Поступить →</button>
+      <div class="ic__body">
+        <h4><a href="/vuzy-moskvy/madi/">МАДИ</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">Государственный</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">Есть</span></div>
+        </div>
+        <div class="ic__tags"><span class="tag tag--blue">Транспорт</span><span class="tag tag--blue">дороги</span></div>
+        <div class="ic__actions">
+          <a href="/vuzy-moskvy/madi/" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="МАДИ">Поступить</button>
+        </div>
       </div>
     </article>
 
-    <article class="inst-card inst-card--blue">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">МКАГ</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge inst-card__badge--top">Государственный</span>
-          <h4><a class="inst-card__namelink" href="/kolledzhi-moskvy/mkag/">Колледж архитектуры и градостроительства</a></h4>
-          <div class="inst-card__loc">Москва · Бюджет есть · Архитектура, дизайн, строительство</div>
-        </div>
+    <article class="ic ic--blue" data-type="gos" data-budget="1">
+      <div class="ic__media">
+        <span class="ic__badge ic__badge--top">Гос</span>
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">МКАГ</span>
+        
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="/kolledzhi-moskvy/mkag/" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="Колледж архитектуры и градостроительства">Поступить →</button>
+      <div class="ic__body">
+        <h4><a href="/kolledzhi-moskvy/mkag/">Колледж архитектуры и градостроительства</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">Государственный</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">Есть</span></div>
+        </div>
+        <div class="ic__tags"><span class="tag tag--blue">Архитектура</span><span class="tag tag--blue">дизайн</span></div>
+        <div class="ic__actions">
+          <a href="/kolledzhi-moskvy/mkag/" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="Колледж архитектуры и градостроительства">Поступить</button>
+        </div>
       </div>
     </article>
 
-    <article class="inst-card inst-card--amber">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">МАДК</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge inst-card__badge--top">Государственный</span>
-          <h4><a class="inst-card__namelink" href="/kolledzhi-moskvy/madk/">Московский автомобильно-дорожный колледж</a></h4>
-          <div class="inst-card__loc">Москва · Бюджет есть · Автотранспорт, дороги</div>
-        </div>
+    <article class="ic ic--amber" data-type="gos" data-budget="1">
+      <div class="ic__media">
+        <span class="ic__badge ic__badge--top">Гос</span>
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">МАДК</span>
+        
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="/kolledzhi-moskvy/madk/" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="Московский автомобильно-дорожный колледж">Поступить →</button>
+      <div class="ic__body">
+        <h4><a href="/kolledzhi-moskvy/madk/">Московский автомобильно-дорожный колледж</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">Государственный</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">Есть</span></div>
+        </div>
+        <div class="ic__tags"><span class="tag tag--blue">Автотранспорт</span><span class="tag tag--blue">дороги</span></div>
+        <div class="ic__actions">
+          <a href="/kolledzhi-moskvy/madk/" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="Московский автомобильно-дорожный колледж">Поступить</button>
+        </div>
       </div>
     </article>
 
-    <article class="inst-card inst-card--purple">
-      <div class="inst-card__head">
-        <div class="inst-card__logo"><span class="inst-card__logo-text">Политех</span></div>
-        <div class="inst-card__headmain">
-          <span class="inst-card__badge inst-card__badge--top">Государственный</span>
-          <h4><a class="inst-card__namelink" href="/vuzy-moskvy/polytech/">Московский Политех</a></h4>
-          <div class="inst-card__loc">Москва · Бюджет есть · Инженерия, дизайн, IT</div>
-        </div>
+    <article class="ic ic--purple" data-type="gos" data-budget="1">
+      <div class="ic__media">
+        <span class="ic__badge ic__badge--top">Гос</span>
+        <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
+        <span class="ic__mono">Политех</span>
+        
       </div>
-      <div class="inst-card__divider"></div>
-      <div class="inst-card__actions">
-        <a href="/vuzy-moskvy/polytech/" class="btn btn--white">Подробнее</a>
-        <button type="button" class="btn btn--primary" data-apply="Московский Политех">Поступить →</button>
+      <div class="ic__body">
+        <h4><a href="/vuzy-moskvy/polytech/">Московский Политех</a></h4>
+        <div class="ic__stats">
+          <div><span class="ic__k">Тип</span><span class="ic__v">Государственный</span></div>
+          <div><span class="ic__k">Бюджетные места</span><span class="ic__v">Есть</span></div>
+        </div>
+        <div class="ic__tags"><span class="tag tag--blue">Инженерия</span><span class="tag tag--blue">дизайн</span></div>
+        <div class="ic__actions">
+          <a href="/vuzy-moskvy/polytech/" class="btn btn--white">Подробнее</a>
+          <button type="button" class="btn btn--primary" data-apply="Московский Политех">Поступить</button>
+        </div>
       </div>
     </article>
   </div>
@@ -201,6 +231,6 @@
   <div class="footer__bottom"><span>© 2026 Путь к профессии · <a href="/" style="color:inherit">putkprofessii.ru</a></span><span>Москва и МО</span></div>
 </footer>
 <div class="sticky-cta" aria-hidden="true"><a href="#" data-apply="" class="btn btn--primary btn--full">Получить бесплатную консультацию →</a></div>
-<script src="/app.js?v=20260603"></script>
+<script src="/app.js?v=20260604"></script>
 </body>
 </html>
