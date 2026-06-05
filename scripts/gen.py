@@ -18,7 +18,7 @@ try:
 except Exception:
     ARTICLES = {}
 
-CSS_VER = '20260604'
+CSS_VER = '20260605'
 SITE = 'https://putkprofessii.ru'
 
 COLOR_CYCLE = ['blue', 'green', 'purple', 'amber']
@@ -279,21 +279,30 @@ def detail_page(inst, ctx):
   <nav class="breadcrumbs" aria-label="Навигационная цепочка">
     <a href="/">Главная</a><span class="sep">›</span><a href="{ctx['hub_url']}">{ctx['hub_label']}</a><span class="sep">›</span><span aria-current="page">{esc(inst['abbr'])}</span>
   </nav>
-  <div class="inst-detail-head">
-    <div class="inst-card__logo inst-card--{inst['color']}" style="width:84px;height:84px"><span class="inst-card__logo-text">{esc(inst['abbr'])}</span></div>
-    <div>
+  <div class="dhero dhero--{inst['color']}">
+    <div class="dhero__info">
+      <span class="inst-card__badge {('inst-card__badge--top' if inst['type']=='Государственный' else 'inst-card__badge--choice')}" style="align-self:flex-start">{inst['type']} · {'вуз' if ctx['kind']=='vuz' else 'колледж'}</span>
       <h1 class="display--md" id="page-h1" style="max-width:22ch">{esc(full)}</h1>
-      <div class="inst-card__loc" style="margin-top:8px;font-size:14px">{city} · {inst['type']}{' · Бюджетные места есть' if inst.get('budget') else ' · Платное обучение'}</div>
+      <div class="dhero__loc">{city} · {esc(inst['dirs'])}</div>
+      <div class="dhero__stats">
+        <div class="dhero__stat"><b>{budget}</b><span>Бюджетные места</span></div>
+        <div class="dhero__stat"><b>{city}</b><span>Город</span></div>
+        <div class="dhero__stat"><b>{'Гос' if inst['type']=='Государственный' else 'Частн.'}</b><span>Тип</span></div>
+      </div>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.6;margin:2px 0 4px">{intro}</p>
+      <div class="dhero__cta">
+        <button type="button" class="btn btn--primary btn--lg" data-apply="{esc(name)}">Поступить →</button>
+        <button type="button" class="btn btn--white btn--lg" data-apply="{esc(name)}">Бесплатная консультация</button>
+      </div>
     </div>
-  </div>
-  <p class="lede" style="margin-top:18px;max-width:66ch">{intro}</p>
-  <div style="margin-top:22px">
-    <button type="button" class="btn btn--primary btn--lg" data-apply="{esc(name)}">Поступить в {esc(inst['abbr'])} →</button>
+    <div class="dhero__media">
+      <span class="ic__mono">{esc(inst['abbr'])}</span>
+      {('<img src="' + inst['photo'] + '" alt="' + esc(name) + '" loading="lazy" onerror="this.remove()"/>') if inst.get('photo') else ''}
+    </div>
   </div>
 </section>
 
 <section class="section" style="padding-top:28px">
-  {facts}
   <h2 class="display--sm" style="margin-bottom:14px">Как поступить в {esc(name)} в 2026 году</h2>
   <p style="font-size:15px;color:var(--ink-soft);line-height:1.65;max-width:68ch">Поступление в {kind_word} проходит по {('результатам ЕГЭ и внутренним испытаниям' if ctx['kind'] == 'vuz' else 'среднему баллу аттестата — без ЕГЭ')}. Подаём документы, проверяем шансы на бюджет и платное, расставляем приоритеты. Эксперты «Путь к профессии» помогут с поступлением в {esc(name)} бесплатно — подберём направление, рассчитаем шансы и подготовим документы.</p>
   <div style="margin-top:20px">

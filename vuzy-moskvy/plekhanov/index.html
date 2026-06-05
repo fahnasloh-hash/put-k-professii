@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/styles.css?v=20260604"/>
+<link rel="stylesheet" href="/styles.css?v=20260605"/>
 </head>
 <body>
 <nav class="nav" role="navigation" aria-label="Главное меню">
@@ -56,28 +56,30 @@
   <nav class="breadcrumbs" aria-label="Навигационная цепочка">
     <a href="/">Главная</a><span class="sep">›</span><a href="/vuzy-moskvy/">Вузы Москвы</a><span class="sep">›</span><span aria-current="page">РЭУ</span>
   </nav>
-  <div class="inst-detail-head">
-    <div class="inst-card__logo inst-card--purple" style="width:84px;height:84px"><span class="inst-card__logo-text">РЭУ</span></div>
-    <div>
+  <div class="dhero dhero--purple">
+    <div class="dhero__info">
+      <span class="inst-card__badge inst-card__badge--top" style="align-self:flex-start">Государственный · вуз</span>
       <h1 class="display--md" id="page-h1" style="max-width:22ch">Российский экономический университет имени Г. В. Плеханова</h1>
-      <div class="inst-card__loc" style="margin-top:8px;font-size:14px">Москва · Государственный · Бюджетные места есть</div>
+      <div class="dhero__loc">Москва · Экономика, бизнес, торговля</div>
+      <div class="dhero__stats">
+        <div class="dhero__stat"><b>Есть</b><span>Бюджетные места</span></div>
+        <div class="dhero__stat"><b>Москва</b><span>Город</span></div>
+        <div class="dhero__stat"><b>Гос</b><span>Тип</span></div>
+      </div>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.6;margin:2px 0 4px">Плехановский университет — один из старейших экономических вузов России. Экономика, менеджмент, маркетинг, торговое дело и предпринимательство. Бюджетные места и бизнес-ориентированные программы.</p>
+      <div class="dhero__cta">
+        <button type="button" class="btn btn--primary btn--lg" data-apply="РЭУ им. Г. В. Плеханова">Поступить →</button>
+        <button type="button" class="btn btn--white btn--lg" data-apply="РЭУ им. Г. В. Плеханова">Бесплатная консультация</button>
+      </div>
     </div>
-  </div>
-  <p class="lede" style="margin-top:18px;max-width:66ch">Плехановский университет — один из старейших экономических вузов России. Экономика, менеджмент, маркетинг, торговое дело и предпринимательство. Бюджетные места и бизнес-ориентированные программы.</p>
-  <div style="margin-top:22px">
-    <button type="button" class="btn btn--primary btn--lg" data-apply="РЭУ им. Г. В. Плеханова">Поступить в РЭУ →</button>
+    <div class="dhero__media">
+      <span class="ic__mono">РЭУ</span>
+      <img src="/img/inst/plekhanov.jpg" alt="РЭУ им. Г. В. Плеханова" loading="lazy" onerror="this.remove()"/>
+    </div>
   </div>
 </section>
 
 <section class="section" style="padding-top:28px">
-  <div class="card" style="max-width:none;margin:0 0 28px">
-    <dl class="inst-card__specs">
-      <div class="inst-card__spec"><dt>Тип</dt><dd>Государственный</dd></div>
-      <div class="inst-card__spec"><dt>Бюджетные места</dt><dd>Есть</dd></div>
-      <div class="inst-card__spec"><dt>Город</dt><dd>Москва</dd></div>
-      <div class="inst-card__spec"><dt>Направления</dt><dd>Экономика, бизнес, торговля</dd></div>
-    </dl>
-  </div>
   <h2 class="display--sm" style="margin-bottom:14px">Как поступить в РЭУ им. Г. В. Плеханова в 2026 году</h2>
   <p style="font-size:15px;color:var(--ink-soft);line-height:1.65;max-width:68ch">Поступление в вуз проходит по результатам ЕГЭ и внутренним испытаниям. Подаём документы, проверяем шансы на бюджет и платное, расставляем приоритеты. Эксперты «Путь к профессии» помогут с поступлением в РЭУ им. Г. В. Плеханова бесплатно — подберём направление, рассчитаем шансы и подготовим документы.</p>
   <div style="margin-top:20px">
@@ -104,6 +106,6 @@
   <div class="footer__bottom"><span>© 2026 Путь к профессии · <a href="/" style="color:inherit">putkprofessii.ru</a></span><span>Москва и МО</span></div>
 </footer>
 <div class="sticky-cta" aria-hidden="true"><a href="#" data-apply="" class="btn btn--primary btn--full">Получить бесплатную консультацию →</a></div>
-<script src="/app.js?v=20260604"></script>
+<script src="/app.js?v=20260605"></script>
 </body>
 </html>
