@@ -70,7 +70,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/styles.css?v=20260607-heroanim"/>
+<link rel="stylesheet" href="/styles.css?v=20260607-statparticles"/>
 <!-- Yandex.Metrika counter -->
 <script>
   (function(m,e,t,r,i,k,a){
@@ -195,6 +195,33 @@
 
 <!-- STATS -->
 <div class="stats" role="region" aria-label="Ключевые показатели">
+  <svg class="stats__paths" viewBox="0 0 1500 190" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="statsParticleGlow" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="5" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <path class="stats__track stats__track--blue" d="M38 50 C88 16 154 34 230 36 C312 38 332 10 414 18 C486 25 506 48 574 44"/>
+    <path class="stats__track stats__track--purple" d="M868 44 C946 42 1008 16 1092 26 C1168 36 1218 42 1302 36"/>
+    <path class="stats__track stats__track--green" d="M292 146 C368 150 421 176 510 166 C585 158 620 141 704 146"/>
+    <path class="stats__track stats__track--amber" d="M1112 142 C1178 168 1240 184 1312 164 C1362 150 1406 148 1460 138"/>
+    <circle class="stats__particle stats__particle--blue" r="6" filter="url(#statsParticleGlow)">
+      <animateMotion dur="28s" repeatCount="indefinite" path="M38 50 C88 16 154 34 230 36 C312 38 332 10 414 18 C486 25 506 48 574 44"/>
+    </circle>
+    <circle class="stats__particle stats__particle--purple" r="6" filter="url(#statsParticleGlow)">
+      <animateMotion dur="32s" begin="-10s" repeatCount="indefinite" path="M868 44 C946 42 1008 16 1092 26 C1168 36 1218 42 1302 36"/>
+    </circle>
+    <circle class="stats__particle stats__particle--green" r="6" filter="url(#statsParticleGlow)">
+      <animateMotion dur="34s" begin="-16s" repeatCount="indefinite" path="M292 146 C368 150 421 176 510 166 C585 158 620 141 704 146"/>
+    </circle>
+    <circle class="stats__particle stats__particle--amber" r="6" filter="url(#statsParticleGlow)">
+      <animateMotion dur="30s" begin="-22s" repeatCount="indefinite" path="M1112 142 C1178 168 1240 184 1312 164 C1362 150 1406 148 1460 138"/>
+    </circle>
+  </svg>
   <div class="stats__item">
     <span class="stats__icon tone-blue" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 0 0 0-8"/></svg>

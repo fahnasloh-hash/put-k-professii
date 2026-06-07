@@ -1452,41 +1452,99 @@ body{
   max-width:1500px;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:0;
-  margin:-2px auto clamp(44px,6vw,86px);
-  padding:26px 32px;
-  border-radius:24px;
-  background:rgba(255,255,255,.9);
-  box-shadow:0 24px 58px -36px rgba(23,23,23,.35),0 1px 0 rgba(255,255,255,.8) inset;
+  position:relative;
+  isolation:isolate;
+  overflow:visible;
+  margin:2px auto clamp(44px,6vw,86px);
+  padding:32px 40px;
+  min-height:154px;
+  border:1px solid transparent;
+  border-radius:30px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.9)) padding-box,
+    linear-gradient(96deg,rgba(52,102,220,.18),rgba(36,178,126,.14),rgba(148,77,220,.16),rgba(244,102,16,.2)) border-box;
+  box-shadow:0 34px 70px -44px rgba(23,23,23,.42),0 1px 0 rgba(255,255,255,.9) inset;
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
   animation:heroFadeUp .78s var(--ease) .62s both;
 }
-.stats__item{
-  gap:18px;
-  min-height:78px;
-  padding:0 28px;
-  border-left:1px solid rgba(23,23,23,.09);
+.stats::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  z-index:-1;
+  border-radius:inherit;
+  background:
+    radial-gradient(330px 130px at 6% 20%,rgba(62,107,223,.14),transparent 70%),
+    radial-gradient(330px 120px at 34% 82%,rgba(22,149,92,.12),transparent 72%),
+    radial-gradient(340px 120px at 64% 20%,rgba(148,62,214,.12),transparent 72%),
+    radial-gradient(340px 130px at 91% 78%,rgba(244,102,16,.15),transparent 72%);
+  pointer-events:none;
 }
-.stats__item:first-child{border-left:0}
+.stats__paths{
+  position:absolute;
+  inset:-48px 0 -48px;
+  z-index:0;
+  width:100%;
+  height:calc(100% + 96px);
+  overflow:visible;
+  pointer-events:none;
+}
+.stats__track{
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  opacity:.38;
+}
+.stats__track--blue{stroke:#4A7FEA}
+.stats__track--green{stroke:#19A86E}
+.stats__track--purple{stroke:#9746DD}
+.stats__track--amber{stroke:#FF7118}
+.stats__particle{
+  opacity:.9;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.stats__particle--blue{fill:#3D73D9}
+.stats__particle--green{fill:#16A66B}
+.stats__particle--purple{fill:#923DDA}
+.stats__particle--amber{fill:#F66A16}
+.stats__item{
+  position:relative;
+  z-index:1;
+  gap:24px;
+  min-height:88px;
+  padding:0 34px;
+  border-left:1px solid rgba(23,23,23,.08);
+}
+.stats__item:first-of-type{border-left:0}
 .stats__icon{
-  width:62px;
-  height:62px;
-  border-radius:14px;
+  width:78px;
+  height:78px;
+  border-radius:19px;
+  display:grid;
+  place-items:center;
+  box-shadow:0 1px 0 rgba(255,255,255,.85) inset;
 }
 .stats__icon svg{
-  width:28px;
-  height:28px;
+  width:34px;
+  height:34px;
 }
 .stats__item strong{
-  font-size:32px;
+  font-size:40px;
   font-weight:900;
   letter-spacing:0;
+  line-height:1;
 }
-.stats__item span{
+.stats__item:nth-of-type(1) strong{color:#3542D6}
+.stats__item:nth-of-type(2) strong{color:#118D53}
+.stats__item:nth-of-type(3) strong{color:#8F3DCE}
+.stats__item:nth-of-type(4) strong{color:#F16613}
+.stats__item div > span{
   display:block;
-  margin-top:5px;
-  font-size:16px;
-  line-height:1.35;
+  margin-top:12px;
+  font-size:19px;
+  line-height:1.34;
   color:#3E3E3E;
 }
 
@@ -1564,8 +1622,8 @@ body{
     max-width:none;
   }
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .stats__item:nth-child(odd){border-left:0}
-  .stats__item:nth-child(n+3){
+  .stats__item:nth-of-type(odd){border-left:0}
+  .stats__item:nth-of-type(n+3){
     border-top:1px solid rgba(23,23,23,.09);
     padding-top:20px;
     margin-top:20px;
@@ -1625,6 +1683,7 @@ body{
     padding:18px;
     border-radius:18px;
   }
+  .stats__paths{display:none}
   .stats__item{
     gap:13px;
     padding:0 12px;
@@ -1651,13 +1710,13 @@ body{
   .hero__visual--reference{aspect-ratio:4/3}
   .stats{grid-template-columns:1fr}
   .stats__item,
-  .stats__item:nth-child(odd){
+  .stats__item:nth-of-type(odd){
     border-left:0;
     border-top:1px solid rgba(23,23,23,.09);
     padding:16px 0 0;
     margin-top:16px;
   }
-  .stats__item:first-child{
+  .stats__item:first-of-type{
     border-top:0;
     padding-top:0;
     margin-top:0;
