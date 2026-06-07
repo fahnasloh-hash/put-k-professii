@@ -20,6 +20,27 @@ except Exception:
 
 CSS_VER = '20260607-instphotos'
 SITE = 'https://putkprofessii.ru'
+METRIKA_ID = '109710266'
+METRIKA = '''<!-- Yandex.Metrika counter -->
+<script>
+  (function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {
+      if (document.scripts[j].src === r) { return; }
+    }
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+  })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=__METRIKA_ID__', 'ym');
+
+  ym(__METRIKA_ID__, 'init', {
+    clickmap:true,
+    trackLinks:true,
+    accurateTrackBounce:true,
+    webvisor:true
+  });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/__METRIKA_ID__" style="position:absolute; left:-9999px;" alt=""/></div></noscript>
+<!-- /Yandex.Metrika counter -->'''.replace('__METRIKA_ID__', METRIKA_ID)
 
 COLOR_CYCLE = ['blue', 'green', 'purple', 'amber']
 
@@ -48,6 +69,7 @@ def head(title, desc, canonical):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="/styles.css?v={CSS_VER}"/>
+{METRIKA}
 </head>
 <body>
 '''
