@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/styles.css?v=20260605"/>
+<link rel="stylesheet" href="/styles.css?v=20260607-instphotos"/>
 </head>
 <body>
 <nav class="nav" role="navigation" aria-label="Главное меню">
@@ -66,18 +66,17 @@
 
 <section class="section" id="catalog" style="padding-top:24px">
   <div class="chips" role="tablist" aria-label="Фильтр заведений" data-filter-group>
-    <button class="chip on" data-filter="all">Все</button>
-    <button class="chip" data-filter="gos">Государственные</button>
-    <button class="chip" data-filter="budget">С бюджетными местами</button>
-    <button class="chip" data-filter="chastny">Частные</button>
+    <button type="button" class="chip on" role="tab" aria-selected="true" data-filter="all" data-count="6">Все<span class="chip__count">6</span></button>
+    <button type="button" class="chip" role="tab" aria-selected="false" data-filter="gos" data-count="3">Государственные<span class="chip__count">3</span></button>
+    <button type="button" class="chip" role="tab" aria-selected="false" data-filter="budget" data-count="3">С бюджетными местами<span class="chip__count">3</span></button>
+    <button type="button" class="chip" role="tab" aria-selected="false" data-filter="chastny" data-count="3">Частные<span class="chip__count">3</span></button>
   </div>
   <div class="ic-grid">
     <article class="ic ic--blue" data-type="chastny" data-budget="0">
       <div class="ic__media">
+        <img src="/img/inst/synergy-college.jpg" alt="Обложка: Колледж Университета «Синергия»" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge">Частный</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Синергия</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/kolledzhi-pri-vuze/synergy-college/">Колледж Университета «Синергия»</a></h4>
@@ -95,10 +94,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/ranhigs-college.jpg" alt="Обложка: Колледж при РАНХиГС" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РАНХиГС</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/kolledzhi-pri-vuze/ranhigs-college/">Колледж при РАНХиГС</a></h4>
@@ -116,10 +114,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/plekhanov-college.jpg" alt="Обложка: Колледж при РЭУ им. Плеханова" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РЭУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/kolledzhi-pri-vuze/plekhanov-college/">Колледж при РЭУ им. Плеханова</a></h4>
@@ -137,10 +134,9 @@
 
     <article class="ic ic--amber" data-type="chastny" data-budget="0">
       <div class="ic__media">
+        <img src="/img/inst/mti-college.jpg" alt="Обложка: Колледж при МТИ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge">Частный</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МТИ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/kolledzhi-pri-vuze/mti-college/">Колледж при МТИ</a></h4>
@@ -158,10 +154,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/finu-college.jpg" alt="Обложка: Колледж Финансового университета" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Финуниверситет</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/kolledzhi-pri-vuze/finu-college/">Колледж Финансового университета</a></h4>
@@ -179,10 +174,9 @@
 
     <article class="ic ic--green" data-type="chastny" data-budget="0">
       <div class="ic__media">
+        <img src="/img/inst/map-college.jpg" alt="Обложка: Колледж Московской академии предпринимательства" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge">Частный</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МАП</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/kolledzhi-pri-vuze/map-college/">Колледж Московской академии предпринимательства</a></h4>
@@ -219,6 +213,6 @@
   <div class="footer__bottom"><span>© 2026 Путь к профессии · <a href="/" style="color:inherit">putkprofessii.ru</a></span><span>Москва и МО</span></div>
 </footer>
 <div class="sticky-cta" aria-hidden="true"><a href="#" data-apply="" class="btn btn--primary btn--full">Получить бесплатную консультацию →</a></div>
-<script src="/app.js?v=20260605"></script>
+<script src="/app.js?v=20260607-instphotos"></script>
 </body>
 </html>

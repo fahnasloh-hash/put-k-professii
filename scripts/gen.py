@@ -18,7 +18,7 @@ try:
 except Exception:
     ARTICLES = {}
 
-CSS_VER = '20260605'
+CSS_VER = '20260607-instphotos'
 SITE = 'https://putkprofessii.ru'
 
 COLOR_CYCLE = ['blue', 'green', 'purple', 'amber']
@@ -103,6 +103,10 @@ def esc(s):
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 
+def inst_photo(inst):
+    return f"/img/inst/{inst['slug']}.jpg"
+
+
 import json
 
 
@@ -150,7 +154,7 @@ def faq_block(qa):
 
 
 def card(inst, base_url):
-    """Institution card v2: photo media + stats + favourite + actions."""
+    """Institution card v2: generated photo media + stats + favourite + actions."""
     color = inst.get('color') or 'blue'
     detail = f"{inst.get('_base', base_url)}{inst['slug']}/"
     name = esc(inst['name'])
@@ -159,18 +163,15 @@ def card(inst, base_url):
     is_gos = typ == 'Государственный'
     badge = ('<span class="ic__badge ic__badge--top">Гос</span>' if is_gos
              else '<span class="ic__badge">Частный</span>')
-    photo = inst.get('photo')
-    img = f'<img src="{photo}" alt="{name}" loading="lazy" onerror="this.remove()"/>' if photo else ''
     tagwords = [t.strip() for t in inst['dirs'].replace(' и ', ', ').split(',') if t.strip()][:2]
     tags = ''.join(f'<span class="tag tag--blue">{esc(t)}</span>' for t in tagwords)
     dt = 'gos' if is_gos else 'chastny'
     db = '1' if inst.get('budget') else '0'
     return f'''    <article class="ic ic--{color}" data-type="{dt}" data-budget="{db}">
       <div class="ic__media">
+        <img src="{inst_photo(inst)}" alt="Обложка: {name}" loading="lazy" width="1200" height="750"/>
         {badge}
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">{esc(inst['abbr'])}</span>
-        {img}
       </div>
       <div class="ic__body">
         <h4><a href="{detail}">{name}</a></h4>
@@ -200,6 +201,32 @@ def hub_stats(n, kind):
     return ''.join(out)
 
 
+def filter_chips(items):
+    total = len(items)
+    gos = sum(1 for it in items if it['type'] == 'Государственный')
+    budget = sum(1 for it in items if it.get('budget'))
+    private = total - gos
+    filters = [
+        ('all', 'Все', total),
+        ('gos', 'Государственные', gos),
+        ('budget', 'С бюджетными местами', budget),
+        ('chastny', 'Частные', private),
+    ]
+    buttons = []
+    for key, label, count in filters:
+        if key != 'all' and count == 0:
+            continue
+        active = ' on' if key == 'all' else ''
+        selected = 'true' if key == 'all' else 'false'
+        buttons.append(
+            f'<button type="button" class="chip{active}" role="tab" aria-selected="{selected}" '
+            f'data-filter="{key}" data-count="{count}">{label}<span class="chip__count">{count}</span></button>'
+        )
+    return ('<div class="chips" role="tablist" aria-label="Фильтр заведений" data-filter-group>\n'
+            '    ' + '\n    '.join(buttons) + '\n'
+            '  </div>')
+
+
 def hub_page(cfg, items, alt_links):
     """cfg: dict with url, title, desc, h1, eyebrow, lede, kind. alt_links: list of (url,label,active)."""
     toggle = ''.join(
@@ -223,12 +250,7 @@ def hub_page(cfg, items, alt_links):
 </section>
 
 <section class="section" id="catalog" style="padding-top:24px">
-  <div class="chips" role="tablist" aria-label="Фильтр заведений" data-filter-group>
-    <button class="chip on" data-filter="all">Все</button>
-    <button class="chip" data-filter="gos">Государственные</button>
-    <button class="chip" data-filter="budget">С бюджетными местами</button>
-    <button class="chip" data-filter="chastny">Частные</button>
-  </div>
+  {filter_chips(items)}
   <div class="ic-grid">
 {cards}
   </div>
@@ -296,8 +318,7 @@ def detail_page(inst, ctx):
       </div>
     </div>
     <div class="dhero__media">
-      <span class="ic__mono">{esc(inst['abbr'])}</span>
-      {('<img src="' + inst['photo'] + '" alt="' + esc(name) + '" loading="lazy" onerror="this.remove()"/>') if inst.get('photo') else ''}
+      <img src="{inst_photo(inst)}" alt="Обложка: {esc(name)}" width="1200" height="750"/>
     </div>
   </div>
 </section>
@@ -488,11 +509,18 @@ def fac_hub(faculties, idx):
     cards = []
     for f in faculties:
         cnt = sum(1 for s in f['members'] if s in idx)
+        sal = f.get('salary', '')
+        dem = f.get('demand', '')
+        salline = f'<span style="font-size:13.5px;font-weight:800;color:var(--ink)">{sal}</span>' if sal else ''
+        demtone = 'green' if dem == 'Высокий' else 'amber'
+        demchip = (f'<span class="tag tag--{demtone}" style="align-self:flex-start;font-size:10.5px;padding:2px 9px">{dem} спрос</span>' if dem else '')
         cards.append(
             f'''    <a class="fac-card" href="/fakultety/{f['slug']}/">
       <span class="fac-card__icon" aria-hidden="true">{f['icon']}</span>
       <span class="fac-card__name">{esc(f['name'])}</span>
-      <span class="fac-card__count">{cnt} заведений</span>
+      {salline}
+      <span class="fac-card__count">{cnt} вузов и колледжей</span>
+      {demchip}
     </a>''')
     html = head(title, desc, '/fakultety/') + NAV
     html += f'''

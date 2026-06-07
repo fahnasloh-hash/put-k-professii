@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/styles.css?v=20260605"/>
+<link rel="stylesheet" href="/styles.css?v=20260607-instphotos"/>
 </head>
 <body>
 <nav class="nav" role="navigation" aria-label="Главное меню">
@@ -66,18 +66,17 @@
 
 <section class="section" id="catalog" style="padding-top:24px">
   <div class="chips" role="tablist" aria-label="Фильтр заведений" data-filter-group>
-    <button class="chip on" data-filter="all">Все</button>
-    <button class="chip" data-filter="gos">Государственные</button>
-    <button class="chip" data-filter="budget">С бюджетными местами</button>
-    <button class="chip" data-filter="chastny">Частные</button>
+    <button type="button" class="chip on" role="tab" aria-selected="true" data-filter="all" data-count="49">Все<span class="chip__count">49</span></button>
+    <button type="button" class="chip" role="tab" aria-selected="false" data-filter="gos" data-count="45">Государственные<span class="chip__count">45</span></button>
+    <button type="button" class="chip" role="tab" aria-selected="false" data-filter="budget" data-count="46">С бюджетными местами<span class="chip__count">46</span></button>
+    <button type="button" class="chip" role="tab" aria-selected="false" data-filter="chastny" data-count="4">Частные<span class="chip__count">4</span></button>
   </div>
   <div class="ic-grid">
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mgu.jpg" alt="Обложка: МГУ им. М. В. Ломоносова" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГУ</span>
-        <img src="/img/inst/mgu.jpg" alt="МГУ им. М. В. Ломоносова" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mgu/">МГУ им. М. В. Ломоносова</a></h4>
@@ -95,10 +94,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mfti.jpg" alt="Обложка: МФТИ (Физтех)" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МФТИ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mfti/">МФТИ (Физтех)</a></h4>
@@ -116,10 +114,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/vshe.jpg" alt="Обложка: НИУ ВШЭ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">ВШЭ</span>
-        <img src="/img/inst/vshe.jpg" alt="НИУ ВШЭ" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/vshe/">НИУ ВШЭ</a></h4>
@@ -137,10 +134,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/bauman.jpg" alt="Обложка: МГТУ им. Н. Э. Баумана" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГТУ</span>
-        <img src="/img/inst/bauman.jpg" alt="МГТУ им. Н. Э. Баумана" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/bauman/">МГТУ им. Н. Э. Баумана</a></h4>
@@ -158,10 +154,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mifi.jpg" alt="Обложка: НИЯУ МИФИ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МИФИ</span>
-        <img src="/img/inst/mifi.jpg" alt="НИЯУ МИФИ" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mifi/">НИЯУ МИФИ</a></h4>
@@ -179,10 +174,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mgimo.jpg" alt="Обложка: МГИМО" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГИМО</span>
-        <img src="/img/inst/mgimo.jpg" alt="МГИМО" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mgimo/">МГИМО</a></h4>
@@ -200,10 +194,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/sechenov.jpg" alt="Обложка: Сеченовский университет" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Сеченова</span>
-        <img src="/img/inst/sechenov.jpg" alt="Сеченовский университет" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/sechenov/">Сеченовский университет</a></h4>
@@ -221,10 +214,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/rudn.jpg" alt="Обложка: РУДН" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РУДН</span>
-        <img src="/img/inst/rudn.jpg" alt="РУДН" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/rudn/">РУДН</a></h4>
@@ -242,10 +234,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/ranhigs.jpg" alt="Обложка: РАНХиГС (Президентская академия)" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РАНХиГС</span>
-        <img src="/img/inst/ranhigs.jpg" alt="РАНХиГС (Президентская академия)" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/ranhigs/">РАНХиГС (Президентская академия)</a></h4>
@@ -263,10 +254,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/finu.jpg" alt="Обложка: Финансовый университет" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Финуниверситет</span>
-        <img src="/img/inst/finu.jpg" alt="Финансовый университет" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/finu/">Финансовый университет</a></h4>
@@ -284,10 +274,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/plekhanov.jpg" alt="Обложка: РЭУ им. Г. В. Плеханова" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РЭУ</span>
-        <img src="/img/inst/plekhanov.jpg" alt="РЭУ им. Г. В. Плеханова" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/plekhanov/">РЭУ им. Г. В. Плеханова</a></h4>
@@ -305,10 +294,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mai.jpg" alt="Обложка: Московский авиационный институт" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МАИ</span>
-        <img src="/img/inst/mai.jpg" alt="Московский авиационный институт" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mai/">Московский авиационный институт</a></h4>
@@ -326,10 +314,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/misis.jpg" alt="Обложка: НИТУ МИСИС" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МИСИС</span>
-        <img src="/img/inst/misis.jpg" alt="НИТУ МИСИС" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/misis/">НИТУ МИСИС</a></h4>
@@ -347,10 +334,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mirea.jpg" alt="Обложка: МИРЭА — РТУ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МИРЭА</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mirea/">МИРЭА — РТУ</a></h4>
@@ -368,10 +354,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/gubkin.jpg" alt="Обложка: РГУ нефти и газа им. Губкина" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Губкина</span>
-        <img src="/img/inst/gubkin.jpg" alt="РГУ нефти и газа им. Губкина" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/gubkin/">РГУ нефти и газа им. Губкина</a></h4>
@@ -389,10 +374,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mendeleev.jpg" alt="Обложка: РХТУ им. Д. И. Менделеева" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РХТУ</span>
-        <img src="/img/inst/mendeleev.jpg" alt="РХТУ им. Д. И. Менделеева" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mendeleev/">РХТУ им. Д. И. Менделеева</a></h4>
@@ -410,10 +394,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mpgu.jpg" alt="Обложка: МПГУ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МПГУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mpgu/">МПГУ</a></h4>
@@ -431,10 +414,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mglu.jpg" alt="Обложка: МГЛУ (Иняз)" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГЛУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mglu/">МГЛУ (Иняз)</a></h4>
@@ -452,10 +434,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/guu.jpg" alt="Обложка: Государственный университет управления" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">ГУУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/guu/">Государственный университет управления</a></h4>
@@ -473,10 +454,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/rggu.jpg" alt="Обложка: РГГУ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РГГУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/rggu/">РГГУ</a></h4>
@@ -494,10 +474,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/marhi.jpg" alt="Обложка: Московский архитектурный институт" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МАРХИ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/marhi/">Московский архитектурный институт</a></h4>
@@ -515,10 +494,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/timiryazevka.jpg" alt="Обложка: РГАУ-МСХА им. Тимирязева" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РГАУ</span>
-        <img src="/img/inst/timiryazevka.jpg" alt="РГАУ-МСХА им. Тимирязева" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/timiryazevka/">РГАУ-МСХА им. Тимирязева</a></h4>
@@ -536,10 +514,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/vgik.jpg" alt="Обложка: ВГИК им. Герасимова" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">ВГИК</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/vgik/">ВГИК им. Герасимова</a></h4>
@@ -557,10 +534,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/gitis.jpg" alt="Обложка: ГИТИС" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">ГИТИС</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/gitis/">ГИТИС</a></h4>
@@ -578,10 +554,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mgk.jpg" alt="Обложка: Московская консерватория" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГК</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mgk/">Московская консерватория</a></h4>
@@ -599,10 +574,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mgsu.jpg" alt="Обложка: МГСУ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГСУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mgsu/">МГСУ</a></h4>
@@ -620,10 +594,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/madi.jpg" alt="Обложка: МАДИ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МАДИ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/madi/">МАДИ</a></h4>
@@ -641,10 +614,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/stankin.jpg" alt="Обложка: МГТУ «Станкин»" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Станкин</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/stankin/">МГТУ «Станкин»</a></h4>
@@ -662,10 +634,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/pirogov.jpg" alt="Обложка: РНИМУ им. Пирогова" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РНИМУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/pirogov/">РНИМУ им. Пирогова</a></h4>
@@ -683,10 +654,9 @@
 
     <article class="ic ic--green" data-type="chastny" data-budget="0">
       <div class="ic__media">
+        <img src="/img/inst/synergy.jpg" alt="Обложка: Университет «Синергия»" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge">Частный</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Синергия</span>
-        <img src="/img/inst/synergy.jpg" alt="Университет «Синергия»" loading="lazy" onerror="this.remove()"/>
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/synergy/">Университет «Синергия»</a></h4>
@@ -704,10 +674,9 @@
 
     <article class="ic ic--purple" data-type="chastny" data-budget="0">
       <div class="ic__media">
+        <img src="/img/inst/mti.jpg" alt="Обложка: Московский технологический институт" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge">Частный</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МТИ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mti/">Московский технологический институт</a></h4>
@@ -725,10 +694,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mgpu.jpg" alt="Обложка: МГПУ (Московский городской)" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГПУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mgpu/">МГПУ (Московский городской)</a></h4>
@@ -746,10 +714,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mgyua.jpg" alt="Обложка: МГЮА им. Кутафина" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГЮА</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mgyua/">МГЮА им. Кутафина</a></h4>
@@ -767,10 +734,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/rut-miit.jpg" alt="Обложка: РУТ (МИИТ)" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РУТ (МИИТ)</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/rut-miit/">РУТ (МИИТ)</a></h4>
@@ -788,10 +754,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/polytech.jpg" alt="Обложка: Московский Политех" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Политех</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/polytech/">Московский Политех</a></h4>
@@ -809,10 +774,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/kosygin.jpg" alt="Обложка: РГУ им. Косыгина" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РГУ Косыгина</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/kosygin/">РГУ им. Косыгина</a></h4>
@@ -830,10 +794,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/rgsu.jpg" alt="Обложка: РГСУ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РГСУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/rgsu/">РГСУ</a></h4>
@@ -851,10 +814,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/rgup.jpg" alt="Обложка: РГУП (Правосудия)" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РГУП</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/rgup/">РГУП (Правосудия)</a></h4>
@@ -872,10 +834,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/rosbiotech.jpg" alt="Обложка: Росбиотех" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РОСБИОТЕХ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/rosbiotech/">Росбиотех</a></h4>
@@ -893,10 +854,9 @@
 
     <article class="ic ic--amber" data-type="chastny" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/rosnou.jpg" alt="Обложка: Российский новый университет" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge">Частный</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">РосНОУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/rosnou/">Российский новый университет</a></h4>
@@ -914,10 +874,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mgppu.jpg" alt="Обложка: МГППУ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГППУ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mgppu/">МГППУ</a></h4>
@@ -935,10 +894,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/gnesin.jpg" alt="Обложка: Академия им. Гнесиных" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Гнесинка</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/gnesin/">Академия им. Гнесиных</a></h4>
@@ -956,10 +914,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mxat.jpg" alt="Обложка: Школа-студия МХАТ" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МХАТ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mxat/">Школа-студия МХАТ</a></h4>
@@ -977,10 +934,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/shchukin.jpg" alt="Обложка: Театральный институт им. Щукина" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Щука</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/shchukin/">Театральный институт им. Щукина</a></h4>
@@ -998,10 +954,9 @@
 
     <article class="ic ic--blue" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mgri.jpg" alt="Обложка: МГРИ (геологоразведочный)" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГРИ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mgri/">МГРИ (геологоразведочный)</a></h4>
@@ -1019,10 +974,9 @@
 
     <article class="ic ic--green" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/miigaik.jpg" alt="Обложка: МИИГАиК" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МИИГАиК</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/miigaik/">МИИГАиК</a></h4>
@@ -1040,10 +994,9 @@
 
     <article class="ic ic--purple" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/mgavm.jpg" alt="Обложка: Академия им. Скрябина" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">МГАВМиБ</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/mgavm/">Академия им. Скрябина</a></h4>
@@ -1061,10 +1014,9 @@
 
     <article class="ic ic--amber" data-type="gos" data-budget="1">
       <div class="ic__media">
+        <img src="/img/inst/litinstitut.jpg" alt="Обложка: Литературный институт им. Горького" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge ic__badge--top">Гос</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">Литинститут</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/litinstitut/">Литературный институт им. Горького</a></h4>
@@ -1082,10 +1034,9 @@
 
     <article class="ic ic--blue" data-type="chastny" data-budget="0">
       <div class="ic__media">
+        <img src="/img/inst/britishdesign.jpg" alt="Обложка: Британская высшая школа дизайна" loading="lazy" width="1200" height="750"/>
         <span class="ic__badge">Частный</span>
         <button type="button" class="ic__fav" data-fav aria-label="В избранное">♡</button>
-        <span class="ic__mono">BHSAD</span>
-        
       </div>
       <div class="ic__body">
         <h4><a href="/vuzy-moskvy/britishdesign/">Британская высшая школа дизайна</a></h4>
@@ -1122,6 +1073,6 @@
   <div class="footer__bottom"><span>© 2026 Путь к профессии · <a href="/" style="color:inherit">putkprofessii.ru</a></span><span>Москва и МО</span></div>
 </footer>
 <div class="sticky-cta" aria-hidden="true"><a href="#" data-apply="" class="btn btn--primary btn--full">Получить бесплатную консультацию →</a></div>
-<script src="/app.js?v=20260605"></script>
+<script src="/app.js?v=20260607-instphotos"></script>
 </body>
 </html>

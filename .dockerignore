@@ -1,8 +1,15 @@
 .git
 .dockerignore
+.gitignore
+.claude
 node_modules
 *.jsonl
+*.md
 site-snapshot.html
 test.html
+Dockerfile
+amvera.yml
+data
+scripts
 ChatGPT Image*.png
 Снимок экрана*.png

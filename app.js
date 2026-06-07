@@ -185,22 +185,73 @@
 
     // Catalog filter chips (Все / Государственные / С бюджетом / Частные)
     document.querySelectorAll('[data-filter-group]').forEach(function (group) {
-      var grid = group.parentElement.querySelector('.ic-grid');
+      var section = group.closest('section') || group.parentElement;
+      var grid = section && section.querySelector('.ic-grid');
       if (!grid) return;
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.ic'));
+      var status = section.querySelector('[data-filter-status]');
+
+      function matches(card, filter) {
+        return filter === 'all'
+          || (filter === 'gos' && card.getAttribute('data-type') === 'gos')
+          || (filter === 'chastny' && card.getAttribute('data-type') === 'chastny')
+          || (filter === 'budget' && card.getAttribute('data-budget') === '1');
+      }
+
+      function countFor(filter) {
+        return cards.filter(function (card) { return matches(card, filter); }).length;
+      }
+
+      function prepareChip(chip) {
+        var filter = chip.getAttribute('data-filter') || 'all';
+        var count = countFor(filter);
+        var counter = chip.querySelector('.chip__count');
+        chip.setAttribute('type', 'button');
+        chip.setAttribute('role', 'tab');
+        chip.setAttribute('aria-selected', chip.classList.contains('on') ? 'true' : 'false');
+        chip.setAttribute('data-count', String(count));
+        if (!counter) {
+          counter = document.createElement('span');
+          counter.className = 'chip__count';
+          chip.appendChild(counter);
+        }
+        counter.textContent = count;
+        if (filter !== 'all' && count === 0) {
+          chip.disabled = true;
+          chip.classList.add('is-disabled');
+          chip.setAttribute('aria-disabled', 'true');
+        }
+      }
+
+      function applyFilter(filter) {
+        var visible = 0;
+        cards.forEach(function (card) {
+          var show = matches(card, filter);
+          card.hidden = !show;
+          card.style.display = show ? '' : 'none';
+          if (show) visible += 1;
+        });
+        group.querySelectorAll('.chip').forEach(function (chip) {
+          var isActive = chip.getAttribute('data-filter') === filter;
+          chip.classList.toggle('on', isActive);
+          chip.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        if (status) {
+          status.hidden = visible !== 0;
+          status.textContent = visible === 0
+            ? 'В этой вкладке пока нет заведений. Выберите другой фильтр или оставьте заявку — подберём вариант вручную.'
+            : '';
+        }
+      }
+
+      group.querySelectorAll('.chip').forEach(prepareChip);
       group.addEventListener('click', function (e) {
         var chip = e.target.closest('.chip');
-        if (!chip) return;
-        group.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('on'); });
-        chip.classList.add('on');
-        var f = chip.getAttribute('data-filter');
-        grid.querySelectorAll('.ic').forEach(function (card) {
-          var show = f === 'all'
-            || (f === 'gos' && card.getAttribute('data-type') === 'gos')
-            || (f === 'chastny' && card.getAttribute('data-type') === 'chastny')
-            || (f === 'budget' && card.getAttribute('data-budget') === '1');
-          card.style.display = show ? '' : 'none';
-        });
+        if (!chip || chip.disabled || chip.getAttribute('aria-disabled') === 'true') return;
+        applyFilter(chip.getAttribute('data-filter') || 'all');
       });
+      var active = group.querySelector('.chip.on:not([disabled])') || group.querySelector('.chip:not([disabled])');
+      if (active) applyFilter(active.getAttribute('data-filter') || 'all');
     });
 
     // Favourites (heart) — visual + localStorage
