@@ -18,7 +18,7 @@ try:
 except Exception:
     ARTICLES = {}
 
-CSS_VER = '20260607-instphotos'
+CSS_VER = '20260607-heroanim'
 SITE = 'https://putkprofessii.ru'
 METRIKA_ID = '109710266'
 METRIKA = '''<!-- Yandex.Metrika counter -->
