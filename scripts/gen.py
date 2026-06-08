@@ -18,7 +18,7 @@ try:
 except Exception:
     ARTICLES = {}
 
-CSS_VER = '20260607-statparticles'
+CSS_VER = '20260608-scrollreveal'
 SITE = 'https://putkprofessii.ru'
 METRIKA_ID = '109710266'
 METRIKA = '''<!-- Yandex.Metrika counter -->
@@ -117,6 +117,7 @@ FOOTER = '''<footer class="footer" role="contentinfo">
 </footer>
 <div class="sticky-cta" aria-hidden="true"><a href="#" data-apply="" class="btn btn--primary btn--full">Получить бесплатную консультацию →</a></div>
 <script src="/app.js?v={ver}"></script>
+<script src="/reveal.js?v={ver}"></script>
 </body>
 </html>'''.replace('{ver}', CSS_VER)
 

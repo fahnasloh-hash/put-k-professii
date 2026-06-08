@@ -1722,11 +1722,52 @@ body{
     margin-top:0;
   }
 }
+
+[data-reveal]{
+  opacity:0;
+  transform:translate3d(0,28px,0) scale(.985);
+  filter:blur(8px);
+  transition:
+    opacity .78s var(--ease) var(--reveal-delay,0ms),
+    transform .78s var(--ease) var(--reveal-delay,0ms),
+    filter .78s var(--ease) var(--reveal-delay,0ms);
+  will-change:opacity,transform,filter;
+}
+[data-reveal].is-revealed{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+}
+.ic[data-reveal],
+.dir-card[data-reveal],
+.featured-card[data-reveal],
+.choice-card[data-reveal],
+.step[data-reveal],
+.testimonial[data-reveal],
+.faq-item[data-reveal],
+.blog-card[data-reveal]{
+  transform:translate3d(0,22px,0) scale(.98);
+}
+.ic[data-reveal].is-revealed,
+.dir-card[data-reveal].is-revealed,
+.featured-card[data-reveal].is-revealed,
+.choice-card[data-reveal].is-revealed,
+.step[data-reveal].is-revealed,
+.testimonial[data-reveal].is-revealed,
+.faq-item[data-reveal].is-revealed,
+.blog-card[data-reveal].is-revealed{
+  transform:translate3d(0,0,0) scale(1);
+}
 @media(prefers-reduced-motion:reduce){
   .hero *,
   .hero::after,
-  .stats{
+  .stats,
+  [data-reveal],
+  [data-reveal].is-revealed{
     animation:none!important;
     transition:none!important;
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
   }
 }
