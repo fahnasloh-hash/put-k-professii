@@ -19,7 +19,7 @@ except Exception:
     ARTICLES = {}
 
 CSS_VER = '20260608-anchorfix'
-IMG_VER = '20260609-vuzphotos'
+IMG_VER = '20260609-vuzquality'
 SITE = 'https://putkprofessii.ru'
 METRIKA_ID = '109710266'
 METRIKA = '''<!-- Yandex.Metrika counter -->
