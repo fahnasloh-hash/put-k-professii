@@ -42,6 +42,7 @@ h1,h2,h3,h4,h5,h6{margin:0}
 
   --font:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --serif:"Newsreader",Georgia,serif;
+  --anchor-offset:116px;
 }
 
 /* --- Base --- */
@@ -58,6 +59,14 @@ body{
     radial-gradient(60% 50% at 8% 6%,rgba(31,102,255,.10),transparent 55%),
     radial-gradient(55% 60% at 92% 0%,rgba(244,200,140,.28),transparent 60%),
     linear-gradient(180deg,#FAF6EC 0%,#F7F1E0 60%,#FAF6EC 100%);
+}
+html{scroll-padding-top:var(--anchor-offset)}
+section[id],
+h1[id],
+h2[id],
+h3[id]{scroll-margin-top:var(--anchor-offset)}
+@media(max-width:768px){
+  :root{--anchor-offset:88px}
 }
 
 /* ================================================================

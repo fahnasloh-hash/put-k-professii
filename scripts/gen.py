@@ -18,7 +18,7 @@ try:
 except Exception:
     ARTICLES = {}
 
-CSS_VER = '20260608-dirsvisual'
+CSS_VER = '20260608-anchorfix'
 SITE = 'https://putkprofessii.ru'
 METRIKA_ID = '109710266'
 METRIKA = '''<!-- Yandex.Metrika counter -->
@@ -604,7 +604,7 @@ def article_block(f, art):
            + ''.join(f'<li><a href="#{sid}" style="color:var(--brand)">{esc(lbl)}</a></li>' for sid, lbl, _ in sections)
            + '</ul></div>')
     body = ''.join(
-        f'<h3 id="{sid}" style="font-size:20px;font-weight:700;color:var(--ink);margin:28px 0 8px;scroll-margin-top:84px">{esc(lbl)}</h3>{content}'
+        f'<h3 id="{sid}" style="font-size:20px;font-weight:700;color:var(--ink);margin:28px 0 8px;scroll-margin-top:var(--anchor-offset)">{esc(lbl)}</h3>{content}'
         for sid, lbl, content in sections)
     return f'''
 <section class="section" style="padding-top:0" aria-labelledby="art-h2">
