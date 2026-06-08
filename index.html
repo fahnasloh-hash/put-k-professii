@@ -70,7 +70,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/styles.css?v=20260608-scrollreveal"/>
+<link rel="stylesheet" href="/styles.css?v=20260608-dirsvisual"/>
 <!-- Yandex.Metrika counter -->
 <script>
   (function(m,e,t,r,i,k,a){
@@ -249,60 +249,74 @@
 </div>
 
 <!-- ====== DIRECTIONS ====== -->
-<section class="section" aria-labelledby="dirs-h2">
+<section class="section dirs-section" aria-labelledby="dirs-h2">
+  <div class="dirs-scene" aria-hidden="true">
+    <span class="dirs-scene__pin"></span>
+    <span class="dirs-scene__cap"></span>
+    <span class="dirs-scene__chart"></span>
+    <span class="dirs-scene__dot dirs-scene__dot--a"></span>
+    <span class="dirs-scene__dot dirs-scene__dot--b"></span>
+    <span class="dirs-scene__dot dirs-scene__dot--c"></span>
+  </div>
   <header class="section-header section-header--center">
-    <div class="eyebrow eyebrow--branded">Направления</div>
+    <div class="eyebrow eyebrow--branded dirs-eyebrow"><b aria-hidden="true">→</b> Направления <b aria-hidden="true">←</b></div>
     <h2 class="display--md" id="dirs-h2">Куда поступить в Москве</h2>
     <p class="lede">Выберите направление — подберём лучшие программы под ваши баллы и цели</p>
   </header>
   <nav class="dirs" aria-label="Направления обучения">
-    <a href="/it-kolledzh-moskva/" class="dir-card">
+    <a href="/it-kolledzh-moskva/" class="dir-card dir-card--it">
       <span class="dir-card__icon tone-blue" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="m8 21 4-4 4 4"/><path d="M8 10l3 3-3 3"/><path d="M13 13h3"/></svg>
       </span>
       <h3>IT и программирование</h3>
       <p>Колледжи Москвы по разработке, кибербезопасности, Data Science и сетевым технологиям</p>
       <span class="dir-card__arrow">Смотреть колледжи →</span>
+      <span class="dir-card__art dir-card__art--laptop" aria-hidden="true"></span>
     </a>
-    <a href="/meditsinskie-kolledzhi-moskvy/" class="dir-card">
+    <a href="/meditsinskie-kolledzhi-moskvy/" class="dir-card dir-card--med">
       <span class="dir-card__icon tone-green" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       </span>
       <h3>Медицина и здоровье</h3>
       <p>Медицинские и фармацевтические колледжи Москвы: сестринское дело, фармация, стоматология</p>
       <span class="dir-card__arrow">Смотреть колледжи →</span>
+      <span class="dir-card__art dir-card__art--medkit" aria-hidden="true"></span>
     </a>
-    <a href="/kolledzhi-moskvy/" class="dir-card">
+    <a href="/kolledzhi-moskvy/" class="dir-card dir-card--college">
       <span class="dir-card__icon tone-purple" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 4 2 10l10 6 10-6z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
       </span>
       <h3>Все колледжи Москвы</h3>
       <p>Полный каталог колледжей МСК: экономика, право, дизайн, строительство и ещё 15+ направлений</p>
       <span class="dir-card__arrow">Смотреть каталог →</span>
+      <span class="dir-card__art dir-card__art--city" aria-hidden="true"></span>
     </a>
-    <a href="/vuzy-moskvy/" class="dir-card">
+    <a href="/vuzy-moskvy/" class="dir-card dir-card--university">
       <span class="dir-card__icon tone-amber" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.6 5.5 21 7 14 2 9.3 9 8.5 12 2"/></svg>
       </span>
       <h3>Вузы Москвы</h3>
       <p>МГУ, ВШЭ, МФТИ, МГТУ, РАНХиГС и 25+ вузов — бюджет и платное, баллы и специальности</p>
       <span class="dir-card__arrow">Смотреть вузы →</span>
+      <span class="dir-card__art dir-card__art--university" aria-hidden="true"></span>
     </a>
-    <a href="/kuda-postupit-posle-9-klassa/" class="dir-card">
+    <a href="/kuda-postupit-posle-9-klassa/" class="dir-card dir-card--after9">
       <span class="dir-card__icon tone-green" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V7a2 2 0 0 1 2-2h12.4a.6.6 0 0 1 .6.6V19"/><path d="M4 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v0"/><path d="M9 7v4"/><path d="M12 7v4"/><path d="M15 7v4"/></svg>
       </span>
       <h3>После 9 класса</h3>
       <p>Куда поступить после 9 класса без ЕГЭ: лучшие специальности, бюджетные места, проходные баллы</p>
       <span class="dir-card__arrow">Узнать подробнее →</span>
+      <span class="dir-card__art dir-card__art--backpack" aria-hidden="true"></span>
     </a>
-    <a href="/postuplenie-2026/" class="dir-card">
+    <a href="/postuplenie-2026/" class="dir-card dir-card--rules">
       <span class="dir-card__icon tone-blue" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       </span>
       <h3>Поступление 2026</h3>
       <p>Новые правила приёма 2026: сроки, одна волна, приоритеты, бюджетные места по вузам Москвы</p>
       <span class="dir-card__arrow">Читать правила →</span>
+      <span class="dir-card__art dir-card__art--clipboard" aria-hidden="true"></span>
     </a>
   </nav>
 </section>
@@ -807,6 +821,6 @@ function phoneMask(inp){
 document.querySelectorAll('[name="phone"]').forEach(phoneMask);
 })();
 </script>
-<script src="/reveal.js?v=20260608-scrollreveal"></script>
+<script src="/reveal.js?v=20260608-dirsvisual"></script>
 </body>
 </html>
