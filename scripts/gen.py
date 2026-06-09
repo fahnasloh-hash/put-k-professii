@@ -18,9 +18,10 @@ try:
 except Exception:
     ARTICLES = {}
 
-CSS_VER = '20260608-anchorfix'
+CSS_VER = '20260609-detailphoto'
 IMG_VER = '20260609-vuzquality'
 SITE = 'https://putkprofessii.ru'
+LASTMOD = '2026-06-09'
 METRIKA_ID = '109710266'
 METRIKA = '''<!-- Yandex.Metrika counter -->
 <script>
@@ -46,7 +47,12 @@ METRIKA = '''<!-- Yandex.Metrika counter -->
 COLOR_CYCLE = ['blue', 'green', 'purple', 'amber']
 
 
-def head(title, desc, canonical):
+def abs_url(path):
+    return path if path.startswith(('http://', 'https://')) else SITE + path
+
+
+def head(title, desc, canonical, image='/hero.png'):
+    image_url = abs_url(image)
     return f'''<!doctype html>
 <html lang="ru">
 <head>
@@ -55,13 +61,20 @@ def head(title, desc, canonical):
 <title>{title}</title>
 <meta name="description" content="{desc}"/>
 <link rel="canonical" href="{SITE}{canonical}"/>
-<meta name="robots" content="index,follow"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Путь к профессии"/>
 <meta property="og:url" content="{SITE}{canonical}"/>
 <meta property="og:title" content="{title}"/>
 <meta property="og:description" content="{desc}"/>
-<meta property="og:image" content="{SITE}/hero.png"/>
+<meta property="og:image" content="{image_url}"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="750"/>
 <meta property="og:locale" content="ru_RU"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="{title}"/>
+<meta name="twitter:description" content="{desc}"/>
+<meta name="twitter:image" content="{image_url}"/>
 <link rel="shortcut icon" href="/favicon.ico"/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png"/>
@@ -154,8 +167,25 @@ def edu_org_ld(inst, url, kind):
     return jsonld({
         "@context": "https://schema.org", "@type": t,
         "name": inst.get('full', inst['name']), "url": SITE + url,
+        "alternateName": inst.get('abbr', inst['name']),
+        "description": inst.get('desc', ''),
+        "image": abs_url(inst_photo(inst)),
+        "areaServed": ["Москва", "Московская область"],
         "address": {"@type": "PostalAddress", "addressLocality": inst.get('city', 'Москва'),
                     "addressRegion": "Москва и Московская область", "addressCountry": "RU"},
+    })
+
+
+def webpage_ld(title, desc, url, image):
+    return jsonld({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": title,
+        "description": desc,
+        "url": SITE + url,
+        "inLanguage": "ru-RU",
+        "isPartOf": {"@type": "WebSite", "name": "Путь к профессии", "url": SITE + "/"},
+        "primaryImageOfPage": {"@type": "ImageObject", "url": abs_url(image), "width": 1200, "height": 750},
     })
 
 
@@ -318,7 +348,7 @@ def detail_page(inst, ctx):
     </dl>
   </div>'''
     intro = inst.get('desc', '')
-    html = head(title, desc, url)
+    html = head(title, desc, url, inst_photo(inst))
     html += NAV
     html += f'''
 <section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
@@ -377,6 +407,7 @@ def detail_page(inst, ctx):
          f"Основные направления подготовки: {inst['dirs']}. Полный список специальностей и проходные баллы уточним на бесплатной консультации."),
     ]
     html += faq_block(qa)
+    html += webpage_ld(title, desc, url, inst_photo(inst))
     html += breadcrumb([('Главная', '/'), (ctx['hub_label'], ctx['hub_url']), (inst['abbr'], url)])
     html += edu_org_ld(inst, url, ctx['kind'])
     html += FOOTER
@@ -806,7 +837,7 @@ def main():
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for loc, pr in all_urls:
-        sm.append(f'  <url><loc>{SITE}{loc}</loc><priority>{pr}</priority></url>')
+        sm.append(f'  <url><loc>{SITE}{loc}</loc><lastmod>{LASTMOD}</lastmod><priority>{pr}</priority></url>')
     sm.append('</urlset>')
     write('sitemap.xml', '\n'.join(sm) + '\n')
 
