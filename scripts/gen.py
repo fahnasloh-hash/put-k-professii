@@ -12,16 +12,18 @@ sys.path.insert(0, os.path.join(ROOT, 'data'))
 import institutions as D
 import faculties as F
 import cities as C
+import seo_pages as S
+import content_plan as CP
 try:
     import articles as A
     ARTICLES = A.ARTICLES
 except Exception:
     ARTICLES = {}
 
-CSS_VER = '20260609-detailphoto'
-IMG_VER = '20260609-vuzquality'
+CSS_VER = '20260613-seo-neutral'
+IMG_VER = '20260611-collegephotos'
 SITE = 'https://putkprofessii.ru'
-LASTMOD = '2026-06-09'
+LASTMOD = '2026-06-13'
 METRIKA_ID = '109710266'
 METRIKA = '''<!-- Yandex.Metrika counter -->
 <script>
@@ -98,7 +100,8 @@ NAV = '''<nav class="nav" role="navigation" aria-label="Главное меню"
     <a href="/vuzy-moskvy/">Вузы</a>
     <a href="/kolledzhi-moskvy/">Колледжи</a>
     <a href="/goroda/">Города</a>
-    <a href="/fakultety/">Факультеты</a>
+    <a href="/professii/">Профессии</a>
+    <a href="/fakultety/">Направления</a>
     <a href="/kuda-postupit-posle-9-klassa/">После 9 класса</a>
     <a href="/postuplenie-2026/">Поступление 2026</a>
     <a href="/blog/">Блог</a>
@@ -110,7 +113,8 @@ NAV = '''<nav class="nav" role="navigation" aria-label="Главное меню"
   <a href="/vuzy-moskvy/">🎓 Вузы Москвы и МО</a>
   <a href="/kolledzhi-moskvy/">🏫 Колледжи</a>
   <a href="/goroda/">🏙 Города</a>
-  <a href="/fakultety/">🧭 Факультеты</a>
+  <a href="/professii/">🧭 Профессии</a>
+  <a href="/fakultety/">📚 Направления</a>
   <a href="/kuda-postupit-posle-9-klassa/">📚 После 9 класса</a>
   <a href="/postuplenie-2026/">📅 Поступление 2026</a>
   <a href="/pomoshch-s-postupleniem/">🤝 Помощь</a>
@@ -125,7 +129,7 @@ FOOTER = '''<footer class="footer" role="contentinfo">
     <div class="footer__brand"><div class="footer__logo"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><strong>Путь к профессии</strong></div><p class="footer__desc">Бесплатная помощь с поступлением в Москве и МО. С 2022 года.</p></div>
     <div class="footer__col"><h4>Вузы</h4><ul><li><a href="/vuzy-moskvy/">Вузы Москвы</a></li><li><a href="/vuzy-moskovskoy-oblasti/">Вузы Московской области</a></li><li><a href="/postuplenie-2026/">Поступление 2026</a></li></ul></div>
     <div class="footer__col"><h4>Колледжи</h4><ul><li><a href="/kolledzhi-moskvy/">Колледжи Москвы</a></li><li><a href="/kolledzhi-pri-vuze/">Колледжи при вузах</a></li><li><a href="/kuda-postupit-posle-9-klassa/">После 9 класса</a></li></ul></div>
-    <div class="footer__col"><h4>Сервис</h4><ul><li><a href="/pomoshch-s-postupleniem/">Помощь</a></li><li><a href="/blog/">Блог</a></li><li><a href="#" data-apply="">Консультация</a></li></ul></div>
+    <div class="footer__col"><h4>Сервис</h4><ul><li><a href="/professii/">Профессии</a></li><li><a href="/pomoshch-s-postupleniem/">Помощь</a></li><li><a href="/blog/">Блог</a></li><li><a href="#" data-apply="">Консультация</a></li></ul></div>
   </div>
   <div class="footer__bottom"><span>© 2026 Путь к профессии · <a href="/" style="color:inherit">putkprofessii.ru</a></span><span>Москва и МО</span></div>
 </footer>
@@ -236,7 +240,7 @@ def card(inst, base_url):
         <div class="ic__tags">{tags}</div>
         <div class="ic__actions">
           <a href="{detail}" class="btn btn--white">Подробнее</a>
-          <button type="button" class="btn btn--primary" data-apply="{name}">Поступить</button>
+          <button type="button" class="btn btn--primary" data-apply="{name}">Подобрать</button>
         </div>
       </div>
     </article>'''
@@ -367,8 +371,8 @@ def detail_page(inst, ctx):
       </div>
       <p style="font-size:15px;color:var(--ink-soft);line-height:1.6;margin:2px 0 4px">{intro}</p>
       <div class="dhero__cta">
-        <button type="button" class="btn btn--primary btn--lg" data-apply="{esc(name)}">Поступить →</button>
-        <button type="button" class="btn btn--white btn--lg" data-apply="{esc(name)}">Бесплатная консультация</button>
+        <button type="button" class="btn btn--primary btn--lg" data-apply="{esc(name)}">Получить консультацию →</button>
+        <button type="button" class="btn btn--white btn--lg" data-apply="{esc(name)}">Сравнить варианты</button>
       </div>
     </div>
     <div class="dhero__media">
@@ -378,10 +382,10 @@ def detail_page(inst, ctx):
 </section>
 
 <section class="section" style="padding-top:28px">
-  <h2 class="display--sm" style="margin-bottom:14px">Как поступить в {esc(name)} в 2026 году</h2>
-  <p style="font-size:15px;color:var(--ink-soft);line-height:1.65;max-width:68ch">Поступление в {kind_word} проходит по {('результатам ЕГЭ и внутренним испытаниям' if ctx['kind'] == 'vuz' else 'среднему баллу аттестата — без ЕГЭ')}. Подаём документы, проверяем шансы на бюджет и платное, расставляем приоритеты. Эксперты «Путь к профессии» помогут с поступлением в {esc(name)} бесплатно — подберём направление, рассчитаем шансы и подготовим документы.</p>
+  <h2 class="display--sm" style="margin-bottom:14px">Как проходит поступление в {esc(name)} в 2026 году</h2>
+  <p style="font-size:15px;color:var(--ink-soft);line-height:1.65;max-width:68ch">Поступление в {kind_word} проходит по {('результатам ЕГЭ и внутренним испытаниям' if ctx['kind'] == 'vuz' else 'среднему баллу аттестата — без ЕГЭ')}. Мы помогаем сравнить {esc(name)} с другими учебными заведениями Москвы и МО, проверить шансы на бюджет и платное, расставить приоритеты и подготовить документы.</p>
   <div style="margin-top:20px">
-    <button type="button" class="btn btn--primary" data-apply="{esc(name)}">Оставить заявку →</button>
+    <button type="button" class="btn btn--primary" data-apply="{esc(name)}">Получить нейтральный подбор →</button>
   </div>
 </section>
 
@@ -401,7 +405,7 @@ def detail_page(inst, ctx):
                 'Обучение платное, бюджетных мест нет. Поможем подобрать выгодные условия и рассрочку.')
     qa = [
         (f"Как поступить в {name} в 2026 году?",
-         f"Поступление в {name} {admit}. Эксперты «Путь к профессии» бесплатно подберут направление, оценят шансы на бюджет и помогут с документами."),
+         f"Поступление в {name} {admit}. Эксперты «Путь к профессии» бесплатно сравнят несколько вариантов, оценят шансы на бюджет и помогут с документами."),
         (f"Есть ли бюджетные места в {name}?", budget_a),
         (f"Какие направления есть в {name}?",
          f"Основные направления подготовки: {inst['dirs']}. Полный список специальностей и проходные баллы уточним на бесплатной консультации."),
@@ -647,7 +651,7 @@ def article_block(f, art):
     <ul style="margin:0;padding-left:18px;line-height:1.9">{progs}</ul>
     {toc}
     {body}
-    <div style="margin-top:26px"><button type="button" class="btn btn--primary btn--lg" data-apply="Направление: {esc(name)}">Поступить на «{esc(name)}» →</button></div>
+    <div style="margin-top:26px"><button type="button" class="btn btn--primary btn--lg" data-apply="Направление: {esc(name)}">Подобрать обучение по направлению →</button></div>
   </div>
 </section>
 '''
@@ -677,7 +681,7 @@ def fac_detail(f, idx, faculties):
   </div>
   <p class="lede" style="margin-top:18px;max-width:66ch">{esc(f['desc'])}</p>
   <div style="margin-top:22px">
-    <button type="button" class="btn btn--primary btn--lg" data-apply="Направление: {esc(f['name'])}">Поступить на «{esc(f['name'])}» →</button>
+    <button type="button" class="btn btn--primary btn--lg" data-apply="Направление: {esc(f['name'])}">Подобрать обучение →</button>
   </div>
 </section>
 
@@ -710,6 +714,273 @@ def fac_detail(f, idx, faculties):
                                          "url": SITE + m['_base'] + m['slug'] + '/'} for i, m in enumerate(members)]})
     html += FOOTER
     return html
+
+
+SEO_LINK_LABELS = {
+    "/postuplenie-posle-9-klassa/": "Поступление после 9 класса",
+    "/postuplenie-posle-11-klassa/": "Поступление после 11 класса",
+    "/postuplenie-bez-ege/": "Поступление без ЕГЭ",
+    "/kolledzhi-moskvy/": "Колледжи Москвы",
+    "/kolledzhi-moskovskoy-oblasti/": "Колледжи Московской области",
+    "/kolledzhi-pri-vuze/": "Колледжи при вузах",
+    "/vuzy-moskvy/": "Вузы Москвы",
+    "/vuzy-moskovskoy-oblasti/": "Вузы Московской области",
+    "/distancionnoe-obuchenie/": "Дистанционное обучение",
+    "/professii/": "Профессии",
+    "/goroda/": "Города Московской области",
+    "/pomoshch-s-postupleniem/": "Помощь с поступлением",
+}
+
+
+def seo_link_grid(links):
+    rows = []
+    for u in links:
+        label = SEO_LINK_LABELS.get(u, u.strip('/').replace('-', ' ').title())
+        rows.append(f'<a href="{u}">{esc(label)}</a>')
+    return '<nav class="link-grid" aria-label="Связанные страницы">' + ''.join(rows) + '</nav>'
+
+
+def neutral_note():
+    return ('<p style="font-size:13px;color:var(--ink-mute);line-height:1.6;margin-top:18px;max-width:72ch">'
+            'Путь к профессии работает как независимый образовательный навигатор: мы показываем разные варианты обучения, '
+            'а финальный подбор учебного заведения делается после заявки и уточнения ваших баллов, целей и бюджета.</p>')
+
+
+def core_seo_page(page):
+    sections = ''.join(
+        f'''<article class="card" style="max-width:none">
+      <h2 style="font-size:22px;margin-bottom:10px">{esc(h)}</h2>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.65">{esc(txt)}</p>
+    </article>'''
+        for h, txt in page['sections']
+    )
+    html = head(page['title'], page['desc'], page['url']) + NAV
+    html += f'''
+<section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
+  <nav class="breadcrumbs" aria-label="Навигационная цепочка">
+    <a href="/">Главная</a><span class="sep">›</span><span aria-current="page">{esc(page['crumb'])}</span>
+  </nav>
+  <div class="pill" style="margin-bottom:20px"><span class="pill__dot" aria-hidden="true"></span>{esc(page['eyebrow'])}</div>
+  <h1 class="display" id="page-h1" style="max-width:22ch">{esc(page['h1'])}</h1>
+  <p class="lede" style="margin-top:20px;max-width:68ch">{esc(page['lede'])}</p>
+  {neutral_note()}
+</section>
+
+<section class="section" style="padding-top:28px" aria-labelledby="route-h2">
+  <header class="section-header"><h2 class="display--sm" id="route-h2">Что важно знать</h2></header>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px" class="seo-card-grid">
+    {sections}
+  </div>
+</section>
+
+<section class="section" style="padding-top:0" aria-labelledby="links-h2">
+  <h2 class="display--sm" id="links-h2" style="margin-bottom:14px">Связанные разделы</h2>
+  {seo_link_grid(page['links'])}
+</section>
+
+<section class="section" id="form" style="padding-top:0">
+  <div class="cta-band">
+    <h2>Получить консультацию по поступлению</h2>
+    <p>Сравним несколько вариантов обучения в Москве и Московской области под ваши баллы, цели и бюджет.</p>
+    <a href="#" data-apply="{esc(page['h1'])}" class="btn btn--white btn--lg" style="margin-top:18px">Подобрать варианты →</a>
+  </div>
+</section>
+'''
+    html += faq_block(page['faq'])
+    html += webpage_ld(page['title'], page['desc'], page['url'], '/hero.png')
+    html += breadcrumb([('Главная', '/'), (page['crumb'], page['url'])])
+    html += FOOTER
+    return html
+
+
+def profession_hub():
+    cards = []
+    for p in S.PROFESSIONS:
+        cards.append(
+            f'''<a class="fac-card" href="/professii/{p['slug']}/">
+      <span class="fac-card__icon" aria-hidden="true">🧭</span>
+      <span class="fac-card__name">{esc(p['name'])}</span>
+      <span class="fac-card__count">Где учиться в Москве и МО</span>
+    </a>'''
+        )
+    html = head(
+        'Профессии после 9 и 11 класса — где учиться в Москве и МО',
+        'Нейтральный каталог профессий для поступления: IT, медицина, право, экономика, дизайн, психология и другие направления в Москве и Московской области.',
+        '/professii/',
+    ) + NAV
+    html += f'''
+<section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
+  <nav class="breadcrumbs" aria-label="Навигационная цепочка">
+    <a href="/">Главная</a><span class="sep">›</span><span aria-current="page">Профессии</span>
+  </nav>
+  <div class="pill" style="margin-bottom:20px"><span class="pill__dot" aria-hidden="true"></span>Профессии · Москва и МО</div>
+  <h1 class="display" id="page-h1" style="max-width:22ch">Профессии после 9 и 11 класса</h1>
+  <p class="lede" style="margin-top:20px;max-width:68ch">Выберите профессию — покажем, где учиться в Москве и Московской области, какие направления сравнить и как построить маршрут поступления.</p>
+  {neutral_note()}
+</section>
+
+<section class="section" style="padding-top:28px">
+  <div class="fac-grid">{''.join(cards)}</div>
+</section>
+
+<section class="section" id="form" style="padding-top:0">
+  <div class="cta-band">
+    <h2>Не знаете, какую профессию выбрать?</h2>
+    <p>Менеджер сравнит несколько направлений и учебных заведений под ваши баллы и интересы.</p>
+    <a href="#" data-apply="Профессии" class="btn btn--white btn--lg" style="margin-top:18px">Подобрать профессию →</a>
+  </div>
+</section>
+'''
+    html += faq_block([
+        ("Как выбрать профессию после 9 класса?", "Сравните интересы, средний балл аттестата, срок обучения, практику и дальнейший переход в вуз."),
+        ("Можно ли выбрать профессию после 11 класса без ЕГЭ?", "Да, если рассматривать колледж после 11 класса или вуз после СПО по внутренним испытаниям."),
+        ("Подбор ведёт конкретный вуз?", "Нет. Сайт работает как независимый навигатор, а варианты подбираются после заявки по вашим данным."),
+    ])
+    html += breadcrumb([('Главная', '/'), ('Профессии', '/professii/')])
+    html += FOOTER
+    return html
+
+
+def profession_page(p, idx):
+    members = [idx[s] for s in p['members'] if s in idx]
+    cards = '\n\n'.join(card(it, it['_base']) for it in members[:8])
+    related = ["/postuplenie-posle-9-klassa/", "/postuplenie-posle-11-klassa/", "/postuplenie-bez-ege/", "/distancionnoe-obuchenie/", "/kolledzhi-moskvy/", "/vuzy-moskvy/"]
+    url = f"/professii/{p['slug']}/"
+    html = head(p['title'], p['desc'], url) + NAV
+    html += f'''
+<section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
+  <nav class="breadcrumbs" aria-label="Навигационная цепочка">
+    <a href="/">Главная</a><span class="sep">›</span><a href="/professii/">Профессии</a><span class="sep">›</span><span aria-current="page">{esc(p['name'])}</span>
+  </nav>
+  <div class="pill" style="margin-bottom:20px"><span class="pill__dot" aria-hidden="true"></span>Профессия · Москва и МО</div>
+  <h1 class="display" id="page-h1" style="max-width:22ch">Профессия {esc(p['name'])}</h1>
+  <p class="lede" style="margin-top:20px;max-width:68ch">{esc(p['desc'])}</p>
+  {neutral_note()}
+  <div style="margin-top:22px"><button type="button" class="btn btn--primary btn--lg" data-apply="Профессия: {esc(p['name'])}">Получить консультацию →</button></div>
+</section>
+
+<section class="section" style="padding-top:28px">
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px" class="seo-card-grid">
+    <article class="card" style="max-width:none"><h2 style="font-size:22px;margin-bottom:10px">Где учиться</h2><p style="font-size:15px;color:var(--ink-soft);line-height:1.65">{esc(p['study'])}. Можно сравнить колледжи, вузы и дистанционные форматы.</p></article>
+    <article class="card" style="max-width:none"><h2 style="font-size:22px;margin-bottom:10px">Кому подходит</h2><p style="font-size:15px;color:var(--ink-soft);line-height:1.65">{esc(p['fit'])}</p></article>
+    <article class="card" style="max-width:none"><h2 style="font-size:22px;margin-bottom:10px">Как поступить</h2><p style="font-size:15px;color:var(--ink-soft);line-height:1.65">После 9 класса чаще выбирают колледж по аттестату, после 11 класса — вуз по ЕГЭ или колледж без ЕГЭ.</p></article>
+  </div>
+</section>
+
+<section class="section" id="catalog" style="padding-top:0">
+  <h2 class="display--sm" style="margin-bottom:16px">Где учиться на «{esc(p['name'])}»</h2>
+  <div class="ic-grid">{cards}</div>
+</section>
+
+<section class="section" style="padding-top:0" aria-labelledby="links-h2">
+  <h2 class="display--sm" id="links-h2" style="margin-bottom:14px">Полезные разделы</h2>
+  {seo_link_grid(related)}
+</section>
+
+<section class="section" id="form" style="padding-top:0">
+  <div class="cta-band">
+    <h2>Подобрать обучение по профессии</h2>
+    <p>Сравним несколько учебных заведений и маршрутов поступления в Москве и Московской области.</p>
+    <a href="#" data-apply="Профессия: {esc(p['name'])}" class="btn btn--white btn--lg" style="margin-top:18px">Получить подбор →</a>
+  </div>
+</section>
+'''
+    html += faq_block([
+        (f"Где учиться на профессию «{p['name']}» в Москве?", f"Можно рассмотреть несколько вариантов: {', '.join(m['name'] for m in members[:5])}. Итоговый выбор зависит от баллов, бюджета и формата обучения."),
+        (f"Можно ли начать путь к профессии «{p['name']}» после 9 класса?", "Да, если есть подходящая программа СПО. После колледжа можно работать или продолжить обучение в вузе."),
+        ("Как получить нейтральный подбор?", "Оставьте заявку: менеджер сравнит разные учебные заведения и не будет ограничиваться одним вузом."),
+    ])
+    html += jsonld({"@context": "https://schema.org", "@type": "ItemList",
+                    "name": f"Где учиться на профессию {p['name']}",
+                    "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": m.get('full', m['name']),
+                                         "url": SITE + m['_base'] + m['slug'] + '/'} for i, m in enumerate(members[:8])]})
+    html += breadcrumb([('Главная', '/'), ('Профессии', '/professii/'), (p['name'], url)])
+    html += FOOTER
+    return html
+
+
+def brand_page(page, idx):
+    inst = idx.get(page['inst_slug'])
+    if not inst:
+        return ''
+    name = page.get('display_name') or inst.get('full', inst['name'])
+    url = f"/vuz/{page['slug']}/"
+    related = [x for x in D.VUZY_MSK if x['slug'] not in {page['inst_slug'], 'synergy', 'mti'}][:6]
+    if page['slug'] == 'mosap':
+        related = [x for x in D.KOLLEDZHI_PRI_VUZE if x['slug'] != 'map-college'] + D.KOLLEDZHI_MSK[:3]
+    rel_links = ''.join(f'<a href="{r.get("_base", "/vuzy-moskvy/")}{r["slug"]}/">{esc(r["name"])}</a>' for r in related[:6])
+    html = head(page['title'], page['desc'], url, inst_photo(inst)) + NAV
+    html += f'''
+<section class="section" aria-labelledby="page-h1" style="padding-bottom:0">
+  <nav class="breadcrumbs" aria-label="Навигационная цепочка">
+    <a href="/">Главная</a><span class="sep">›</span><a href="/vuzy-moskvy/">Вузы Москвы</a><span class="sep">›</span><span aria-current="page">{esc(name)}</span>
+  </nav>
+  <div class="dhero dhero--{inst.get('color', 'blue')}">
+    <div class="dhero__info">
+      <span class="inst-card__badge inst-card__badge--choice" style="align-self:flex-start">Нейтральный обзор</span>
+      <h1 class="display--md" id="page-h1" style="max-width:22ch">Обзор: {esc(name)}</h1>
+      <div class="dhero__loc">{esc(inst.get('city', 'Москва'))} · {esc(inst.get('dirs', 'направления обучения'))}</div>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.65;margin:2px 0 4px">{esc(inst.get('desc', page['desc']))}</p>
+      {neutral_note()}
+      <div class="dhero__cta">
+        <button type="button" class="btn btn--primary btn--lg" data-apply="{esc(name)}">Сравнить с другими вариантами →</button>
+        <a href="/vuzy-moskvy/" class="btn btn--white btn--lg">Все вузы Москвы</a>
+      </div>
+    </div>
+    <div class="dhero__media">
+      <img src="{inst_photo(inst)}" alt="Обложка: {esc(name)}" width="1200" height="750"/>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:28px">
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px" class="seo-card-grid">
+    <article class="card" style="max-width:none"><h2 style="font-size:22px;margin-bottom:10px">Что сравнить</h2><p style="font-size:15px;color:var(--ink-soft);line-height:1.65">Направления, стоимость, формат обучения, документы, сроки и альтернативные учебные заведения.</p></article>
+    <article class="card" style="max-width:none"><h2 style="font-size:22px;margin-bottom:10px">Кому подходит</h2><p style="font-size:15px;color:var(--ink-soft);line-height:1.65">Абитуриентам, которым нужны гибкие форматы, прикладные программы или переход из колледжа в высшее образование.</p></article>
+    <article class="card" style="max-width:none"><h2 style="font-size:22px;margin-bottom:10px">Как подбираем</h2><p style="font-size:15px;color:var(--ink-soft);line-height:1.65">После заявки менеджер сравнивает несколько вариантов и не ограничивает подбор одним учебным заведением.</p></article>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <h2 class="display--sm" style="margin-bottom:14px">Похожие варианты для сравнения</h2>
+  <nav class="link-grid">{rel_links}</nav>
+</section>
+
+<section class="section" id="form" style="padding-top:0">
+  <div class="cta-band">
+    <h2>Получить независимый подбор</h2>
+    <p>Сравним {esc(name)} с другими колледжами и вузами Москвы и Московской области под вашу ситуацию.</p>
+    <a href="#" data-apply="{esc(name)}" class="btn btn--white btn--lg" style="margin-top:18px">Получить консультацию →</a>
+  </div>
+</section>
+'''
+    html += faq_block([
+        (f"Это рекламная рекомендация {name}?", "Нет. Страница является нейтральным обзором в каталоге. Подбор делается после заявки и сравнения нескольких вариантов."),
+        (f"Можно ли сравнить {name} с другими учебными заведениями?", "Да. Менеджер сравнит направления, формат, стоимость, документы и альтернативы в Москве и Московской области."),
+        ("Как оставить заявку на консультацию?", "Нажмите кнопку консультации и укажите телефон. Мы уточним баллы, класс, направление и предложим несколько вариантов."),
+    ])
+    html += webpage_ld(page['title'], page['desc'], url, inst_photo(inst))
+    html += breadcrumb([('Главная', '/'), ('Вузы Москвы', '/vuzy-moskvy/'), (name, url)])
+    html += FOOTER
+    return html
+
+
+def content_plan_markdown():
+    lines = [
+        "# SEO-контент-план putkprofessii.ru",
+        "",
+        "Регион: Москва и Московская область. Другие регионы намеренно исключены.",
+        "",
+        "| # | Заголовок | Основной запрос | Кластер | Цель | URL | Внутренние ссылки | CTA |",
+        "|---:|---|---|---|---|---|---|---|",
+    ]
+    for i, item in enumerate(CP.CONTENT_PLAN, 1):
+        links = ", ".join(item["internal_links"])
+        lines.append(
+            f"| {i} | {item['title']} | {item['main_query']} | {item['cluster']} | "
+            f"{item['goal']} | {item['url']} | {links} | {item['cta']} |"
+        )
+    return "\n".join(lines) + "\n"
 
 
 def main():
@@ -788,7 +1059,7 @@ def main():
     write('kolledzhi-pri-vuze/index.html', hub_page({
         'url': '/kolledzhi-pri-vuze/', 'crumb': 'Колледжи при вузах',
         'title': 'Колледжи при вузах Москвы 2026 — поступление без ЕГЭ, переход в вуз',
-        'desc': 'Колледжи при вузах Москвы: Синергия, РАНХиГС, Плеханова, МТИ. Поступление без ЕГЭ по аттестату, переход в вуз по упрощённой процедуре. Бесплатный подбор.',
+        'desc': 'Колледжи при вузах Москвы: разные варианты СПО при университетах, поступление без ЕГЭ по аттестату, переход в вуз и бесплатный подбор.',
         'eyebrow': 'Колледжи при вузах · 2026',
         'h1': 'Колледжи при вузах Москвы',
         'lede': 'Учитесь в колледже при московском вузе и переходите на высшее образование без ЕГЭ по упрощённой процедуре. Список колледжей при вузах и помощь с поступлением — бесплатно.',
@@ -810,6 +1081,24 @@ def main():
 
     # ---------------- FACULTIES ----------------
     idx = build_index()
+
+    # ---------------- SEO LANDING PAGES ----------------
+    for page in S.CORE_PAGES:
+        write(f"{page['url'].strip('/')}/index.html", core_seo_page(page))
+        urls.append((page['url'], '0.8'))
+
+    write('professii/index.html', profession_hub())
+    urls.append(('/professii/', '0.9'))
+    for p in S.PROFESSIONS:
+        write(f"professii/{p['slug']}/index.html", profession_page(p, idx))
+        urls.append((f"/professii/{p['slug']}/", '0.7'))
+
+    for page in S.BRAND_PAGES:
+        write(f"vuz/{page['slug']}/index.html", brand_page(page, idx))
+        urls.append((f"/vuz/{page['slug']}/", '0.6'))
+
+    write('docs/seo-content-plan.md', content_plan_markdown())
+
     write('fakultety/index.html', fac_hub(F.FACULTIES, idx))
     urls.append(('/fakultety/', '0.9'))
     for f in F.FACULTIES:

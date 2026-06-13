@@ -2320,3 +2320,9 @@ body{
     filter:none!important;
   }
 }
+
+@media(max-width:900px){
+  .seo-card-grid{
+    grid-template-columns:1fr!important;
+  }
+}

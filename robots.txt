@@ -5,4 +5,9 @@ Sitemap: https://putkprofessii.ru/sitemap.xml
 
 # Disallow admin/service paths (none currently, but good practice)
 Disallow: /.claude/
+Disallow: /.git/
+Disallow: /data/
+Disallow: /docs/
+Disallow: /scripts/
 Disallow: /node_modules/
+Disallow: /outputs/
